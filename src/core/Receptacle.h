@@ -2,6 +2,7 @@
 #define _RECEPTACLE_H
 
 #include "Enum.h"
+#include "Pickable.h"
 
 class Receptacle : public Block
 {
