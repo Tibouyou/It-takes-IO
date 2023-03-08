@@ -4,11 +4,9 @@
 #include "Player.h"
 #include "Block.h"
 
-Receptacle::Receptacle(int x, int y)
+Receptacle::Receptacle(int x, int y) : Block(x, y)
 {
-    tileX = x;
-    tileY = y;
-    heldItem = NULL;
+    heldItem = nullptr;
 }
 
 bool Receptacle::isSolid()
@@ -20,6 +18,6 @@ void Receptacle::power(PowerType type)
 {
 }
 
-void update(const Player& p0,const Player& p1, const Level& level)
+void update(const Player& p0,const Player& p1)
 {
 }
