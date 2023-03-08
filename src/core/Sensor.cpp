@@ -1,7 +1,6 @@
 #include "Sensor.h"
 #include "Block.h"
 #include "Player.h"
-#include "Level.h"
 
 bool Sensor::isSolid()
 {
@@ -9,5 +8,9 @@ bool Sensor::isSolid()
 }
 
 void Sensor::power(PowerType type)
+{
+}
+
+void Sensor::update(const Player& p0,const Player& p1)
 {
 }

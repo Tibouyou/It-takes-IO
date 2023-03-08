@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Player.h"
 
-Player::Player(bool playerType) : Entity(x, y, height, width)
+Player::Player(bool playerType, int x, int y, int height, int width) : Entity( x, y, height, width)
 {
     this->playerType = playerType;
     heldItem = NULL;

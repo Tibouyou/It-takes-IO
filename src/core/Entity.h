@@ -1,11 +1,11 @@
-#ifndef ENTITY_H
-#define ENTITY_H
+#ifndef _ENTITY_H
+#define _ENTITY_H
 
-#include "Level.h"
+class Level;
 
 class Entity 
 {
-    private:
+    protected:
         int x;
         int y; 
         int height;
@@ -16,9 +16,9 @@ class Entity
         int getX();
         int getY();
         void setPosition(int x, int y);
-        void update(const Level& currentLevel);
+        void update(const Level &currentLevel);
       
 
 }; 
 
-#endif ENTITY_H
+#endif

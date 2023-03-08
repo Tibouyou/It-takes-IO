@@ -1,11 +1,16 @@
 #ifndef _TRAP_H
 #define _TRAP_H
 
-class Receptacle : public Block
+#include "Block.h"
+#include "Player.h"
+
+
+class Trap : public Block
 {
     public :
         bool isSolid();
-        void update(const player& p0,const player& p1, const Level& level);
+        void update(const Player& p0,const Player& p1);
+        void power(PowerType type);
 }; 
 
 

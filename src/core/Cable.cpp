@@ -5,14 +5,12 @@ Cable::Cable(int tileX, int tileY, PowerType power, unsigned char directionMask)
 {
     this->tileX = tileX;
     this->tileY = tileY;
-    this->power = power;
+    this->cablePower = power;
     this->directionMask = directionMask;
 }
 
 void Cable::power(PowerType power, unsigned char directionMask)
 {
-    this->power = power;
-    this->directionMask = directionMask;
 }
 
 void Cable::update(const Level& currentLevel)
@@ -22,6 +20,6 @@ void Cable::update(const Level& currentLevel)
 
 PowerType Cable::getPowerType()
 {
-    return power;
+    return cablePower;
 }
 

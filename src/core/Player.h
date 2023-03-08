@@ -1,5 +1,5 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef _PLAYER_H
+#define _PLAYER_H
 
 #include "Entity.h"
 #include "Pickable.h"
@@ -21,6 +21,6 @@ class Player : public Entity
         void jump();
         void update(const Level& currentLevel);
         void setDead();
-}
+};
 
-#endif PLAYER_H
+#endif

@@ -1,7 +1,6 @@
 #include "Trap.h"
 #include "Block.h"
 #include "Player.h"
-#include "Level.h"
 
 bool Trap::isSolid()
 {
@@ -9,5 +8,9 @@ bool Trap::isSolid()
 }
 
 void Trap::power(PowerType type)
+{
+}
+
+void Trap::update(const Player& p0,const Player& p1)
 {
 }

@@ -1,13 +1,10 @@
 #include <iostream>
 #include "Pickable.h"
 
-Pickable:: Pickable (PickableType type, int x, int y, int height, int width)
+Pickable::Pickable(PickableType type, int x, int y, int height, int width) : Entity(x, y, height, width)
 {
     this->type = type;
-    this->x = x;
-    this->y = y;
-    this->height = height;
-    this->width = width;
+    this->isHeld = false;
 }
 
 
@@ -18,12 +15,12 @@ PickableType Pickable:: getType()
 
 void Pickable:: setHeld()
 {
-    held = !held;
+    isHeld = !isHeld;
 }
 
 bool Pickable:: getHeld()
 {
-    return held;
+    return isHeld;
 }
 
 void Pickable:: update(const Level& currentLevel)

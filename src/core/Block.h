@@ -14,7 +14,7 @@ class Block
         Block(int x, int y);
         bool isSolid();
         void power(PowerType type);
-        void update(const Player& p0,const Player& p1, const Level& level);
+        void update(const Player& p0,const Player& p1);
 }; 
 
 

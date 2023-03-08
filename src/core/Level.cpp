@@ -1,11 +1,7 @@
 #include "Level.h"
-#include "Player.h"
-#include "Block.h"
-#include "Cable.h"
 
-Level::Level()
+Level::Level(int levelNumber)
 {
-    //ctor
 }
 
 Level::~Level()

@@ -3,6 +3,9 @@
 
 #include "Enum.h"
 #include "Pickable.h"
+#include "Block.h"
+#include "Player.h"
+
 
 class Receptacle : public Block
 {
@@ -12,7 +15,7 @@ class Receptacle : public Block
         Receptacle(int x, int y);
         bool isSolid();
         void power(PowerType type);
-        void update(const player& p0,const player& p1, const Level& level);
+        void update(const Player& p0,const Player& p1);
 }; 
 
 

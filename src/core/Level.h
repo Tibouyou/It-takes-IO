@@ -1,15 +1,20 @@
 #ifndef _LEVEL_H
 #define _LEVEL_H
 
+#include "Player.h"
+#include "Block.h"
+#include "Cable.h"
+#include "Entity.h"
+#include <vector>
 
 class Level
 {
     private :
-        Player p0;
-        Player p1;
-        Block tabBlock[20][20];
-        Cable tabCable[20][20];
-        vector<Entity> tabEntity;
+        Player * p0;
+        Player * p1;
+        Block * tabBlock;
+        Cable * tabCable;
+        std::vector<Entity> tabEntity;
         int levelNumber;
 
     public :
