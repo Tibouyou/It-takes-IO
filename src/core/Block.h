@@ -11,7 +11,7 @@ class Block
         int tileY;
 
     public :
-        Block(int x, int y);
+        Block(int x = 0, int y = 0);
         bool isSolid();
         void power(PowerType type);
         void update(const Player& p0,const Player& p1);

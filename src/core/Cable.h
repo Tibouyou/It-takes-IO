@@ -15,7 +15,7 @@ class Cable
         unsigned char directionMask;
 
     public :
-        Cable(int tileX, int tileY, PowerType power, unsigned char directionMask);
+        Cable(int tileX = 0, int tileY = 0, PowerType power = EMPTY, unsigned char directionMask = 0b0000);
         void power(PowerType power, unsigned char directionMask);
         void update(const Level& currentLevel);
         PowerType getPowerType();

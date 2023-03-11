@@ -9,7 +9,7 @@ class Trap : public Block
 {
     public :
         bool isSolid();
-        void update(const Player& p0,const Player& p1);
+        void update(Player& p0,Player& p1);
         void power(PowerType type);
 }; 
 

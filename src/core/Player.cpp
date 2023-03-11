@@ -4,12 +4,12 @@
 Player::Player(bool playerType, int x, int y, int height, int width) : Entity( x, y, height, width)
 {
     this->playerType = playerType;
-    heldItem = NULL;
-    velocity = 0;
+    heldItem = nullptr;
+    gravity = 0;
     isFalling = false;
     isJumping = false;
     direction = false;
-    isAlive = true;
+    isAlive = true;;
 }
 
 Player::~Player()
@@ -19,20 +19,30 @@ Player::~Player()
 
 void Player::jump()
 {
-    if (!isJumping)
-    {
-        velocity = 10;
-        isJumping = true;
+    if (!isJumping) {
+    gravity = 10;
+    isJumping = true;
     }
 }
 
 void Player::update(const Level& currentLevel)
 {
-    /// oui
+    if (gravity <= 0) {
+        isJumping = false;
+    }
+    if (gravity > 0) {
+        gravity -= 0.5;
+    }
+    y += gravity;
 }
 
 void Player::setDead()
 {
     isAlive = !isAlive;
+}
+
+float Player::getGravity()
+{
+    return gravity;
 }
 

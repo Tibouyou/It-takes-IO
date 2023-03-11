@@ -9,7 +9,7 @@ class Player : public Entity
     private:
         bool playerType;
         Pickable* heldItem;
-        float velocity;
+        float gravity;
         bool isFalling;
         bool isJumping;
         bool direction;
@@ -21,6 +21,7 @@ class Player : public Entity
         void jump();
         void update(const Level& currentLevel);
         void setDead();
+        float getGravity();
 };
 
 #endif
