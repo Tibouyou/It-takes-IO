@@ -18,6 +18,6 @@ void Receptacle::power(PowerType type)
 {
 }
 
-void update(const Player& p0,const Player& p1)
+void update(const Player& p0,const Player& p1, Level& currentLevel)
 {
 }

@@ -1,6 +1,4 @@
 #include "Trap.h"
-#include "Block.h"
-#include "Player.h"
 #include <math.h>
 
 bool Trap::isSolid()
@@ -8,11 +6,7 @@ bool Trap::isSolid()
     return false;
 }
 
-void Trap::power(PowerType type)
-{
-}
-
-void Trap::update(Player& p0,Player& p1)
+void Trap::update(Player& p0,Player& p1, Level& currentLevel)
 {
     if (floor(p0.getX()/50) == tileX && floor(p0.getY()/50) == tileY)
     {

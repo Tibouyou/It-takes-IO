@@ -4,6 +4,8 @@
 #include "Enum.h"
 #include "Player.h"
 
+class Level;
+
 class Block
 {
     protected :
@@ -13,8 +15,8 @@ class Block
     public :
         Block(int x = 0, int y = 0);
         bool isSolid();
-        void power(PowerType type);
-        void update(const Player& p0,const Player& p1);
+        virtual void power(PowerType type);
+        virtual void update(const Player& p0,const Player& p1, Level& currentLevel);
 }; 
 
 

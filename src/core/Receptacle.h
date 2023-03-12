@@ -6,6 +6,7 @@
 #include "Block.h"
 #include "Player.h"
 
+class Level;
 
 class Receptacle : public Block
 {
@@ -15,7 +16,7 @@ class Receptacle : public Block
         Receptacle(int x, int y);
         bool isSolid();
         void power(PowerType type);
-        void update(const Player& p0,const Player& p1);
+        void update(const Player& p0,const Player& p1, Level& currentLevel);
 }; 
 
 

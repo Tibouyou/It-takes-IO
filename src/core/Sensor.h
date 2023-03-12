@@ -4,13 +4,13 @@
 #include "Block.h"
 #include "Player.h"
 
+class Level;
 
 class Sensor : public Block
 {
     public :
         bool isSolid();
-        void update(const Player& p0,const Player& p1);
-        void power(PowerType type);
+        void update(const Player& p0,const Player& p1, Level& currentLevel);
 }; 
 
 

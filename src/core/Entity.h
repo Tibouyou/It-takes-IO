@@ -13,8 +13,8 @@ class Entity
 
     public:
         Entity(int x, int y, int height, int width);
-        int getX();
-        int getY();
+        int getX() const;
+        int getY() const;
         void setPosition(int x, int y);
         virtual void update(const Level &currentLevel) = 0;
       
