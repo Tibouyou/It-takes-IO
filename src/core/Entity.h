@@ -16,7 +16,7 @@ class Entity
         int getX();
         int getY();
         void setPosition(int x, int y);
-        void update(const Level &currentLevel);
+        virtual void update(const Level &currentLevel) = 0;
       
 
 }; 

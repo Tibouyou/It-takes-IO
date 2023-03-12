@@ -25,8 +25,3 @@ void Entity::setPosition(int x, int y)
     this->x = x;
     this->y = y;
 }
-
-void Entity::update(const Level& currentLevel)
-{
-    // Do nothing
-}

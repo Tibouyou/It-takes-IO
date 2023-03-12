@@ -22,7 +22,7 @@ class Level
         ~Level();
         void loadLevel();
         void resetLevel();
-        Block & getBlock(int x, int y);
+        Block & getBlock(int x, int y) const;
         Cable & getCable(int x, int y);
         Player * getPlayer0();
         Player * getPlayer1();

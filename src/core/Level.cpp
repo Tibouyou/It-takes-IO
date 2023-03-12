@@ -4,8 +4,8 @@
 Level::Level(int levelNumber)
 {
     this->levelNumber = levelNumber;
-    this->p0 = new Player(0,0,0,100,50);
-    this->p1 = new Player(1,0,0,100,50);
+    this->p0 = new Player(0,0,50,100,50);
+    this->p1 = new Player(1,0,50,100,50);
     this->tabBlock = new Block[400];
     this->tabCable = new Cable[400];
 }
@@ -26,7 +26,7 @@ void Level::resetLevel()
 {
 }
 
-Block & Level::getBlock(int x, int y)
+Block & Level::getBlock(int x, int y) const
 {
     assert((x <= 20) && (y <= 20));
     return tabBlock[y*20+x];

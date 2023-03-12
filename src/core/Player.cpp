@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Player.h"
+#include "Level.h"
+#include <math.h>
 
 Player::Player(bool playerType, int x, int y, int height, int width) : Entity( x, y, height, width)
 {
@@ -34,6 +36,10 @@ void Player::update(const Level& currentLevel)
         gravity -= 0.5;
     }
     y += gravity;
+    y-=0.5;
+    if (currentLevel.getBlock(getTileX(),getTileY()).isSolid()) {
+        y += 0.5;
+    }
 }
 
 void Player::setDead()
@@ -44,5 +50,15 @@ void Player::setDead()
 float Player::getGravity()
 {
     return gravity;
+}
+
+int Player::getTileX()
+{
+    return floor(x/50);
+}
+
+int Player::getTileY()
+{
+    return floor(y/50);
 }
 

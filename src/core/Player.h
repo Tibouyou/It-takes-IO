@@ -22,6 +22,8 @@ class Player : public Entity
         void update(const Level& currentLevel);
         void setDead();
         float getGravity();
+        int getTileX();
+        int getTileY();
 };
 
 #endif
