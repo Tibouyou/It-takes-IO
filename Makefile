@@ -1,7 +1,19 @@
-all: bin/main
+all: bin/main bin/main_txt
+
+bin/main_txt: obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o
+	g++ -g -Wall -o bin/main_txt obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o
 
 bin/main: obj/Main.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o
 	g++ -g -Wall -o bin/main obj/Main.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o
+
+obj/Main_txt.o: src/txt/main_txt.cpp src/txt/winTxt.h src/txt/txtJeu.h src/core/Level.h
+	g++ -g -Wall -c src/txt/main_txt.cpp -o obj/Main_txt.o
+
+obj/winTxt.o: src/txt/winTxt.cpp src/txt/winTxt.h
+	g++ -g -Wall -c src/txt/winTxt.cpp -o obj/winTxt.o
+
+obj/txtJeu.o: src/txt/txtJeu.cpp src/txt/txtJeu.h src/core/Level.h
+	g++ -g -Wall -c src/txt/txtJeu.cpp -o obj/txtJeu.o	
 
 obj/Main.o: src/main.cpp src/core/Block.h src/core/Cable.h src/core/Entity.h src/core/Level.h src/core/Pickable.h src/core/Platform.h src/core/Player.h src/core/Receptacle.h src/core/Sensor.h src/core/Trap.h
 	g++ -g -Wall -c src/main.cpp -o obj/Main.o

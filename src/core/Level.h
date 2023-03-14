@@ -16,14 +16,18 @@ class Level
         Cable * tabCable;
         std::vector<Entity> tabEntity;
         int levelNumber;
+        int height;
+        int width;
 
     public :
-        Level(int levelNumber);
+        Level(int levelNumber,int height,int width);
         ~Level();
+        int getHeight() const;
+        int getWidth() const;
         void loadLevel();
         void resetLevel();
         Block & getBlock(int x, int y) const;
-        Cable & getCable(int x, int y);
+        Cable & getCable(int x, int y) const;
         Player * getPlayer0();
         Player * getPlayer1();
 }; 
