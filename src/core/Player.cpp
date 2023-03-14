@@ -36,9 +36,11 @@ void Player::update(const Level& currentLevel)
         gravity -= 0.5;
     }
     y += gravity;
-    y-=0.5;
+    y-=5;
+    std::cout << "Player X: " << getTileX() << " Player Y: " << getTileY() << std::endl;
+    std::cout << "Collidable ? " << currentLevel.getBlock(getTileX(),getTileY()).isSolid() << std::endl;
     if (currentLevel.getBlock(getTileX(),getTileY()).isSolid()) {
-        y += 0.5;
+        y += 5;
     }
 }
 

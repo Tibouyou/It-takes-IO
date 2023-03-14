@@ -1,6 +1,4 @@
 #include "Sensor.h"
-#include "Block.h"
-#include "Player.h"
 #include "Level.h"
 #include "Enum.h"
 #include <math.h>

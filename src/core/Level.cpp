@@ -1,4 +1,5 @@
 #include "Level.h"
+#include "Platform.h"
 #include <cassert>
 
 Level::Level(int levelNumber)
