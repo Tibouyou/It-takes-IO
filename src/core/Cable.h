@@ -12,10 +12,10 @@ class Cable
         int tileX; 
         int tileY;
         PowerType cablePower;
-        unsigned char directionMask;
+        unsigned char directionMaskCable;
 
     public :
-        Cable(int tileX = 0, int tileY = 0, PowerType power = EMPTY, unsigned char directionMask = 0b0000);
+        Cable(int tileX = 0, int tileY = 0, PowerType power = EMPTY, unsigned char directionMaskCable = 0b0000);
         void power(PowerType power, unsigned char directionMask);
         void update(const Level& currentLevel);
         PowerType getPowerType();
