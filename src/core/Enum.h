@@ -12,4 +12,17 @@ enum PowerDirection {
 
 enum BlockType{AIR, PLATFORM, SENSOR, TRAP, RECEPTACLE};
 
+enum Obstacle {
+    nothing = '.',
+    platform = '#',
+    sensor = '_',
+    trap = '+',
+    receptacle = 'R',
+    cable = 'C',
+    pickableNon = 'N', 
+    door = 'D',
+    player0 = '0',
+    player1 = '1'
+};
+
 #endif
