@@ -13,7 +13,7 @@ class Receptacle : public Block
     private :
         Pickable * heldItem;
     public :
-        Receptacle(int x, int y);
+        Receptacle(int x, int y, BlockType type = RECEPTACLE);
         bool isSolid();
         void power(PowerType type, const Level& currentLevel);
         void update(const Player& p0,const Player& p1, Level& currentLevel);

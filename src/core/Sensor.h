@@ -9,6 +9,7 @@ class Level;
 class Sensor : public Block
 {
     public :
+        Sensor(int x, int y, BlockType type = SENSOR);
         bool isSolid();
         void update(const Player& p0,const Player& p1, Level& currentLevel);
 }; 

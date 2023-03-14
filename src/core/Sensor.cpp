@@ -3,6 +3,10 @@
 #include "Enum.h"
 #include <math.h>
 
+Sensor::Sensor(int x, int y, BlockType type) : Block( x, y, type)
+{
+}
+
 bool Sensor::isSolid()
 {
     return false;

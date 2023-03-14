@@ -2,7 +2,7 @@
 #include "Level.h"
 
 
-Receptacle::Receptacle(int x, int y) : Block(x, y)
+Receptacle::Receptacle(int x, int y, BlockType type) : Block(x, y, type)
 {
     heldItem = nullptr;
 }
