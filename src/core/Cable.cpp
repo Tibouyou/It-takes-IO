@@ -1,16 +1,17 @@
 #include <iostream>
 #include "Cable.h"
 
-Cable::Cable(int tileX, int tileY, PowerType power, unsigned char directionMask)
+Cable::Cable(int tileX, int tileY, PowerType power, unsigned char directionMaskCable)
 {
     this->tileX = tileX;
     this->tileY = tileY;
     this->cablePower = power;
-    this->directionMask = directionMask;
+    this->directionMaskCable = directionMaskCable;
 }
 
 void Cable::power(PowerType power, unsigned char directionMask)
 {
+   
 }
 
 void Cable::update(const Level& currentLevel)
