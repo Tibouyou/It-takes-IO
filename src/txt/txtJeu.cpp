@@ -11,10 +11,9 @@
 void txtAff(WinTXT & win, const Level & level) {
 
 	win.clear();
-
     // Affichage des murs et des pastilles
-	for(int x=0;x<level.getHeight();++x){
-		for(int y=0;y<level.getWidth();++y){
+	for(int y=0;y<level.getHeight();y++){
+		for(int x=0;x<level.getWidth();x++){
 			char blockC = level.getBlock(x,y).getType();
 			switch (blockC) {
 				case AIR:
@@ -35,14 +34,16 @@ void txtAff(WinTXT & win, const Level & level) {
 			}
 			win.print( x, y, blockC);
 		}
-	}	
+	}
+	win.print( level.getPlayer0()->getTileX(), level.getPlayer0()->getTileY(), '0');
+	win.print( level.getPlayer1()->getTileX(), level.getPlayer1()->getTileY(), '1');
 	win.draw();
 }
 
 void txtBoucle (Level & level) {
 	// Creation d'une nouvelle fenetre en mode texte
 	// => fenetre de dimension et position (WIDTH,HEIGHT,STARTX,STARTY)
-    WinTXT win (level.getHeight(),level.getWidth());
+    WinTXT win (level.getWidth(),level.getHeight());
 
 	bool ok = true;
 	int c;

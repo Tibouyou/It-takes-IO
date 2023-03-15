@@ -28,8 +28,8 @@ class Level
         void resetLevel();
         Block & getBlock(int x, int y) const;
         Cable & getCable(int x, int y) const;
-        Player * getPlayer0();
-        Player * getPlayer1();
+        Player * getPlayer0() const;
+        Player * getPlayer1() const;
 }; 
 
 
