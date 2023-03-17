@@ -20,11 +20,11 @@ void Receptacle::power(PowerType type, const Level& currentLevel)
         {
             if (type == ZERO)
             {
-                currentLevel.getCable(tileX + 1, tileY)->power(ONE, 0b1000);
+                currentLevel.getCable(tileX + 1, tileY)->power(ONE, PowerDirection::RIGHT, currentLevel);
             }
             else if (type == ONE)
             {
-                currentLevel.getCable(tileX + 1, tileY)->power(ZERO, 0b1000);
+                currentLevel.getCable(tileX + 1, tileY)->power(ZERO, PowerDirection::RIGHT, currentLevel);
             }
         
         }

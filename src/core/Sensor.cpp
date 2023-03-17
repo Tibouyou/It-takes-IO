@@ -22,18 +22,18 @@ void Sensor::update(const Player& p0,const Player& p1, Level& currentLevel)
     {    
         if (p0OnSensor)
         {
-            currentLevel.getCable(tileX +1 , tileY)->power(ZERO, PowerDirection::RIGHT);
-            currentLevel.getCable(tileX -1 , tileY)->power(ZERO, PowerDirection::LEFT);
-            currentLevel.getCable(tileX , tileY +1)->power(ZERO, PowerDirection::DOWN);
-            currentLevel.getCable(tileX , tileY -1)->power(ZERO, PowerDirection::UP);
+            currentLevel.getCable(tileX +1 , tileY)->power(ZERO, PowerDirection::LEFT, currentLevel);
+            currentLevel.getCable(tileX -1 , tileY)->power(ZERO, PowerDirection::RIGHT, currentLevel);
+            currentLevel.getCable(tileX , tileY +1)->power(ZERO, PowerDirection::UP, currentLevel);
+            currentLevel.getCable(tileX , tileY -1)->power(ZERO, PowerDirection::DOWN, currentLevel);
         }
     
         if (p1OnSensor)
         {
-            currentLevel.getCable(tileX +1 , tileY)->power(ONE, PowerDirection::RIGHT);
-            currentLevel.getCable(tileX -1 , tileY)->power(ONE, PowerDirection::LEFT);
-            currentLevel.getCable(tileX , tileY +1)->power(ONE, PowerDirection::DOWN);
-            currentLevel.getCable(tileX , tileY -1)->power(ONE, PowerDirection::UP);
+            currentLevel.getCable(tileX +1 , tileY)->power(ONE, PowerDirection::LEFT, currentLevel);
+            currentLevel.getCable(tileX -1 , tileY)->power(ONE, PowerDirection::RIGHT, currentLevel);
+            currentLevel.getCable(tileX , tileY +1)->power(ONE, PowerDirection::UP, currentLevel);
+            currentLevel.getCable(tileX , tileY -1)->power(ONE, PowerDirection::DOWN, currentLevel);
         }
     }
         
