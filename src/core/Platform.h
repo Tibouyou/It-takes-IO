@@ -6,7 +6,7 @@
 class Platform : public Block
 {
     public :
-        bool isSolid();
+        bool isSolid() override;
         Platform(int x, int y, BlockType type = PLATFORM);
 }; 
 

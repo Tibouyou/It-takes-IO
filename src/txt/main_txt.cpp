@@ -3,7 +3,7 @@
 
 int main ( int argc, char** argv ) {
     termClear();
-	Level level(1,20,20);
+	Level level(1);
 	txtBoucle(level);
     termClear();
 	return 0;

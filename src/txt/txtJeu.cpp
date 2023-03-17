@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #ifdef _WIN32
 #include <windows.h>
 #else
@@ -14,7 +15,7 @@ void txtAff(WinTXT & win, const Level & level) {
     // Affichage des murs et des pastilles
 	for(int y=0;y<level.getHeight();y++){
 		for(int x=0;x<level.getWidth();x++){
-			char blockC = level.getBlock(x,y).getType();
+			char blockC = level.getBlock(x,y)->getType();
 			switch (blockC) {
 				case AIR:
 					blockC = ' ';
@@ -37,13 +38,17 @@ void txtAff(WinTXT & win, const Level & level) {
 	}
 	win.print( level.getPlayer0()->getTileX(), level.getPlayer0()->getTileY(), '0');
 	win.print( level.getPlayer1()->getTileX(), level.getPlayer1()->getTileY(), '1');
+	win.print( 0, level.getHeight(), "Player 0: ");
+	win.print( 0, level.getHeight()+1, "x : "+std::to_string(level.getPlayer1()->getX()));
+	win.print( 0, level.getHeight()+2, "y : "+std::to_string(level.getPlayer1()->getY()));
 	win.draw();
+
 }
 
 void txtBoucle (Level & level) {
 	// Creation d'une nouvelle fenetre en mode texte
 	// => fenetre de dimension et position (WIDTH,HEIGHT,STARTX,STARTY)
-    WinTXT win (level.getWidth(),level.getHeight());
+    WinTXT win (level.getWidth(),level.getHeight()+10);
 
 	bool ok = true;
 	int c;
@@ -67,6 +72,7 @@ void txtBoucle (Level & level) {
 				ok = false;
 				break;
 		}
+		level.update();
 
 	} while (ok);
 

@@ -101,6 +101,13 @@ void WinTXT::print (int x, int y, char* c) {
     while (c[i]!='\0') {print(x+i,y,c[i]);++i;}
 }
 
+void WinTXT::print (int x, int y, std::string c) {
+    for (char i : c) {
+        print(x, y, i);
+        ++x;
+    }
+}
+
 void WinTXT::draw (int x, int y) {
     termMove(0,0);
     for(int j=0;j<dimy;++j) {

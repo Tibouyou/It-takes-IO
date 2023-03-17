@@ -7,7 +7,7 @@
 #include <iostream>
 #include <fstream>
 
-Level::Level(int levelNumber, int height, int width)
+Level::Level(int levelNumber)
 {
     this->levelNumber = levelNumber;
     this->p0 = new Player(0,0,50,100,50);
@@ -19,8 +19,6 @@ Level::~Level()
 {
     delete p0;
     delete p1;
-    delete [] tabBlock;
-    delete [] tabCable;
 }
 
 void Level::loadLevel()
@@ -34,8 +32,6 @@ void Level::loadLevel()
     fichierLevel >> width >> height;
     this->width = width;
     this->height = height;
-    this->tabBlock = new Block[height*width];
-    this->tabCable = new Cable[height*width];
     for (int y = 0; y < height; y++)
     {
         for (int x = 0; x < width; x++)
@@ -44,30 +40,42 @@ void Level::loadLevel()
             fichierLevel >> type;
             switch (type)
             {
+                case '.': 
+                    tabBlock.push_back(new Block(x,y));
+                    break;
                 case '#':
-                    tabBlock[y*width+x] = Platform(x,y);
+                    tabBlock.push_back(new Platform(x,y));
                     break;
                 case '_':
-                    tabBlock[y*width+x] = Sensor(x,y);
+                    tabBlock.push_back(new Sensor(x,y));
                     break;
                 case '0':
                     p0->setPosition(x*50,y*50);
+                    tabBlock.push_back(new Block(x,y));
                     break;
                 case '1':
                     p1->setPosition(x*50,y*50);
+                    tabBlock.push_back(new Block(x,y));
                     break;
                 case 'R':
-                    tabBlock[y*width+x] = Receptacle(x,y);
+                    tabBlock.push_back(new Receptacle(x,y));
                     break;   
                 case '+':
-                    tabBlock[y*width+x] = Trap(x,y);
+                    tabBlock.push_back(new Trap(x,y));
                     break;     
                 default:
+                    tabBlock.push_back(new Block(x,y));
                     break;
             }
         }
     }
     fichierLevel.close();
+}
+
+void Level::update()
+{
+    p0->update(*this);
+    p1->update(*this);
 }
 
 void Level::resetLevel()
@@ -84,13 +92,13 @@ int Level::getWidth() const
     return width;
 }
 
-Block & Level::getBlock(int x, int y) const
+Block * Level::getBlock(int x, int y) const
 {
     assert((y <= height) && (x <= width));
-    return tabBlock[y*width+x];
+    return tabBlock.at(y*width+x);
 }
 
-Cable & Level::getCable(int x, int y) const
+Cable * Level::getCable(int x, int y) const
 {
     assert((x <= 20) && (y <= 20));
     return tabCable[y*20+x];
