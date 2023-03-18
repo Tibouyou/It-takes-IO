@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Entity.h"
 #include "Level.h"
+#include <math.h>
 
 Entity::Entity(int x, int y, int height, int width)
 {
@@ -22,6 +23,16 @@ int Entity::getX() const
 int Entity::getY() const
 {
     return y;
+}
+
+int Entity::getTileX(int offset)
+{
+    return floor((x+offset)/50);
+}
+
+int Entity::getTileY(int offset)
+{
+    return floor((y+offset)/50);
 }
 
 void Entity::setPosition(int x, int y)

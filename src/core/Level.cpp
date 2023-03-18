@@ -66,7 +66,7 @@ void Level::loadLevel()
                     break;
                 case 'N':
                     tabBlock.push_back(new Block(x,y));
-                    tabEntity.push_back(new Pickable(NON ,x,y,50,50));
+                    tabPickable.push_back(new Pickable(NON ,x*50,y*50,50,50));
                     break;           
                 default:
                     tabBlock.push_back(new Block(x,y));
@@ -136,5 +136,10 @@ Player * Level::getPlayer0() const
 Player * Level::getPlayer1() const
 {
     return p1;
+}
+
+std::vector<Pickable*> Level::getPickable() const
+{
+    return tabPickable;
 }
 

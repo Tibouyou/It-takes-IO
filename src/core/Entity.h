@@ -18,8 +18,8 @@ class Entity
         int getY() const;
         void setPosition(int x, int y);
         virtual void update(const Level &currentLevel) = 0;
-      
-
+        int getTileX(int offset = 0);
+        int getTileY(int offset = 0);
 }; 
 
 #endif

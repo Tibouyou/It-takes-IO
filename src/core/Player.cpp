@@ -43,11 +43,11 @@ void Player::moveRight()
 void Player::update(const Level& currentLevel)
 {
     if (isMoving) {
-        if (direction && !currentLevel.getBlock(getTileX(5),getTileY())->isSolid()) {
-            x += 5;
+        if (direction && !currentLevel.getBlock(getTileX(50),getTileY())->isSolid()) {
+            x += 50;
         }
-        else if(!direction && !currentLevel.getBlock(getTileX(-5),getTileY())->isSolid()) {
-            x -= 5;
+        else if(!direction && !currentLevel.getBlock(getTileX(-50),getTileY())->isSolid()) {
+            x -= 50;
         }
     }
     if (gravity <= 0) {
@@ -64,7 +64,7 @@ void Player::update(const Level& currentLevel)
     if (!isJumping && !currentLevel.getBlock(getTileX(),getTileY())->isSolid()) {
         isFalling = true;
     }
-    if (isFalling){y+=5;}
+    if (isFalling){y+=10;}
     
     if (currentLevel.getBlock(getTileX(),getTileY())->isSolid()) {
         y = getTileY()*50-1;
@@ -83,14 +83,30 @@ float Player::getGravity()
     return gravity;
 }
 
-int Player::getTileX(int offset)
+void Player::pickUp(const Level& currentLevel)
 {
-    return floor((x+offset)/50);
+    if (heldItem == nullptr) {
+        for (Pickable* pickable : currentLevel.getPickable()) {
+            if (pickable->getTileX() == getTileX() && pickable->getTileY() == getTileY()) {
+                heldItem = pickable;
+                heldItem->setHeld();
+                break;
+            }
+        }
+    }
 }
 
-int Player::getTileY(int offset)
+void Player::drop()
 {
-    return floor((y+offset)/50);
+    if (heldItem != nullptr) {
+        heldItem->setPosition(getTileX()*50,getTileY()*50);
+        heldItem->setHeld();
+        heldItem = nullptr;
+    }
 }
 
+Pickable* Player::getHeldItem()
+{
+    return heldItem;
+}
 

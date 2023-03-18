@@ -24,9 +24,10 @@ class Player : public Entity
         void moveRight();
         void update(const Level& currentLevel);
         void setDead();
+        void pickUp(const Level& currentLevel);
+        void drop();
+        Pickable* getHeldItem();
         float getGravity();
-        int getTileX(int offset = 0);
-        int getTileY(int offset = 0);
 };
 
 #endif

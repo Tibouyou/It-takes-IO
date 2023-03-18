@@ -53,12 +53,20 @@ void txtAff(WinTXT & win, const Level & level) {
 			win.print( x+level.getWidth()+5, y, blockC);
 		}
 	}
+	for (Pickable* pickable : level.getPickable()) {
+		int pickableC = pickable->getType();
+		switch (pickableC) {
+			case NON:
+				pickableC = 'N';
+				break;
+		}
+		if (!pickable->getHeld()) win.print( pickable->getTileX(), pickable->getTileY(), pickableC);
+    }
 	win.print( level.getPlayer0()->getTileX(), level.getPlayer0()->getTileY(), '0');
 	win.print( level.getPlayer1()->getTileX(), level.getPlayer1()->getTileY(), '1');
 	win.print( 0, level.getHeight(), "Player 0: ");
 	win.print( 0, level.getHeight()+1, "x : "+std::to_string(level.getPlayer0()->getX()));
 	win.print( 0, level.getHeight()+2, "y : "+std::to_string(level.getPlayer0()->getY()));
-	win.print( 0, level.getHeight()+3, "cable : "+std::to_string(level.tabCable.size()));
 	win.draw();
 
 }
@@ -92,6 +100,10 @@ void txtBoucle (Level & level) {
 			case 'd':
 				level.getPlayer0()->moveRight();
 				break;
+			case 's':
+				if (level.getPlayer0()->getHeldItem() == nullptr) level.getPlayer0()->pickUp(level);
+				else level.getPlayer0()->drop();
+				break;
 			case 'u':
 				level.getPlayer1()->jump();
 				break;
@@ -100,6 +112,10 @@ void txtBoucle (Level & level) {
 				break;	
 			case 'k':
 				level.getPlayer1()->moveRight();
+				break;	
+			case 'j':
+				if (level.getPlayer1()->getHeldItem() == nullptr) level.getPlayer1()->pickUp(level);
+				else level.getPlayer1()->drop();
 				break;			
 			case 'p':
 				ok = false;
