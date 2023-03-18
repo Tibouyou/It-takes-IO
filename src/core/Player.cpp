@@ -21,10 +21,22 @@ Player::~Player()
 
 void Player::jump()
 {
-    if (!isJumping) {
-    gravity = 10;
+    if (!isJumping && !isFalling) {
+    gravity = 15;
     isJumping = true;
     }
+}
+
+void::Player::moveLeft()
+{
+    x -= 5;
+    direction = false;
+}
+
+void Player::moveRight()
+{
+    x += 5;
+    direction = true;
 }
 
 void Player::update(const Level& currentLevel)
@@ -36,10 +48,14 @@ void Player::update(const Level& currentLevel)
         gravity -= 0.5;
     }
     y -= gravity;
-    if (!isJumping){y+=5;}
+    if (!isJumping && !currentLevel.getBlock(getTileX(),getTileY())->isSolid()) {
+        isFalling = true;
+    }
+    if (isFalling){y+=5;}
     
     if (currentLevel.getBlock(getTileX(),getTileY())->isSolid()) {
         y = getTileY()*50-1;
+        isFalling = false;
     }
 }
 

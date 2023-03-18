@@ -19,6 +19,8 @@ class Player : public Entity
         Player(bool playerType, int x, int y, int height, int width);
         ~Player();
         void jump();
+        void moveLeft();
+        void moveRight();
         void update(const Level& currentLevel);
         void setDead();
         float getGravity();

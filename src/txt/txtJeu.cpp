@@ -39,8 +39,8 @@ void txtAff(WinTXT & win, const Level & level) {
 	win.print( level.getPlayer0()->getTileX(), level.getPlayer0()->getTileY(), '0');
 	win.print( level.getPlayer1()->getTileX(), level.getPlayer1()->getTileY(), '1');
 	win.print( 0, level.getHeight(), "Player 0: ");
-	win.print( 0, level.getHeight()+1, "x : "+std::to_string(level.getPlayer1()->getX()));
-	win.print( 0, level.getHeight()+2, "y : "+std::to_string(level.getPlayer1()->getY()));
+	win.print( 0, level.getHeight()+1, "x : "+std::to_string(level.getPlayer0()->getX()));
+	win.print( 0, level.getHeight()+2, "y : "+std::to_string(level.getPlayer0()->getY()));
 	win.draw();
 
 }
@@ -68,6 +68,12 @@ void txtBoucle (Level & level) {
 			case 'z':
 				level.getPlayer0()->jump();
 				break;
+			case 'q':
+				level.getPlayer0()->moveLeft();
+				break;	
+			case 'd':
+				level.getPlayer0()->moveRight();
+				break;	
 			case 'p':
 				ok = false;
 				break;
