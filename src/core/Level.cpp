@@ -99,14 +99,14 @@ int Level::getWidth() const
 
 Block * Level::getBlock(int x, int y) const
 {
-    assert((y <= height) && (x <= width));
+    assert((y < height) && (x < width) && (y >= 0) && (x >= 0));
     return tabBlock.at(y*width+x);
 }
 
 Cable * Level::getCable(int x, int y) const
 {
-    assert((x <= 20) && (y <= 20));
-    return tabCable[y*20+x];
+    assert((y < height) && (x < width) && (y >= 0) && (x >= 0));
+    return tabCable[y*width+x];
 }
 
 Player * Level::getPlayer0() const
