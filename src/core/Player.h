@@ -12,6 +12,7 @@ class Player : public Entity
         float gravity;
         bool isFalling;
         bool isJumping;
+        bool isMoving;
         bool direction;
         bool isAlive;
 
@@ -24,8 +25,8 @@ class Player : public Entity
         void update(const Level& currentLevel);
         void setDead();
         float getGravity();
-        int getTileX();
-        int getTileY();
+        int getTileX(int offset = 0);
+        int getTileY(int offset = 0);
 };
 
 #endif

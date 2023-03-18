@@ -1,4 +1,5 @@
 #include "Level.h"
+#include "Pickable.h"
 #include "Platform.h"
 #include "Sensor.h"
 #include "Receptacle.h"
@@ -62,7 +63,11 @@ void Level::loadLevel()
                     break;   
                 case '+':
                     tabBlock.push_back(new Trap(x,y));
-                    break;     
+                    break;
+                case 'N':
+                    tabBlock.push_back(new Block(x,y));
+                    tabEntity.push_back(new Pickable(NON ,x,y,50,50));
+                    break;           
                 default:
                     tabBlock.push_back(new Block(x,y));
                     break;

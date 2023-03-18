@@ -14,7 +14,7 @@ class Level
         Player * p1;
         std::vector<Block*> tabBlock;
         std::vector<Cable*> tabCable;
-        std::vector<Entity> tabEntity;
+        std::vector<Entity*> tabEntity;
         int levelNumber;
         int height;
         int width;

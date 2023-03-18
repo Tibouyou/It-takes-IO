@@ -10,6 +10,7 @@ Player::Player(bool playerType, int x, int y, int height, int width) : Entity( x
     gravity = 0;
     isFalling = false;
     isJumping = false;
+    isMoving = false;
     direction = false;
     isAlive = true;;
 }
@@ -29,23 +30,35 @@ void Player::jump()
 
 void::Player::moveLeft()
 {
-    x -= 5;
+    isMoving = true;
     direction = false;
 }
 
 void Player::moveRight()
 {
-    x += 5;
+    isMoving = true;
     direction = true;
 }
 
 void Player::update(const Level& currentLevel)
 {
+    if (isMoving) {
+        if (direction && !currentLevel.getBlock(getTileX(5),getTileY())->isSolid()) {
+            x += 5;
+        }
+        else if(!direction && !currentLevel.getBlock(getTileX(-5),getTileY())->isSolid()) {
+            x -= 5;
+        }
+    }
     if (gravity <= 0) {
         isJumping = false;
     }
     if (gravity > 0) {
         gravity -= 0.5;
+    }
+    if (currentLevel.getBlock(getTileX(),getTileY(-gravity))->isSolid()) {
+        gravity = 0;
+        isFalling = true;
     }
     y -= gravity;
     if (!isJumping && !currentLevel.getBlock(getTileX(),getTileY())->isSolid()) {
@@ -57,6 +70,7 @@ void Player::update(const Level& currentLevel)
         y = getTileY()*50-1;
         isFalling = false;
     }
+    isMoving = false;
 }
 
 void Player::setDead()
@@ -69,13 +83,14 @@ float Player::getGravity()
     return gravity;
 }
 
-int Player::getTileX()
+int Player::getTileX(int offset)
 {
-    return floor(x/50);
+    return floor((x+offset)/50);
 }
 
-int Player::getTileY()
+int Player::getTileY(int offset)
 {
-    return floor(y/50);
+    return floor((y+offset)/50);
 }
+
 
