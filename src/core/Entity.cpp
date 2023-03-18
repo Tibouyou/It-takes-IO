@@ -10,6 +10,10 @@ Entity::Entity(int x, int y, int height, int width)
     this->width = width;
 }
 
+Entity::~Entity()
+{
+}
+
 int Entity::getX() const
 {
     return x;

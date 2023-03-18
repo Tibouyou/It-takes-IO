@@ -13,6 +13,7 @@ class Entity
 
     public:
         Entity(int x, int y, int height, int width);
+        virtual ~Entity();
         int getX() const;
         int getY() const;
         void setPosition(int x, int y);

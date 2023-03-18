@@ -1,8 +1,9 @@
 #include <iostream>
 #include "Cable.h"
+#include "Enum.h"
 #include "Level.h"
 
-Cable::Cable(int tileX, int tileY, PowerType power, unsigned char directionMaskCable)
+Cable::Cable(int tileX, int tileY, unsigned char directionMaskCable,PowerType power)
 {
     this->tileX = tileX;
     this->tileY = tileY;
@@ -41,9 +42,9 @@ void Cable::power(PowerType power, unsigned char directionMask, const Level& cur
    }
 }
 
-void Cable::update(const Level& currentLevel)
+void Cable::reset()
 {
-    // Do nothing
+    cablePower = EMPTY;
 }
 
 PowerType Cable::getPowerType()

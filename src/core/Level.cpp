@@ -33,11 +33,11 @@ void Level::loadLevel()
     fichierLevel >> width >> height;
     this->width = width;
     this->height = height;
+    char type;
     for (int y = 0; y < height; y++)
     {
         for (int x = 0; x < width; x++)
         {
-            char type;
             fichierLevel >> type;
             switch (type)
             {
@@ -74,6 +74,16 @@ void Level::loadLevel()
             }
         }
     }
+
+    int cableType;
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            fichierLevel >> cableType;
+            tabCable.push_back(new Cable(x,y,cableType));
+        }
+    }
     fichierLevel.close();
 }
 
@@ -81,6 +91,15 @@ void Level::update()
 {
     p0->update(*this);
     p1->update(*this);
+    for (int i = 0; i < tabCable.size(); i++)
+    {
+        tabCable[i]->reset();
+    }
+    for (int i = 0; i < tabBlock.size(); i++)
+    {
+        tabBlock[i]->update(*p0,*p1,*this);
+    }
+
 }
 
 void Level::resetLevel()

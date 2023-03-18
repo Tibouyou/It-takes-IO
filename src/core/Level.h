@@ -13,13 +13,14 @@ class Level
         Player * p0;
         Player * p1;
         std::vector<Block*> tabBlock;
-        std::vector<Cable*> tabCable;
+        //std::vector<Cable*> tabCable;
         std::vector<Entity*> tabEntity;
         int levelNumber;
         int height;
         int width;
 
     public :
+        std::vector<Cable*> tabCable;
         Level(int levelNumber);
         ~Level();
         int getHeight() const;
