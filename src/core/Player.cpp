@@ -1,7 +1,9 @@
 #include <iostream>
+#include "Enum.h"
 #include "Player.h"
 #include "Level.h"
 #include <math.h>
+#include "Receptacle.h"
 
 Player::Player(bool playerType, int x, int y, int height, int width) : Entity( x, y, height, width)
 {
@@ -85,24 +87,25 @@ float Player::getGravity()
 
 void Player::pickUp(const Level& currentLevel)
 {
-    if (heldItem == nullptr) {
-        for (Pickable* pickable : currentLevel.getPickable()) {
-            if (pickable->getTileX() == getTileX() && pickable->getTileY() == getTileY()) {
-                heldItem = pickable;
-                heldItem->setHeld();
-                break;
-            }
+    for (Pickable* pickable : currentLevel.getPickable()) {
+        if (pickable->getTileX() == getTileX() && pickable->getTileY() == getTileY()) {
+            heldItem = pickable;
+            heldItem->setHeld();
+            if (currentLevel.getBlock(getTileX(),getTileY())->getType() == RECEPTACLE) dynamic_cast<Receptacle*>(currentLevel.getBlock(getTileX(),getTileY()))->setHeldItem(nullptr);
         }
     }
 }
 
-void Player::drop()
+void Player::drop(const Level& currentLevel)
 {
-    if (heldItem != nullptr) {
-        heldItem->setPosition(getTileX()*50,getTileY()*50);
-        heldItem->setHeld();
-        heldItem = nullptr;
-    }
+    Block* block = currentLevel.getBlock(getTileX(),getTileY());
+    if (block->getType() == RECEPTACLE) {
+        if (dynamic_cast<Receptacle*>(block)->getHeldItem() == nullptr) dynamic_cast<Receptacle*>(block)->setHeldItem(heldItem);
+    } 
+        
+    heldItem->setPosition(getTileX()*50,getTileY()*50);
+    heldItem->setHeld();
+    heldItem = nullptr;
 }
 
 Pickable* Player::getHeldItem()

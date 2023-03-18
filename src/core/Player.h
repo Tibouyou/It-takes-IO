@@ -25,7 +25,7 @@ class Player : public Entity
         void update(const Level& currentLevel);
         void setDead();
         void pickUp(const Level& currentLevel);
-        void drop();
+        void drop(const Level& currentLevel);
         Pickable* getHeldItem();
         float getGravity();
 };

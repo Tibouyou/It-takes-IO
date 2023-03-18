@@ -7,6 +7,7 @@
 #include "Cable.h"
 #include "Entity.h"
 #include <vector>
+#include "Receptacle.h"
 
 class Level
 {

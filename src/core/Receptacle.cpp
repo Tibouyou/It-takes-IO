@@ -20,11 +20,11 @@ void Receptacle::power(PowerType type, const Level& currentLevel)
         {
             if (type == ZERO)
             {
-                currentLevel.getCable(tileX + 1, tileY)->power(ONE, PowerDirection::RIGHT, currentLevel);
+                currentLevel.getCable(tileX + 1, tileY)->power(ONE, PowerDirection::LEFT, currentLevel);
             }
             else if (type == ONE)
             {
-                currentLevel.getCable(tileX + 1, tileY)->power(ZERO, PowerDirection::RIGHT, currentLevel);
+                currentLevel.getCable(tileX + 1, tileY)->power(ZERO, PowerDirection::LEFT, currentLevel);
             }
         
         }
@@ -33,4 +33,14 @@ void Receptacle::power(PowerType type, const Level& currentLevel)
 
 void Receptacle::update(const Player& p0,const Player& p1, Level& currentLevel)
 {
+}
+
+void Receptacle::setHeldItem(Pickable * item)
+{
+    heldItem = item;
+}
+
+Pickable * Receptacle::getHeldItem()
+{
+    return heldItem;
 }

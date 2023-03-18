@@ -17,7 +17,7 @@ class Block
         Block(int x = 0, int y = 0, BlockType type = AIR);
         virtual bool isSolid();
         BlockType getType();
-        virtual void power(PowerType type);
+        virtual void power(PowerType type, const Level& currentLevel);
         virtual void update(const Player& p0,const Player& p1, Level& currentLevel);
 }; 
 

@@ -18,7 +18,7 @@ BlockType Block::getType() {
     return type;
 }
 
-void Block::power(PowerType type) 
+void Block::power(PowerType type, const Level& currentLevel) 
 {
 
 }

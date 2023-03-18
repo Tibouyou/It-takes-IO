@@ -67,6 +67,12 @@ void txtAff(WinTXT & win, const Level & level) {
 	win.print( 0, level.getHeight(), "Player 0: ");
 	win.print( 0, level.getHeight()+1, "x : "+std::to_string(level.getPlayer0()->getX()));
 	win.print( 0, level.getHeight()+2, "y : "+std::to_string(level.getPlayer0()->getY()));
+	Receptacle * recep = dynamic_cast<Receptacle*>(level.getBlock(9, 7));
+	if (recep->getHeldItem() == nullptr) {
+		win.print( 0, level.getHeight()+3, "Receptacle : R");
+	} else {
+		win.print( 0, level.getHeight()+3, "Receptacle : "+std::to_string(recep->getHeldItem()->getType()));
+	}
 	win.draw();
 
 }
@@ -102,7 +108,7 @@ void txtBoucle (Level & level) {
 				break;
 			case 's':
 				if (level.getPlayer0()->getHeldItem() == nullptr) level.getPlayer0()->pickUp(level);
-				else level.getPlayer0()->drop();
+				else level.getPlayer0()->drop(level);
 				break;
 			case 'u':
 				level.getPlayer1()->jump();
@@ -115,7 +121,7 @@ void txtBoucle (Level & level) {
 				break;	
 			case 'j':
 				if (level.getPlayer1()->getHeldItem() == nullptr) level.getPlayer1()->pickUp(level);
-				else level.getPlayer1()->drop();
+				else level.getPlayer1()->drop(level);
 				break;			
 			case 'p':
 				ok = false;

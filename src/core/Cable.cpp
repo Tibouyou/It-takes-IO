@@ -19,25 +19,25 @@ void Cable::power(PowerType power, unsigned char directionMask, const Level& cur
        if ((directionMaskCable & PowerDirection::RIGHT) && !(directionMask & PowerDirection::RIGHT))
        {
             currentLevel.getCable(tileX + 1, tileY)->power(power, PowerDirection::LEFT, currentLevel);
-            currentLevel.getBlock(tileX + 1, tileY)->power(power);
+            currentLevel.getBlock(tileX + 1, tileY)->power(power, currentLevel);
        }
 
         if ((directionMaskCable & PowerDirection::LEFT) && !(directionMask & PowerDirection::LEFT))
         {
             currentLevel.getCable(tileX - 1, tileY)->power(power, PowerDirection::RIGHT, currentLevel);
-            currentLevel.getBlock(tileX - 1, tileY)->power(power);
+            currentLevel.getBlock(tileX - 1, tileY)->power(power, currentLevel);
         }
 
         if ((directionMaskCable & PowerDirection::UP) && !(directionMask & PowerDirection::UP))
         {
             currentLevel.getCable(tileX, tileY - 1)->power(power, PowerDirection::DOWN, currentLevel);
-            currentLevel.getBlock(tileX, tileY - 1)->power(power);
+            currentLevel.getBlock(tileX, tileY - 1)->power(power, currentLevel);
         }
             
         if ((directionMaskCable & PowerDirection::DOWN) && !(directionMask & PowerDirection::DOWN))
         {
             currentLevel.getCable(tileX, tileY + 1)->power(power, PowerDirection::UP, currentLevel);
-            currentLevel.getBlock(tileX, tileY + 1)->power(power);
+            currentLevel.getBlock(tileX, tileY + 1)->power(power, currentLevel);
         }
    }
 }
