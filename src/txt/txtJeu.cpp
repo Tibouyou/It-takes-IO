@@ -36,6 +36,23 @@ void txtAff(WinTXT & win, const Level & level) {
 			win.print( x, y, blockC);
 		}
 	}
+	for(int y=0;y<level.getHeight();y++){
+		for(int x=0;x<level.getWidth();x++){
+			int blockC = level.getCable(x,y)->getPowerType();
+			switch (blockC) {
+				case EMPTY:
+					blockC = ' ';
+					break;
+				case ZERO:
+					blockC = '0';
+					break;
+				case ONE:
+					blockC = '1';
+					break;
+			}
+			win.print( x+level.getWidth()+5, y, blockC);
+		}
+	}
 	win.print( level.getPlayer0()->getTileX(), level.getPlayer0()->getTileY(), '0');
 	win.print( level.getPlayer1()->getTileX(), level.getPlayer1()->getTileY(), '1');
 	win.print( 0, level.getHeight(), "Player 0: ");
@@ -49,7 +66,7 @@ void txtAff(WinTXT & win, const Level & level) {
 void txtBoucle (Level & level) {
 	// Creation d'une nouvelle fenetre en mode texte
 	// => fenetre de dimension et position (WIDTH,HEIGHT,STARTX,STARTY)
-    WinTXT win (level.getWidth(),level.getHeight()+10);
+    WinTXT win (level.getWidth()*2+5,level.getHeight()+10);
 
 	bool ok = true;
 	int c;
