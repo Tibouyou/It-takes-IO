@@ -110,8 +110,7 @@ void Level::update()
         tabCable[i]->reset();
     }
     for (int i = 0; i < tabBlock.size(); i++)
-    {std::vector<Cable*> input;
-        std::vector<Cable*> output;
+    {
         tabBlock[i]->update(*p0,*p1,*this);
     }
 

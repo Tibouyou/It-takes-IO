@@ -18,7 +18,7 @@ class Block
         virtual bool isSolid();
         BlockType getType();
         virtual void power(PowerType type, const Level& currentLevel);
-        virtual void update(const Player& p0,const Player& p1, Level& currentLevel);
+        virtual void update(Player& p0, Player& p1, Level& currentLevel);
 }; 
 
 

@@ -13,7 +13,7 @@ bool Sensor::isSolid()
 }
 
 
-void Sensor::update(const Player& p0,const Player& p1, Level& currentLevel)
+void Sensor::update(Player& p0, Player& p1, Level& currentLevel)
 {
     bool p0OnSensor = (floor(p0.getX()/50) == tileX && floor(p0.getY()/50) == tileY);
     bool p1OnSensor = (floor(p1.getX()/50) == tileX && floor(p1.getY()/50) == tileY);

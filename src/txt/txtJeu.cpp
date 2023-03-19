@@ -123,6 +123,8 @@ void txtBoucle (Level & level) {
 		}
 		level.update();
 
+		if(!level.getPlayer0()->getAlive() || !level.getPlayer1()->getAlive()) ok = false;
+		
 	} while (ok);
 
 }

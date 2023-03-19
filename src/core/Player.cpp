@@ -14,7 +14,7 @@ Player::Player(bool playerType, int x, int y, int height, int width) : Entity( x
     isJumping = false;
     isMoving = false;
     direction = false;
-    isAlive = true;;
+    isAlive = true;
 }
 
 Player::~Player()
@@ -77,7 +77,12 @@ void Player::update(const Level& currentLevel)
 
 void Player::setDead()
 {
-    isAlive = !isAlive;
+    isAlive = false;
+}
+
+bool Player::getAlive() const 
+{
+    return isAlive;
 }
 
 float Player::getGravity()

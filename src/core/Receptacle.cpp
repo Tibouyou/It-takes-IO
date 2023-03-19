@@ -31,10 +31,6 @@ void Receptacle::power(PowerType type, const Level& currentLevel)
     }
 }
 
-void Receptacle::update(const Player& p0,const Player& p1, Level& currentLevel)
-{
-}
-
 void Receptacle::setHeldItem(Pickable * item)
 {
     heldItem = item;

@@ -11,7 +11,7 @@ class Trap : public Block
     public :
         Trap(int x, int y, BlockType type = TRAP);
         bool isSolid();
-        void update(Player& p0,Player& p1, Level& currentLevel);
+        void update(Player& p0, Player& p1, Level& currentLevel);
 }; 
 
 
