@@ -88,7 +88,8 @@ void Level::loadLevel()
                     tabBlock.push_back(new Block(x,y));
                     break;  
                 case 'D':
-                    tabBlock.push_back(new Door(x,y));
+                    door = new Door(x,y);
+                    tabBlock.push_back(door);
                     break;  
                 default:
                     tabBlock.push_back(new Block(x,y));
@@ -133,29 +134,38 @@ void Level::update()
 {
     p0->update(*this);
     p1->update(*this);
-    for (int i = 0; i < tabCable.size(); i++)
+
+    if (!door->isOpened())
     {
-        tabCable[i]->reset();
-    }
-    for (int i = 0; i < tabBlock.size(); i++)
-    {
-        if (tabBlock[i]->getType() == SENSOR)
+        for (unsigned int i = 0; i < tabCable.size(); i++)
         {
-            tabBlock[i]->update(*p0,*p1,*this);
+            tabCable[i]->reset();
+        }
+
+        for (unsigned int i = 0; i < tabBlock.size(); i++)
+        {
+            if (tabBlock[i]->getType() == SENSOR)
+            {
+                tabBlock[i]->update(*p0,*p1,*this);
+            }
+        }
+
+        for (unsigned int i = 0; i < tabGate.size(); i++)
+        {
+            tabGate[i]->update(*this);
         }
     }
-    for (int i = 0; i < tabGate.size(); i++)
-    {
-        tabGate[i]->update(*this);
-    }
-    for (int i = 0; i < tabBlock.size(); i++)
+    
+
+    for (unsigned int i = 0; i < tabBlock.size(); i++)
     {
         if (tabBlock[i]->getType() == TRAP)
         {
             tabBlock[i]->update(*p0,*p1,*this);
         }
     }
-    for (int i = 0; i < tabBlock.size(); i++)
+
+    for (unsigned int i = 0; i < tabBlock.size(); i++)
     {
         if (tabBlock[i]->getType() == DOOR)
         {
@@ -200,6 +210,11 @@ Player * Level::getPlayer1() const
     return p1;
 }
 
+Door * Level::getDoor() const
+{
+    return door;
+}
+
 std::vector<Pickable*> Level::getPickable() const
 {
     return tabPickable;
@@ -219,4 +234,3 @@ bool Level::getWin() const
 {
     return isWon;
 }
-

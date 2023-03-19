@@ -13,12 +13,14 @@ bool Trap::isSolid()
 
 void Trap::update(Player& p0, Player& p1, Level& currentLevel)
 {
-    if (p0.getTileX() == tileX && p0.getTileY() == tileY)
-    {
-        p0.setDead();
+    if (currentLevel.getCable(tileX, tileY)->getPowerType() == PowerType::ONE) {
+        if (p0.getTileX() == tileX && p0.getTileY() == tileY)
+        {
+            p0.setDead();
+        }
+        if (p1.getTileX() == tileX && p1.getTileY() == tileY)
+        {
+            p1.setDead();
+        }
     }
-    if (p1.getTileX() == tileX && p1.getTileY() == tileY)
-    {
-        p1.setDead();
-    }  
 }

@@ -9,12 +9,14 @@
 #include <vector>
 #include "Receptacle.h"
 #include "Gate.h"
+#include "Door.h"
 
 class Level
 {
     private :
         Player * p0;
         Player * p1;
+        Door * door;
         std::vector<Block*> tabBlock;
         std::vector<Gate*> tabGate;
         std::vector<Cable*> tabCable;
@@ -40,6 +42,7 @@ class Level
         Cable * getCable(int x, int y) const;
         Player * getPlayer0() const;
         Player * getPlayer1() const;
+        Door * getDoor() const;
 }; 
 
 

@@ -12,6 +12,10 @@ bool Door::isSolid()
     return !open;
 }
 
+bool Door::isOpened()
+{
+    return open;
+}
 
 void Door::setOpen()
 {

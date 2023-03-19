@@ -90,12 +90,23 @@ float Player::getGravity()
     return gravity;
 }
 
+void Player::use(const Level& currentLevel)
+{
+    if (!currentLevel.getDoor()->isOpened()) {
+        if (heldItem == nullptr)  {
+            pickUp(currentLevel);
+        } else {
+            drop(currentLevel);
+        }
+    }
+}
+
 void Player::pickUp(const Level& currentLevel)
 {
     for (Pickable* pickable : currentLevel.getPickable()) {
         if (pickable->getTileX() == getTileX() && pickable->getTileY() == getTileY()) {
             heldItem = pickable;
-            heldItem->setHeld();
+            heldItem->toggleHeld();
             if (currentLevel.getBlock(getTileX(),getTileY())->getType() == RECEPTACLE) dynamic_cast<Receptacle*>(currentLevel.getBlock(getTileX(),getTileY()))->setHeldItem(nullptr);
         }
     }
@@ -109,7 +120,7 @@ void Player::drop(const Level& currentLevel)
     } 
         
     heldItem->setPosition(getTileX()*50,getTileY()*50);
-    heldItem->setHeld();
+    heldItem->toggleHeld();
     heldItem = nullptr;
 }
 

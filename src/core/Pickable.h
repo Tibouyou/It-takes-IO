@@ -15,7 +15,7 @@ class Pickable : public Entity
         Pickable(PickableType type, int x, int y, int height, int width);
         void update(const Level& currentLevel);
         PickableType getType();
-        void setHeld();
+        void toggleHeld();
         bool getHeld();
 };
 

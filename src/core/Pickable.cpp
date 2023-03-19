@@ -13,7 +13,7 @@ PickableType Pickable:: getType()
     return type;
 }
 
-void Pickable:: setHeld()
+void Pickable:: toggleHeld()
 {
     isHeld = !isHeld;
 }

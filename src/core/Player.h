@@ -25,6 +25,7 @@ class Player : public Entity
         void update(const Level& currentLevel);
         void setDead();
         bool getAlive() const;
+        void use(const Level& currentLevel);
         void pickUp(const Level& currentLevel);
         void drop(const Level& currentLevel);
         Pickable* getHeldItem();

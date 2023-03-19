@@ -27,7 +27,9 @@ void txtAff(WinTXT & win, const Level & level) {
 					blockC = '_';
 					break;
 				case TRAP:
-					blockC = '+';
+					if (level.getCable(x,y)->getPowerType() == PowerType::ONE)
+						blockC = '+';
+					else blockC = 'x';
 					break;
 				case RECEPTACLE:
 					blockC = 'R';
@@ -86,7 +88,7 @@ void txtAff(WinTXT & win, const Level & level) {
 
 }
 
-void txtBoucle (Level & level) {
+void txtBoucle (Level& level) {
 	// Creation d'une nouvelle fenetre en mode texte
 	// => fenetre de dimension et position (WIDTH,HEIGHT,STARTX,STARTY)
     WinTXT win (level.getWidth()*2+5,level.getHeight()+10);
@@ -116,8 +118,7 @@ void txtBoucle (Level & level) {
 				level.getPlayer0()->moveRight();
 				break;
 			case 's':
-				if (level.getPlayer0()->getHeldItem() == nullptr) level.getPlayer0()->pickUp(level);
-				else level.getPlayer0()->drop(level);
+				level.getPlayer0()->use(level);
 				break;
 			case 'u':
 				level.getPlayer1()->jump();
@@ -129,8 +130,7 @@ void txtBoucle (Level & level) {
 				level.getPlayer1()->moveRight();
 				break;	
 			case 'j':
-				if (level.getPlayer1()->getHeldItem() == nullptr) level.getPlayer1()->pickUp(level);
-				else level.getPlayer1()->drop(level);
+				level.getPlayer1()->use(level);
 				break;			
 			case 'p':
 				ok = false;
