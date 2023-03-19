@@ -11,10 +11,6 @@ bool Door::isSolid()
     return !open;
 }
 
-bool Door::isOpen()
-{
-    return open;
-}
 
 void Door::setOpen()
 {
@@ -23,7 +19,7 @@ void Door::setOpen()
 
 void Door::update(Player& p0, Player& p1, Level& currentLevel)
 {
-    if (currentLevel.getCable(tileX, tileY - 1)->getPowerType() == ONE)
+    if (currentLevel.getCable(tileX, tileY + 1)->getPowerType() == ONE)
     {
         this->setOpen();
     }

@@ -14,7 +14,6 @@ class Door : public Block
     public :
         Door(int x, int y, BlockType type = DOOR);
         bool isSolid();
-        bool isOpen();
         void setOpen();
         void update(Player& p0, Player& p1, Level& currentLevel);
 };

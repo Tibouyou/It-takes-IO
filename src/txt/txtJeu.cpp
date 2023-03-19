@@ -36,7 +36,8 @@ void txtAff(WinTXT & win, const Level & level) {
 					blockC = '&';
 					break;
 				case DOOR:
-					blockC = 'D';
+					if (level.getBlock(x,y)->isSolid()) blockC = 'D';
+					else blockC = 'd';
 					break;	
 			}
 			win.print( x, y, blockC);
@@ -49,7 +50,6 @@ void txtAff(WinTXT & win, const Level & level) {
 				case EMPTY:
 					if (level.getCable(x,y)->getDirectionMask() == NONE) blockC = ' ';
 					else blockC = '.';
-					//blockC=' ';
 					break;
 				case ZERO:
 					blockC = '0';

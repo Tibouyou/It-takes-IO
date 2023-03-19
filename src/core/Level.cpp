@@ -138,13 +138,29 @@ void Level::update()
     }
     for (int i = 0; i < tabBlock.size(); i++)
     {
-        tabBlock[i]->update(*p0,*p1,*this);
+        if (tabBlock[i]->getType() == SENSOR)
+        {
+            tabBlock[i]->update(*p0,*p1,*this);
+        }
     }
     for (int i = 0; i < tabGate.size(); i++)
     {
         tabGate[i]->update(*this);
     }
-
+    for (int i = 0; i < tabBlock.size(); i++)
+    {
+        if (tabBlock[i]->getType() == TRAP)
+        {
+            tabBlock[i]->update(*p0,*p1,*this);
+        }
+    }
+    for (int i = 0; i < tabBlock.size(); i++)
+    {
+        if (tabBlock[i]->getType() == DOOR)
+        {
+            tabBlock[i]->update(*p0,*p1,*this);
+        }
+    }
 }
 
 void Level::resetLevel()
