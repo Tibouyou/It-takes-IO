@@ -140,6 +140,10 @@ void Level::update()
     {
         tabBlock[i]->update(*p0,*p1,*this);
     }
+    for (int i = 0; i < tabGate.size(); i++)
+    {
+        tabGate[i]->update(*this);
+    }
 
 }
 

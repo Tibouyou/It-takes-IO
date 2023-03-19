@@ -25,7 +25,7 @@ class Gate : public Block
         int getX();
         int getY();
         bool isSolid();
-        void update(Player& p0,Player& p1, Level& currentLevel);
+        void update(Level& currentLevel);
 }; 
 
 

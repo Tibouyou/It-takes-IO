@@ -13,7 +13,7 @@ Cable::Cable(int tileX, int tileY, unsigned char directionMaskCable,PowerType po
 
 void Cable::power(PowerType power, unsigned char directionMask, const Level& currentLevel)
 {
-   if (directionMask & directionMaskCable)
+   if ((directionMask & directionMaskCable) || (directionMask == PowerDirection::NONE))
    {
        cablePower = power;
        if ((directionMaskCable & PowerDirection::RIGHT) && !(directionMask & PowerDirection::RIGHT))

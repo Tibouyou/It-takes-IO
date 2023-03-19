@@ -2,6 +2,7 @@
 #include "Enum.h"
 #include "Vector2D.h"
 #include <math.h>
+#include "Level.h"
 
 Gate::Gate(int x, int y, GateType gateType, BlockType type) : Block( x, y, type)
 {
@@ -25,9 +26,27 @@ bool Gate::isSolid()
 }
 
 
-void Gate::update(Player& p0,Player& p1, Level& currentLevel)
+void Gate::update(Level& currentLevel)
 {
-        
+    PowerType outputPower = EMPTY;
+    switch (gateType)
+    {
+        case AND:
+            for (Vector2D* input : input)
+            {
+                if (currentLevel.getCable(input->x, input->y)->getPowerType() != ONE) {
+                    outputPower = EMPTY;
+                    break;
+                }
+                outputPower = ONE;
+            }
+            
+            for (Vector2D* output : output)
+            {
+                currentLevel.getCable(output->x, output->y)->power(outputPower, PowerDirection::NONE, currentLevel);
+            }
+            break;
+    }
 }
 
 int Gate::getX()
