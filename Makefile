@@ -1,10 +1,10 @@
 all: bin/main bin/main_txt
 
-bin/main_txt: obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o
-	g++ -g -Wall -o bin/main_txt obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o
+bin/main_txt: obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o
+	g++ -g -Wall -o bin/main_txt obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o
 
-bin/main: obj/Main.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o
-	g++ -g -Wall -o bin/main obj/Main.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o
+bin/main: obj/Main.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o
+	g++ -g -Wall -o bin/main obj/Main.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o
 
 obj/Main_txt.o: src/txt/main_txt.cpp src/txt/winTxt.h src/txt/txtJeu.h src/core/Level.h
 	g++ -g -Wall -c src/txt/main_txt.cpp -o obj/Main_txt.o
@@ -44,6 +44,9 @@ obj/Sensor.o: src/core/Sensor.cpp src/core/Sensor.h src/core/Block.h src/core/Pl
 
 obj/Gate.o: src/core/Gate.cpp src/core/Gate.h src/core/Block.h src/core/Player.h src/core/Vector2D.h
 	g++ -g -Wall -c src/core/Gate.cpp -o obj/Gate.o	
+
+obj/Door.o: src/core/Door.cpp src/core/Door.h src/core/Block.h src/core/Player.h src/core/Enum.h
+	g++ -g -Wall -c src/core/Door.cpp -o obj/Door.o	
 
 obj/Trap.o: src/core/Trap.cpp src/core/Trap.h src/core/Block.h src/core/Player.h
 	g++ -g -Wall -c src/core/Trap.cpp -o obj/Trap.o			

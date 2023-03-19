@@ -7,6 +7,7 @@
 #include "Receptacle.h"
 #include "Trap.h"
 #include "Vector2D.h"
+#include "Door.h"
 #include <cassert>
 #include <iostream>
 #include <fstream>
@@ -84,7 +85,10 @@ void Level::loadLevel()
                 case '&':
                     tabGate.push_back(new Gate(x,y, AND));
                     tabBlock.push_back(new Block(x,y));
-                    break;    
+                    break;  
+                case 'D':
+                    tabBlock.push_back(new Door(x,y));
+                    break;  
                 default:
                     tabBlock.push_back(new Block(x,y));
                     break;
