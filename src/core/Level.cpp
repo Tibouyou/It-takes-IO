@@ -17,6 +17,7 @@ Level::Level(int levelNumber)
     this->levelNumber = levelNumber;
     this->p0 = new Player(0,0,50,100,50);
     this->p1 = new Player(1,0,50,100,50);
+    this->isWon = false;
     loadLevel();
 }
 
@@ -207,5 +208,15 @@ std::vector<Pickable*> Level::getPickable() const
 std::vector<Gate*> Level::getGate() const
 {
     return tabGate;
+}
+
+void Level::win()
+{
+    this->isWon = true;
+}
+
+bool Level::getWin() const
+{
+    return isWon;
 }
 

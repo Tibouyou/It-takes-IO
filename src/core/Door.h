@@ -11,6 +11,7 @@ class Door : public Block
 {
     private :
         bool open;
+        bool win;
     public :
         Door(int x, int y, BlockType type = DOOR);
         bool isSolid();

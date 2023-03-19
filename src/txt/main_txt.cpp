@@ -5,6 +5,6 @@ int main ( int argc, char** argv ) {
     termClear();
 	Level level(1);
 	txtBoucle(level);
-    termClear();
+    //termClear();
 	return 0;
 }

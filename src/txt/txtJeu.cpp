@@ -139,7 +139,9 @@ void txtBoucle (Level & level) {
 		level.update();
 
 		if(!level.getPlayer0()->getAlive() || !level.getPlayer1()->getAlive()) ok = false;
-
+		if(level.getWin()) ok = false;
 	} while (ok);
-
+	termClear();
+	if(level.getWin()) std::cout << "Bien joué" << std::endl;
+	else std::cout << "Gros nullos" << std::endl;
 }

@@ -22,6 +22,7 @@ class Level
         int levelNumber;
         int height;
         int width;
+        bool isWon;
 
     public :
         Level(int levelNumber);
@@ -31,6 +32,8 @@ class Level
         void loadLevel();
         void resetLevel();
         void update();
+        void win();
+        bool getWin() const;
         std::vector<Gate*> getGate() const;
         std::vector<Pickable*> getPickable() const;
         Block * getBlock(int x, int y) const;
