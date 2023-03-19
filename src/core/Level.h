@@ -8,6 +8,7 @@
 #include "Entity.h"
 #include <vector>
 #include "Receptacle.h"
+#include "Door.h"
 
 class Level
 {

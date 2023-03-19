@@ -4,6 +4,7 @@
 #include "Sensor.h"
 #include "Receptacle.h"
 #include "Trap.h"
+#include "Vector2D.h"
 #include <cassert>
 #include <iostream>
 #include <fstream>
@@ -24,6 +25,8 @@ Level::~Level()
 
 void Level::loadLevel()
 {
+    std::vector<Vector2D*> input;
+    std::vector<Vector2D*> output;
     int width, height;
     std::ifstream fichierLevel("data/levels/level"+std::to_string(levelNumber)+".txt");
     if (!fichierLevel.is_open()) {
@@ -67,7 +70,18 @@ void Level::loadLevel()
                 case 'N':
                     tabBlock.push_back(new Block(x,y));
                     tabPickable.push_back(new Pickable(NON ,x*50,y*50,50,50));
-                    break;           
+                    break; 
+                case 'I':
+                    tabBlock.push_back(new Block(x,y));
+                    input.push_back(new Vector2D(x,y));
+                    break;
+                case 'O':
+                    tabBlock.push_back(new Block(x,y));
+                    output.push_back(new Vector2D(x,y));
+                    break;    
+                case '&':
+                    tabBlock.push_back(new Door(x,y, AND, input, output));
+                    break;    
                 default:
                     tabBlock.push_back(new Block(x,y));
                     break;
@@ -96,7 +110,8 @@ void Level::update()
         tabCable[i]->reset();
     }
     for (int i = 0; i < tabBlock.size(); i++)
-    {
+    {std::vector<Cable*> input;
+        std::vector<Cable*> output;
         tabBlock[i]->update(*p0,*p1,*this);
     }
 

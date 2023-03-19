@@ -32,6 +32,9 @@ void txtAff(WinTXT & win, const Level & level) {
 				case RECEPTACLE:
 					blockC = 'R';
 					break;
+				case DOOR:
+					blockC = '&';
+					break;	
 			}
 			win.print( x, y, blockC);
 		}
@@ -64,15 +67,6 @@ void txtAff(WinTXT & win, const Level & level) {
     }
 	win.print( level.getPlayer0()->getTileX(), level.getPlayer0()->getTileY(), '0');
 	win.print( level.getPlayer1()->getTileX(), level.getPlayer1()->getTileY(), '1');
-	win.print( 0, level.getHeight(), "Player 0: ");
-	win.print( 0, level.getHeight()+1, "x : "+std::to_string(level.getPlayer0()->getX()));
-	win.print( 0, level.getHeight()+2, "y : "+std::to_string(level.getPlayer0()->getY()));
-	Receptacle * recep = dynamic_cast<Receptacle*>(level.getBlock(9, 7));
-	if (recep->getHeldItem() == nullptr) {
-		win.print( 0, level.getHeight()+3, "Receptacle : R");
-	} else {
-		win.print( 0, level.getHeight()+3, "Receptacle : "+std::to_string(recep->getHeldItem()->getType()));
-	}
 	win.draw();
 
 }
