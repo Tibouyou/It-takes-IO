@@ -19,7 +19,6 @@ void Trap::update(Player& p0, Player& p1, Level& currentLevel)
     }
     if (p1.getTileX() == tileX && p1.getTileY() == tileY)
     {
-        currentLevel.getBlock(1000,1000);
         p1.setDead();
     }  
 }

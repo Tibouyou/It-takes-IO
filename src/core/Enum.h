@@ -11,7 +11,7 @@ enum PowerDirection {
     RIGHT = 1<<3
 };
 
-enum BlockType{AIR, PLATFORM, SENSOR, TRAP, RECEPTACLE, GATE};
+enum BlockType{AIR, PLATFORM, SENSOR, TRAP, RECEPTACLE, GATE, DOOR};
 
 enum GateType{AND};
 
