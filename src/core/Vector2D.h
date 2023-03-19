@@ -4,6 +4,7 @@
 struct Vector2D {
     int x;
     int y;
-    Vector2D(int x, int y);
+    int id;
+    Vector2D(int x, int y, int id=0);
 };
 #endif

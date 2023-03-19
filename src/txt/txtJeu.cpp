@@ -32,7 +32,7 @@ void txtAff(WinTXT & win, const Level & level) {
 				case RECEPTACLE:
 					blockC = 'R';
 					break;
-				case DOOR:
+				case GATE:
 					blockC = '&';
 					break;	
 			}
@@ -67,6 +67,9 @@ void txtAff(WinTXT & win, const Level & level) {
     }
 	win.print( level.getPlayer0()->getTileX(), level.getPlayer0()->getTileY(), '0');
 	win.print( level.getPlayer1()->getTileX(), level.getPlayer1()->getTileY(), '1');
+	win.print( 0, level.getHeight(), std::to_string(level.tabGate[0]->input.size()));
+	win.print( 0, level.getHeight()+1, std::to_string(level.tabGate[0]->output.size()));
+	win.print( 0, level.getHeight()+2, std::to_string(level.tabGate.size()));
 	win.draw();
 
 }

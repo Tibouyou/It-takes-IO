@@ -13,13 +13,17 @@ class Level;
 class Gate : public Block
 {
     private : 
-        std::vector<Vector2D*> input;
-        std::vector<Vector2D*> output;
+        //std::vector<Vector2D*> input;
+        //std::vector<Vector2D*> output;
         GateType gateType;
     public :
+        std::vector<Vector2D*> input;
+        std::vector<Vector2D*> output;
         Gate(int x, int y,GateType gateType, BlockType type = GATE);
-        std::vector<Vector2D*> getInput();
-        std::vector<Vector2D*> getOutput();
+        void addInput(Vector2D * v);
+        void addOutput(Vector2D * v);
+        int getX();
+        int getY();
         bool isSolid();
         void update(Player& p0,Player& p1, Level& currentLevel);
 }; 

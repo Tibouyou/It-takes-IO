@@ -8,7 +8,7 @@
 #include "Entity.h"
 #include <vector>
 #include "Receptacle.h"
-#include "Door.h"
+#include "Gate.h"
 
 class Level
 {
@@ -16,6 +16,7 @@ class Level
         Player * p0;
         Player * p1;
         std::vector<Block*> tabBlock;
+        //std::vector<Gate*> tabGate;
         std::vector<Cable*> tabCable;
         std::vector<Pickable*> tabPickable;
         int levelNumber;
@@ -23,6 +24,7 @@ class Level
         int width;
 
     public :
+        std::vector<Gate*> tabGate;
         Level(int levelNumber);
         ~Level();
         int getHeight() const;

@@ -1,4 +1,6 @@
 #include "Level.h"
+#include "Enum.h"
+#include "Gate.h"
 #include "Pickable.h"
 #include "Platform.h"
 #include "Sensor.h"
@@ -80,7 +82,8 @@ void Level::loadLevel()
                     output.push_back(new Vector2D(x,y));
                     break;    
                 case '&':
-                    tabBlock.push_back(new Door(x,y, AND, input, output));
+                    tabGate.push_back(new Gate(x,y, AND));
+                    tabBlock.push_back(new Block(x,y));
                     break;    
                 default:
                     tabBlock.push_back(new Block(x,y));
@@ -99,6 +102,26 @@ void Level::loadLevel()
         }
     }
     fichierLevel.close();
+
+    for (Gate* gateCore: tabGate)
+    {
+        for (Vector2D* input : input)
+        {
+            gateCore->addInput(input);
+            if (input->x - gateCore->getX() <= 1 && input->x - gateCore->getX() >= -1 && input->y - gateCore->getY() <= 1 && input->y - gateCore->getY() >= -1)
+            {
+                //gateCore->getInput().push_back(input);
+            }
+        }
+        for (Vector2D* output : output)
+        {
+            gateCore->addOutput(output);
+            if (output->x - gateCore->getX() <= 1 && output->x - gateCore->getX() >= -1 && output->y - gateCore->getY() <= 1 && output->y - gateCore->getY() >= -1)
+            {
+                //gateCore->getOutput().push_back(output);
+            }
+        }
+    }
 }
 
 void Level::update()

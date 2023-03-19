@@ -9,14 +9,14 @@ Gate::Gate(int x, int y, GateType gateType, BlockType type) : Block( x, y, type)
 
 }
 
-std::vector<Vector2D*> Gate::getInput()
+void Gate::addInput(Vector2D * v)
 {
-    return input;
+    input.push_back(v);
 }
 
-std::vector<Vector2D*> Gate::getOutput()
+void Gate::addOutput(Vector2D * v)
 {
-    return output;
+    output.push_back(v);
 }
 
 bool Gate::isSolid()
@@ -28,4 +28,14 @@ bool Gate::isSolid()
 void Gate::update(Player& p0,Player& p1, Level& currentLevel)
 {
         
+}
+
+int Gate::getX()
+{
+    return tileX;
+}
+
+int Gate::getY()
+{
+    return tileY;
 }
