@@ -16,7 +16,7 @@ class Level
         Player * p0;
         Player * p1;
         std::vector<Block*> tabBlock;
-        //std::vector<Gate*> tabGate;
+        std::vector<Gate*> tabGate;
         std::vector<Cable*> tabCable;
         std::vector<Pickable*> tabPickable;
         int levelNumber;
@@ -24,7 +24,6 @@ class Level
         int width;
 
     public :
-        std::vector<Gate*> tabGate;
         Level(int levelNumber);
         ~Level();
         int getHeight() const;
@@ -32,6 +31,7 @@ class Level
         void loadLevel();
         void resetLevel();
         void update();
+        std::vector<Gate*> getGate() const;
         std::vector<Pickable*> getPickable() const;
         Block * getBlock(int x, int y) const;
         Cable * getCable(int x, int y) const;

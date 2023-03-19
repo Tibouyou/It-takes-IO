@@ -58,3 +58,8 @@ int Gate::getY()
 {
     return tileY;
 }
+
+GateType Gate::getGateType()
+{
+    return gateType;
+}

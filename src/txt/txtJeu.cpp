@@ -34,6 +34,7 @@ void txtAff(WinTXT & win, const Level & level) {
 					break;
 				case GATE:
 					blockC = '&';
+					break;
 				case DOOR:
 					blockC = 'D';
 					break;	
@@ -46,7 +47,9 @@ void txtAff(WinTXT & win, const Level & level) {
 			int blockC = level.getCable(x,y)->getPowerType();
 			switch (blockC) {
 				case EMPTY:
-					blockC = ' ';
+					if (level.getCable(x,y)->getDirectionMask() == NONE) blockC = ' ';
+					else blockC = '.';
+					//blockC=' ';
 					break;
 				case ZERO:
 					blockC = '0';
@@ -67,11 +70,18 @@ void txtAff(WinTXT & win, const Level & level) {
 		}
 		if (!pickable->getHeld()) win.print( pickable->getTileX(), pickable->getTileY(), pickableC);
     }
+	
+	for (Gate* gates : level.getGate()) {
+		GateType gateC = gates->getGateType();
+		switch (gateC) {
+			case AND:
+				win.print( gates->getX(), gates->getY(), '&');
+				win.print( gates->getX()+level.getWidth()+5, gates->getY(), '&');
+				break;
+		}
+	}
 	win.print( level.getPlayer0()->getTileX(), level.getPlayer0()->getTileY(), '0');
 	win.print( level.getPlayer1()->getTileX(), level.getPlayer1()->getTileY(), '1');
-	win.print( 0, level.getHeight(), std::to_string(level.tabGate[0]->input.size()));
-	win.print( 0, level.getHeight()+1, std::to_string(level.tabGate[0]->output.size()));
-	win.print( 0, level.getHeight()+2, std::to_string(level.tabGate.size()));
 	win.draw();
 
 }

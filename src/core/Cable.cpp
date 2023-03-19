@@ -52,3 +52,7 @@ PowerType Cable::getPowerType()
     return cablePower;
 }
 
+unsigned char Cable::getDirectionMask()
+{
+    return directionMaskCable;
+}

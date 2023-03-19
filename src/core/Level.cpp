@@ -188,3 +188,8 @@ std::vector<Pickable*> Level::getPickable() const
     return tabPickable;
 }
 
+std::vector<Gate*> Level::getGate() const
+{
+    return tabGate;
+}
+
