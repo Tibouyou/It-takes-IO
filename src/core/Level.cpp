@@ -191,12 +191,14 @@ int Level::getWidth() const
 Block * Level::getBlock(int x, int y) const
 {
     assert((y < height) && (x < width) && (y >= 0) && (x >= 0));
+    assert(y*width+x < tabBlock.size());
     return tabBlock.at(y*width+x);
 }
 
 Cable * Level::getCable(int x, int y) const
 {
     assert((y < height) && (x < width) && (y >= 0) && (x >= 0));
+    assert(y*width+x < tabCable.size());
     return tabCable[y*width+x];
 }
 
