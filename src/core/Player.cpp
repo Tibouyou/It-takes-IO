@@ -25,7 +25,7 @@ Player::~Player()
 void Player::jump()
 {
     if (!isJumping && !isFalling) {
-    gravity = 15;
+    gravity = 30;
     isJumping = true;
     }
 }
@@ -56,7 +56,7 @@ void Player::update(const Level& currentLevel)
         isJumping = false;
     }
     if (gravity > 0) {
-        gravity -= 0.5;
+        gravity -= 2;
     }
     if (currentLevel.getBlock(getTileX(),getTileY(-gravity))->isSolid()) {
         gravity = 0;
@@ -66,7 +66,7 @@ void Player::update(const Level& currentLevel)
     if (!isJumping && !currentLevel.getBlock(getTileX(),getTileY())->isSolid()) {
         isFalling = true;
     }
-    if (isFalling){y+=10;}
+    if (isFalling){y+=20;}
     
     if (currentLevel.getBlock(getTileX(),getTileY())->isSolid()) {
         y = getTileY()*50-1;
