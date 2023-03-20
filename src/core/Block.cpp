@@ -9,6 +9,11 @@ Block::Block(int x, int y, BlockType type)
     this->type = type;
 }
 
+Block::~Block()
+{
+
+}
+
 bool Block::isSolid()
 {
     return false;

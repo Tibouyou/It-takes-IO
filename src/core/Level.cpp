@@ -25,6 +25,23 @@ Level::~Level()
 {
     delete p0;
     delete p1;
+
+    for (Block* block: tabBlock)
+    {
+        delete block;
+    }
+    for (Gate* gate: tabGate)
+    {
+        delete gate;
+    }
+    for (Cable* cable: tabCable)
+    {
+        delete cable;
+    }
+    for (Pickable* pickable: tabPickable)
+    {
+        delete pickable;
+    }
 }
 
 void Level::loadLevel()
@@ -113,18 +130,16 @@ void Level::loadLevel()
     {
         for (Vector2D* input : input)
         {
-            gateCore->addInput(input);
             if (input->x - gateCore->getX() <= 1 && input->x - gateCore->getX() >= -1 && input->y - gateCore->getY() <= 1 && input->y - gateCore->getY() >= -1)
             {
-                //gateCore->getInput().push_back(input);
+                gateCore->addInput(input);
             }
         }
         for (Vector2D* output : output)
         {
-            gateCore->addOutput(output);
             if (output->x - gateCore->getX() <= 1 && output->x - gateCore->getX() >= -1 && output->y - gateCore->getY() <= 1 && output->y - gateCore->getY() >= -1)
             {
-                //gateCore->getOutput().push_back(output);
+                gateCore->addOutput(output);
             }
         }
     }
@@ -191,14 +206,12 @@ int Level::getWidth() const
 Block * Level::getBlock(int x, int y) const
 {
     assert((y < height) && (x < width) && (y >= 0) && (x >= 0));
-    assert(y*width+x < tabBlock.size());
     return tabBlock.at(y*width+x);
 }
 
 Cable * Level::getCable(int x, int y) const
 {
     assert((y < height) && (x < width) && (y >= 0) && (x >= 0));
-    assert(y*width+x < tabCable.size());
     return tabCable[y*width+x];
 }
 

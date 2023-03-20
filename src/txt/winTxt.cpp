@@ -118,6 +118,10 @@ void WinTXT::draw (int x, int y) {
     termMove(0,dimy);
 }
 
+WinTXT::~WinTXT () {
+    delete[] win;
+}
+
 #if not defined _WIN32
 int kbhit() {
     struct timeval tv;

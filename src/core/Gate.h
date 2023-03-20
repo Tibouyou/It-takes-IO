@@ -18,6 +18,7 @@ class Gate : public Block
         GateType gateType;
     public :
         Gate(int x, int y,GateType gateType, BlockType type = GATE);
+        ~Gate();
         void addInput(Vector2D * v);
         void addOutput(Vector2D * v);
         int getX();

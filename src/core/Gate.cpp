@@ -63,3 +63,15 @@ GateType Gate::getGateType()
 {
     return gateType;
 }
+
+Gate::~Gate()
+{
+    for (Vector2D* input : input)
+    {
+        delete input;
+    }
+    for (Vector2D* output : output)
+    {
+        delete output;
+    }
+}

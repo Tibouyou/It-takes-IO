@@ -19,7 +19,7 @@ Player::Player(bool playerType, int x, int y, int height, int width) : Entity( x
 
 Player::~Player()
 {
-    delete heldItem;
+    //delete heldItem;
 }
 
 void Player::jump()
