@@ -22,8 +22,3 @@ bool Pickable:: getHeld()
 {
     return isHeld;
 }
-
-void Pickable:: update(const Level& currentLevel)
-{
-    // Do nothing
-}

@@ -7,15 +7,57 @@ enum PickableType { NON };
 
 class Pickable : public Entity
 {
-    private: 
+    private:
+        /**
+         * @brief The type of the pickable
+         * 
+         */
         PickableType type;
+
+        /**
+         * @brief The state of the pickable
+         * 
+         */
         bool isHeld;
     
     public:
-        Pickable(PickableType type, int x, int y, int height, int width);
+
+        /**
+         * @brief Construct a new Pickable object
+         * 
+         * @param type The type of the pickable
+         * @param x The position x of the pickable in the level
+         * @param y The position y of the pickable in the level
+         * @param height The height of the pickable
+         * @param width The width of the pickable
+         */
+        Pickable(PickableType type, int x, int y, int height = 50, int width = 50);
+
+        /**
+         * @brief Function called when the pickable is updated
+         * 
+         */
         void update(const Level& currentLevel);
+
+        /**
+         * @brief Get the type of the pickable
+         * 
+         * @return PickableType The type of the pickable
+         */
         PickableType getType();
+
+        /**
+         * @brief Toggle the state of the pickable
+         * 
+         */
         void toggleHeld();
+
+        /**
+         * @brief Get the state of the pickable
+         * 
+         * @return true The pickable is held
+         * @return false The pickable is not held
+         */
         bool getHeld();
 };
 
