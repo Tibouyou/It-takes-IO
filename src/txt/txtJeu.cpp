@@ -13,7 +13,7 @@
 void txtAff(WinTXT & win, const Level & level) {
 
 	win.clear();
-    // Affichage des murs et des pastilles
+
 	for(int y=0;y<level.getHeight();y++){
 		for(int x=0;x<level.getWidth();x++){
 			char blockC = level.getBlock(x,y)->getType();

@@ -2,3 +2,4 @@
 bin/*
 obj/*
 src/main.cpp
+doc/html/*
