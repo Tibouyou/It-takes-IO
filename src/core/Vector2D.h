@@ -13,12 +13,6 @@ struct Vector2D {
      * 
      */
     int y;
-    
-    /**
-     * @brief id of the vector
-     * 
-     */
-    int id;
 
     /**
      * @brief Construct a new Vector2D object
@@ -27,6 +21,6 @@ struct Vector2D {
      * @param y y coordinate
      * @param id id of the vector
      */
-    Vector2D(int x, int y, int id=0);
+    Vector2D(int x, int y);
 };
 #endif
