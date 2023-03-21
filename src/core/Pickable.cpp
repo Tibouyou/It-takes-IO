@@ -7,18 +7,25 @@ Pickable::Pickable(PickableType type, int x, int y, int height, int width) : Ent
     this->isHeld = false;
 }
 
+Pickable::~Pickable()
+{
+}
 
-PickableType Pickable:: getType()
+void Pickable::update(const Level& currentLevel)
+{
+}
+
+PickableType Pickable::getType()
 {
     return type;
 }
 
-void Pickable:: toggleHeld()
+void Pickable::toggleHeld()
 {
     isHeld = !isHeld;
 }
 
-bool Pickable:: getHeld()
+bool Pickable::getHeld()
 {
     return isHeld;
 }

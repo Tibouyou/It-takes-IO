@@ -90,7 +90,7 @@ void Level::loadLevel()
                     break;
                 case 'N':
                     tabBlock.push_back(new Block(x,y));
-                    tabPickable.push_back(new Pickable(NON ,x*50,y*50));
+                    tabPickable.push_back(new Pickable(NON ,x*50,y*50, 50, 50));
                     break; 
                 case 'I':
                     tabBlock.push_back(new Block(x,y));
