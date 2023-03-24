@@ -40,3 +40,13 @@ void Entity::setPosition(int x, int y)
     this->x = x;
     this->y = y;
 }
+
+int Entity::getHeight() const
+{
+    return height;
+}
+
+int Entity::getWidth() const
+{
+    return width;
+}

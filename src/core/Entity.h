@@ -90,6 +90,10 @@ class Entity
          * @return int The tile y of the entity
          */
         int getTileY(int offset = 0);
+
+        int getWidth() const;
+
+        int getHeight() const;
 }; 
 
 #endif

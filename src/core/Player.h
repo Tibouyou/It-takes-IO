@@ -136,6 +136,7 @@ class Player : public Entity
          * @return float gravity of the player
          */
         float getGravity();
+
 };
 
 #endif

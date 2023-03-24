@@ -14,6 +14,7 @@ sfmlJeu::sfmlJeu () {
     int dimx = level->getWidth()*50;
     int dimy = level->getHeight()*50;
     m_window = new RenderWindow(VideoMode(dimx,dimy), "It-Takes-IO", sf::Style::Fullscreen);
+    playerSfml0 = new PlayerSfml(level->getPlayer0());
 }
 
 void sfmlJeu::sfmlInit() {
@@ -27,7 +28,6 @@ sfmlJeu::~sfmlJeu () {
 
 void sfmlJeu::sfmlAff() {
     m_window->clear(Color(230, 240, 255, 255));
-
 
     // Afficher les blocs
     for(int y=0;y<level->getHeight();y++){
@@ -147,6 +147,13 @@ void sfmlJeu::sfmlAff() {
 				break;
 		}
 	}
+    
+    m_window->draw(playerSfml0->getSprite());
+    
+    sf::RectangleShape rectangle2(sf::Vector2f(50.f, 5));
+    rectangle2.setPosition(level->getPlayer1()->getX(), level->getPlayer1()->getY());
+    rectangle2.setFillColor(sf::Color::Yellow);
+    m_window->draw(rectangle2);
 
 
     m_window->display();
@@ -159,9 +166,9 @@ void sfmlJeu::sfmlBoucle () {
     while (m_window->isOpen())
     {
         float elapsed = clock.getElapsedTime().asSeconds();
-        if (elapsed > 0.5) {
-            // mouvement fantomes
+        if (elapsed > 0.1) {
             level->update();
+            playerSfml0->update();
             clock.restart();
         }
 
@@ -176,6 +183,22 @@ void sfmlJeu::sfmlBoucle () {
                 switch (event.key.code) {
                 case Keyboard::P : m_window->close();
 					break;
+                case Keyboard::Z : level->getPlayer0()->jump();
+					break;
+                case Keyboard::Q : level->getPlayer0()->moveLeft();
+					break;
+                case Keyboard::D : level->getPlayer0()->moveRight();
+					break; 
+                case Keyboard::S : level->getPlayer0()->use(*level);
+					break;   
+                case Keyboard::Up : level->getPlayer1()->jump();
+                    break;
+                case Keyboard::Left : level->getPlayer1()->moveLeft();
+                    break;
+                case Keyboard::Right : level->getPlayer1()->moveRight();
+                    break;
+                case Keyboard::Down : level->getPlayer1()->use(*level);
+                    break;
                 default : break;
                 }
             }

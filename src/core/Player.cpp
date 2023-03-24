@@ -68,8 +68,8 @@ void Player::update(const Level& currentLevel)
     }
     if (isFalling){y+=20;}
     
-    if (currentLevel.getBlock(getTileX(),getTileY())->isSolid()) {
-        y = getTileY()*50-1;
+    if (currentLevel.getBlock(getTileX(),getTileY(49))->isSolid()) {
+        y = getTileY()*50;
         isFalling = false;
     }
     isMoving = false;
@@ -128,4 +128,3 @@ Pickable* Player::getHeldItem()
 {
     return heldItem;
 }
-

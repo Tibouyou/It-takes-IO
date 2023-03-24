@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <vector>
+#include "playerSfml.h"
 
 /**
     La classe g�rant le jeu avec un affichage SFML
@@ -16,6 +17,7 @@ private :
 
 	Level * level;
 	sf::RenderWindow * m_window;
+    PlayerSfml * playerSfml0;
 
 public :
 
