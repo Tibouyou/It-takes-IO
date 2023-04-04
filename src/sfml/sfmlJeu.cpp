@@ -1,3 +1,4 @@
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <cassert>
 #include <time.h>
@@ -75,49 +76,51 @@ void sfmlJeu::sfmlAff() {
     for(int y=0;y<level->getHeight();y++){
 		for(int x=0;x<level->getWidth();x++){
 			int blockC = level->getCable(x,y)->getPowerType();
+            sf::Color colorCable;
 			switch (blockC) {
 				case EMPTY:
-					if (level->getCable(x,y)->getDirectionMask() == NONE) break;
-					else {
+                    colorCable = sf::Color(250, 150, 100);
+					break;
+				case ZERO:
+					colorCable = sf::Color(255, 0, 0);
+					break;
+				case ONE:
+					colorCable = sf::Color(0, 0, 255);
+					break;
+			}
+            		if (!(level->getCable(x,y)->getDirectionMask() == NONE))
+					{
             
                         if (level->getCable(x,y)->getDirectionMask() &PowerDirection::UP) {
                             sf::RectangleShape lineUp(sf::Vector2f(6, 25));
                             lineUp.setPosition(x*50+22, y*50);
-                            lineUp.setFillColor(sf::Color(250, 150, 100));
+                            lineUp.setFillColor(colorCable);
                             m_window->draw(lineUp);
                         }
                         if (level->getCable(x,y)->getDirectionMask() & PowerDirection::DOWN) {
                             sf::RectangleShape lineDown(sf::Vector2f(6, 25));
                             lineDown.setPosition(x*50+22, y*50+25);
-                            lineDown.setFillColor(sf::Color(250, 150, 100));
+                            lineDown.setFillColor(colorCable);
                             m_window->draw(lineDown);
                         }
                         
                         if (level->getCable(x,y)->getDirectionMask() & PowerDirection::LEFT) {
                             sf::RectangleShape lineLeft(sf::Vector2f(25, 6));
                             lineLeft.setPosition(x*50, y*50+22);
-                            lineLeft.setFillColor(sf::Color(250, 150, 100));
+                            lineLeft.setFillColor(colorCable);
                             m_window->draw(lineLeft);
                         }
                         if (level->getCable(x,y)->getDirectionMask() & PowerDirection::RIGHT) {
                             sf::RectangleShape lineRight(sf::Vector2f(25, 6));
                             lineRight.setPosition(x*50+25, y*50+22);
-                            lineRight.setFillColor(sf::Color(250, 150, 100));
+                            lineRight.setFillColor(colorCable);
                             m_window->draw(lineRight);
                         }
                         sf::RectangleShape center(sf::Vector2f(6, 6));
                             center.setPosition(x*50+22, y*50+22);
-                            center.setFillColor(sf::Color(250, 150, 100));
+                            center.setFillColor(colorCable);
                             m_window->draw(center);
                     }
-					break;
-				case ZERO:
-					blockC = '0';
-					break;
-				case ONE:
-					blockC = '1';
-					break;
-			}
 		}
 	}
 
@@ -165,12 +168,10 @@ void sfmlJeu::sfmlBoucle () {
 
     while (m_window->isOpen())
     {
-        float elapsed = clock.getElapsedTime().asSeconds();
-        if (elapsed > 0.1) {
-            level->update();
-            playerSfml0->update();
-            clock.restart();
-        }
+        float elapsed = clock.getElapsedTime().asMilliseconds();
+        level->update();
+        playerSfml0->update(elapsed);
+        clock.restart();
 
         Event event;
 
@@ -185,19 +186,38 @@ void sfmlJeu::sfmlBoucle () {
 					break;
                 case Keyboard::Z : level->getPlayer0()->jump();
 					break;
-                case Keyboard::Q : level->getPlayer0()->moveLeft();
+                case Keyboard::Q : level->getPlayer0()->setMoving(true);
+                    level->getPlayer0()->setDirection(true);
 					break;
-                case Keyboard::D : level->getPlayer0()->moveRight();
+                case Keyboard::D : level->getPlayer0()->setMoving(true);
+                    level->getPlayer0()->setDirection(false);
 					break; 
                 case Keyboard::S : level->getPlayer0()->use(*level);
 					break;   
                 case Keyboard::Up : level->getPlayer1()->jump();
                     break;
-                case Keyboard::Left : level->getPlayer1()->moveLeft();
+                case Keyboard::Left : level->getPlayer1()->setMoving(true);
+                    level->getPlayer1()->setDirection(true);
                     break;
-                case Keyboard::Right : level->getPlayer1()->moveRight();
+                case Keyboard::Right : level->getPlayer1()->setMoving(true);
+                    level->getPlayer1()->setDirection(false);
                     break;
                 case Keyboard::Down : level->getPlayer1()->use(*level);
+                    break;
+                default : break;
+                }
+            }
+
+            if (event.type == Event::KeyReleased) {
+                switch (event.key.code) {
+                case Keyboard::Q : 
+                if (level->getPlayer0()->getDirection()) level->getPlayer0()->setMoving(false);
+					break;
+                case Keyboard::D : if (!level->getPlayer0()->getDirection()) level->getPlayer0()->setMoving(false);
+					break; 
+                case Keyboard::Left : level->getPlayer1()->setMoving(false);
+                    break;
+                case Keyboard::Right : level->getPlayer1()->setMoving(false);
                     break;
                 default : break;
                 }

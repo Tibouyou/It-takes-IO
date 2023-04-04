@@ -16,7 +16,7 @@ class PlayerSfml
         PlayerSfml(Player * player);
         ~PlayerSfml();
         sf::Sprite getSprite();
-        void update();
+        void update(float elapsed);
 
 };
 

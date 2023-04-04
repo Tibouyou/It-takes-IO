@@ -81,12 +81,12 @@ class Player : public Entity
         /**
          * @brief Make the player move left
          */
-        void moveLeft();
+        void moveLeft(int x);
 
         /**
          * @brief Make the player move right
          */
-        void moveRight();
+        void moveRight(int x);
 
         /**
          * @brief Update of the player
@@ -136,6 +136,20 @@ class Player : public Entity
          * @return float gravity of the player
          */
         float getGravity();
+
+        void setMoving(bool isMoving);
+
+        void setDirection(bool direction);
+
+        bool getDirection();
+
+        bool getMoving();
+
+        void addGravity(int value);
+
+        bool getIsJumping();
+
+        bool getIsFalling();
 
 };
 

@@ -30,49 +30,37 @@ void Player::jump()
     }
 }
 
-void::Player::moveLeft()
+void::Player::moveLeft(int x)
 {
-    isMoving = true;
-    direction = false;
+    this->x -= x;
 }
 
-void Player::moveRight()
+void Player::moveRight(int x)
 {
-    isMoving = true;
-    direction = true;
+    this->x += x;
 }
 
 void Player::update(const Level& currentLevel)
 {
-    if (isMoving) {
-        if (direction && !currentLevel.getBlock(getTileX(50),getTileY())->isSolid()) {
-            x += 50;
-        }
-        else if(!direction && !currentLevel.getBlock(getTileX(-50),getTileY())->isSolid()) {
-            x -= 50;
-        }
-    }
-    if (gravity <= 0) {
-        isJumping = false;
-    }
-    if (gravity > 0) {
-        gravity -= 2;
-    }
-    if (currentLevel.getBlock(getTileX(),getTileY(-gravity))->isSolid()) {
+    if (gravity >= 200) {
         gravity = 0;
         isFalling = true;
+        isJumping = false;
     }
-    y -= gravity;
+    if (currentLevel.getBlock(getTileX(),getTileY(-gravity/100))->isSolid()) {
+        gravity = 0;
+        isFalling = true;
+        isJumping = false;
+    }
     if (!isJumping && !currentLevel.getBlock(getTileX(),getTileY())->isSolid()) {
         isFalling = true;
     }
-    if (isFalling){y+=20;}
-    
     if (currentLevel.getBlock(getTileX(),getTileY(49))->isSolid()) {
         y = getTileY()*50;
         isFalling = false;
     }
-    isMoving = false;
+    y -= gravity/100;
+
 }
 
 void Player::setDead()
@@ -127,4 +115,39 @@ void Player::drop(const Level& currentLevel)
 Pickable* Player::getHeldItem()
 {
     return heldItem;
+}
+
+void Player::setMoving(bool isMoving) 
+{
+    this->isMoving = isMoving;
+}
+
+void Player::setDirection(bool direction)
+{
+    this->direction = direction;
+}
+
+bool Player::getDirection()
+{
+    return direction;
+}
+
+bool Player::getMoving()
+{
+    return isMoving;
+}
+
+void Player::addGravity(int value)
+{
+    gravity += value;
+}
+
+bool Player::getIsJumping()
+{
+    return isJumping;
+}
+
+bool Player::getIsFalling()
+{
+    return isFalling;
 }
