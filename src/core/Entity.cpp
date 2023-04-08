@@ -3,7 +3,7 @@
 #include "Level.h"
 #include <math.h>
 
-Entity::Entity(int x, int y, int height, int width)
+Entity::Entity(float x, float y, int height, int width)
 {
     this->x = x;
     this->y = y;

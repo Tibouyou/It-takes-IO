@@ -5,7 +5,7 @@
 #include <math.h>
 #include "Receptacle.h"
 
-Player::Player(bool playerType, int x, int y, int height, int width) : Entity( x, y, height, width)
+Player::Player(bool playerType, float x, float y, int height, int width) : Entity( x, y, height, width)
 {
     this->playerType = playerType;
     heldItem = nullptr;
@@ -30,25 +30,25 @@ void Player::jump()
     }
 }
 
-void::Player::moveLeft(int x)
+void::Player::moveLeft(float x)
 {
     this->x -= x;
 }
 
-void Player::moveRight(int x)
+void Player::moveRight(float x)
 {
     this->x += x;
 }
 
 void Player::update(const Level& currentLevel)
 {
-    if (gravity >= 200) {
+    if (gravity >= 300) {
         gravity = 0;
         isFalling = true;
         isJumping = false;
     }
-    if (currentLevel.getBlock(getTileX(),getTileY(-gravity/100))->isSolid()) {
-        gravity = 0;
+    if (currentLevel.getBlock(getTileX(),getTileY(-51))->isSolid()) {
+        if (gravity > 0) gravity = 0;
         isFalling = true;
         isJumping = false;
     }

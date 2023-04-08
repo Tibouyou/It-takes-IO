@@ -10,13 +10,13 @@ class Entity
          * @brief The position x of the entity in the level
          * 
          */
-        int x;
+        float x;
 
         /**
          * @brief The position y of the entity in the level
          * 
          */
-        int y; 
+        float y; 
 
         /**
          * @brief The height of the entity
@@ -40,7 +40,7 @@ class Entity
          * @param height The height of the entity
          * @param width The width of the entity
          */
-        Entity(int x, int y, int height, int width);
+        Entity(float x, float y, int height, int width);
 
         /**
          * @brief Destroy the Entity object

@@ -65,7 +65,7 @@ class Player : public Entity
          * @param height height of the player
          * @param width width of the player
          */
-        Player(bool playerType, int x, int y, int height, int width);
+        Player(bool playerType, float x, float y, int height, int width);
 
         /**
          * @brief Destroy the Player object
@@ -81,12 +81,12 @@ class Player : public Entity
         /**
          * @brief Make the player move left
          */
-        void moveLeft(int x);
+        void moveLeft(float x);
 
         /**
          * @brief Make the player move right
          */
-        void moveRight(int x);
+        void moveRight(float x);
 
         /**
          * @brief Update of the player

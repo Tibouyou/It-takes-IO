@@ -16,18 +16,17 @@ PlayerSfml::PlayerSfml(Player * player)
 
 void PlayerSfml::update(float elapsed)
 {
-    std::cout << player->getGravity() << std::endl;
     this->sprite.setPosition(player->getX(), player->getY()+50);
     if (player->getIsJumping()) {
-        player->addGravity(elapsed);
+        player->addGravity(elapsed/2);
     } else if (player->getIsFalling()) {
-        player->addGravity(-elapsed);
+        player->addGravity(-elapsed/2);
     }
     if (player->getMoving()) {
         if (player->getDirection()) {
-            player->moveLeft(elapsed);
+            player->moveLeft(elapsed/3);
         } else {
-            player->moveRight(elapsed);
+            player->moveRight(elapsed/3);
         }
     }
 }
