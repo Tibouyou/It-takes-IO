@@ -75,7 +75,7 @@ class Entity
          * 
          * @param currentLevel The current level
          */
-        virtual void update(const Level &currentLevel) = 0;
+        virtual void update(const Level &currentLevel, float elapsed = 1.0f) = 0;
 
         /**
          * @brief Get the tile x of the entity

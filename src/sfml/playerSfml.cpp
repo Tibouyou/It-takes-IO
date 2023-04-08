@@ -1,4 +1,5 @@
 #include "playerSfml.h"
+#include <cmath>
 #include <iostream>
 
 PlayerSfml::PlayerSfml(Player * player)
@@ -11,24 +12,11 @@ PlayerSfml::PlayerSfml(Player * player)
     this->sprite.setPosition(player->getX(), player->getY()+50);
     this->sprite.setOrigin(0, 400);
     this->sprite.setScale((float)player->getHeight()/400, (float)player->getHeight()/400);
-
 }
 
 void PlayerSfml::update(float elapsed)
 {
     this->sprite.setPosition(player->getX(), player->getY()+50);
-    if (player->getIsJumping()) {
-        player->addGravity(elapsed/2);
-    } else if (player->getIsFalling()) {
-        player->addGravity(-elapsed/2);
-    }
-    if (player->getMoving()) {
-        if (player->getDirection()) {
-            player->moveLeft(elapsed/3);
-        } else {
-            player->moveRight(elapsed/3);
-        }
-    }
 }
 
 PlayerSfml::~PlayerSfml()
@@ -39,3 +27,4 @@ sf::Sprite PlayerSfml::getSprite()
 {
     return this->sprite;
 }
+

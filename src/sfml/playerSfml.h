@@ -3,6 +3,7 @@
 
 #include "../core/Player.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/System/Vector2.hpp>
 
 class PlayerSfml
 {
@@ -17,7 +18,6 @@ class PlayerSfml
         ~PlayerSfml();
         sf::Sprite getSprite();
         void update(float elapsed);
-
 };
 
 #endif

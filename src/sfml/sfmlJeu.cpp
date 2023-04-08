@@ -5,6 +5,8 @@
 #include "sfmlJeu.h"
 #include <stdlib.h>
 
+#include <math.h>
+
 using namespace sf;
 
 #include <iostream>
@@ -15,6 +17,7 @@ sfmlJeu::sfmlJeu () {
     int dimx = level->getWidth()*50;
     int dimy = level->getHeight()*50;
     m_window = new RenderWindow(VideoMode(dimx,dimy), "It-Takes-IO", sf::Style::Fullscreen);
+    m_window->setFramerateLimit(120);
     playerSfml0 = new PlayerSfml(level->getPlayer0());
 }
 
@@ -158,6 +161,13 @@ void sfmlJeu::sfmlAff() {
     rectangle2.setFillColor(sf::Color::Yellow);
     m_window->draw(rectangle2);
 
+    for (int i = 0; i < level->getPlayer0()->getHeight(); i++) {
+        sf::RectangleShape rectangleColl(sf::Vector2f(2, 2));
+        rectangleColl.setPosition(level->getPlayer1()->getX(), floor((level->getPlayer1()->getY()+i-50)/50)*50);
+        rectangleColl.setFillColor(sf::Color::Red);
+        m_window->draw(rectangleColl);
+    }
+
 
     m_window->display();
 }
@@ -168,8 +178,8 @@ void sfmlJeu::sfmlBoucle () {
 
     while (m_window->isOpen())
     {
-        float elapsed = clock.getElapsedTime().asMilliseconds();
-        level->update();
+        float elapsed = clock.getElapsedTime().asSeconds();
+        level->update(elapsed);
         playerSfml0->update(elapsed);
         clock.restart();
 
@@ -214,7 +224,7 @@ void sfmlJeu::sfmlBoucle () {
                 if (level->getPlayer0()->getDirection()) level->getPlayer0()->setMoving(false);
 					break;
                 case Keyboard::D : if (!level->getPlayer0()->getDirection()) level->getPlayer0()->setMoving(false);
-					break; 
+					break;    
                 case Keyboard::Left : level->getPlayer1()->setMoving(false);
                     break;
                 case Keyboard::Right : level->getPlayer1()->setMoving(false);

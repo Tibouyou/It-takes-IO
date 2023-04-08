@@ -124,7 +124,7 @@ class Level
          * @brief Function called when the level is update
          * 
          */
-        void update();
+        void update(float elapsed = 1.0f);
 
         /**
          * @brief Function called when the level is won

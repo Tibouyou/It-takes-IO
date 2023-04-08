@@ -11,7 +11,7 @@ Pickable::~Pickable()
 {
 }
 
-void Pickable::update(const Level& currentLevel)
+void Pickable::update(const Level& currentLevel, float elapsed)
 {
 }
 

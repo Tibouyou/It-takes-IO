@@ -43,7 +43,7 @@ class Pickable : public Entity
          * @brief Function called when the pickable is updated
          * 
          */
-        void update(const Level& currentLevel);
+        void update(const Level& currentLevel, float elapsed = 1.0f);
 
         /**
          * @brief Get the type of the pickable

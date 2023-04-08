@@ -3,6 +3,7 @@
 
 #include "Entity.h"
 #include "Pickable.h"
+#include "Vector2D.h"
 
 class Player : public Entity
 {
@@ -55,6 +56,7 @@ class Player : public Entity
          */
         bool isAlive;
 
+
     public:
         /**
          * @brief Construct a new Player object
@@ -79,21 +81,11 @@ class Player : public Entity
         void jump();
 
         /**
-         * @brief Make the player move left
-         */
-        void moveLeft(float x);
-
-        /**
-         * @brief Make the player move right
-         */
-        void moveRight(float x);
-
-        /**
          * @brief Update of the player
          * 
          * @param currentLevel current level
          */
-        void update(const Level& currentLevel);
+        void update(const Level& currentLevel, float elapsed = 1.0f);
 
         /**
          * @brief Set the player to dead
@@ -143,13 +135,7 @@ class Player : public Entity
 
         bool getDirection();
 
-        bool getMoving();
-
-        void addGravity(int value);
-
-        bool getIsJumping();
-
-        bool getIsFalling();
+        bool getCollisionX(const Level& currentLevel, float moveX);
 
 };
 

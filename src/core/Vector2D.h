@@ -21,6 +21,6 @@ struct Vector2D {
      * @param y y coordinate
      * @param id id of the vector
      */
-    Vector2D(int x, int y);
+    Vector2D(int x = 0, int y = 0);
 };
 #endif

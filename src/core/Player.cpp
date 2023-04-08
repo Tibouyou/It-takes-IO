@@ -9,7 +9,7 @@ Player::Player(bool playerType, float x, float y, int height, int width) : Entit
 {
     this->playerType = playerType;
     heldItem = nullptr;
-    gravity = 0;
+    gravity = 0.0f;
     isFalling = false;
     isJumping = false;
     isMoving = false;
@@ -22,45 +22,28 @@ Player::~Player()
     //delete heldItem;
 }
 
-void Player::jump()
-{
-    if (!isJumping && !isFalling) {
-    gravity = 30;
-    isJumping = true;
-    }
-}
 
-void::Player::moveLeft(float x)
+void Player::update(const Level& currentLevel, float elapsed)
 {
-    this->x -= x;
-}
+    gravity += 9.81f * elapsed;
+    y += gravity*100*elapsed;
 
-void Player::moveRight(float x)
-{
-    this->x += x;
-}
-
-void Player::update(const Level& currentLevel)
-{
-    if (gravity >= 300) {
-        gravity = 0;
-        isFalling = true;
-        isJumping = false;
-    }
-    if (currentLevel.getBlock(getTileX(),getTileY(-51))->isSolid()) {
-        if (gravity > 0) gravity = 0;
-        isFalling = true;
-        isJumping = false;
-    }
-    if (!isJumping && !currentLevel.getBlock(getTileX(),getTileY())->isSolid()) {
-        isFalling = true;
-    }
-    if (currentLevel.getBlock(getTileX(),getTileY(49))->isSolid()) {
+    if (currentLevel.getBlock(getTileX(1),getTileY(50))->isSolid() || currentLevel.getBlock(getTileX(35),getTileY(50))->isSolid()) {
         y = getTileY()*50;
-        isFalling = false;
+        gravity = 0;
     }
-    y -= gravity/100;
-
+    if (currentLevel.getBlock(getTileX(1),getTileY(-50))->isSolid() || currentLevel.getBlock(getTileX(35),getTileY(-50))->isSolid()) {
+        y = y+1;
+        gravity = 0;
+    }
+    
+    if (isMoving) {
+        if (direction) {
+            if (!getCollisionX(currentLevel, -elapsed*300)) x -= elapsed*300;
+        } else {
+            if (!getCollisionX(currentLevel, elapsed*300+35)) x += elapsed*300;
+        }
+    }
 }
 
 void Player::setDead()
@@ -127,27 +110,22 @@ void Player::setDirection(bool direction)
     this->direction = direction;
 }
 
+void Player::jump()
+{
+    gravity = -std::sqrt(2.0f * 9.81f * 2.5f);
+}
+
 bool Player::getDirection()
 {
     return direction;
 }
 
-bool Player::getMoving()
-{
-    return isMoving;
-}
-
-void Player::addGravity(int value)
-{
-    gravity += value;
-}
-
-bool Player::getIsJumping()
-{
-    return isJumping;
-}
-
-bool Player::getIsFalling()
-{
-    return isFalling;
+bool Player::getCollisionX(const Level &currentLevel, float moveX) {
+    bool collision = false;
+    for (int i = 0; i < height; i++) {
+        if (currentLevel.getBlock(getTileX(moveX),getTileY(i-50))->isSolid()) {
+            collision = true;
+        }
+    }
+    return collision;
 }

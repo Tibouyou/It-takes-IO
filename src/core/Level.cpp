@@ -145,10 +145,10 @@ void Level::loadLevel()
     }
 }
 
-void Level::update()
+void Level::update(float elapsed)
 {
-    p0->update(*this);
-    p1->update(*this);
+    p0->update(*this,elapsed);
+    p1->update(*this,elapsed);
 
     if (!door->isOpened())
     {
