@@ -116,7 +116,7 @@ void Player::setDirection(bool direction)
 
 void Player::jump()
 {
-    gravity = -std::sqrt(2.0f * 9.81f * 2.5f);
+    if (isOnGround) gravity = -std::sqrt(2.0f * 9.81f * 2.5f);
 }
 
 bool Player::getDirection()

@@ -25,6 +25,8 @@ private :
     sf::Texture doorTexture;
     int frameDoor;
     sf::Clock doorClock;
+    sf::Texture backgroundTexture;
+    sf::Sprite background;
 
 public :
 

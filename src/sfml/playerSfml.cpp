@@ -40,6 +40,14 @@ void PlayerSfml::update(float elapsed)
     } else {
         this->sprite.setTextureRect(sf::IntRect(animationFrame*150, 0, 150, 400));
     }
+
+    if (player->getOnGround() && !player->getMoving()) {
+        if (player->getHeldItem() != nullptr)
+            this->sprite.setTextureRect(sf::IntRect(0, 1200, 150, 400));
+        else
+            this->sprite.setTextureRect(sf::IntRect(0, 800, 150, 400));
+    }
+
     if (player->getDirection()) {
         this->sprite.setPosition(player->getX(), player->getY()+50);
     } else {

@@ -25,6 +25,10 @@ sfmlJeu::sfmlJeu () {
     door.setTextureRect(sf::IntRect(0, 0, 100, 200));
     door.setScale(0.5, 0.5);
     frameDoor = 0;
+    backgroundTexture.loadFromFile("data/background.jpg");
+    background.setTexture(backgroundTexture);
+    background.setTextureRect(sf::IntRect(0, 0, dimx, dimy));
+    background.setPosition(0, 0);
 }
 
 void sfmlJeu::sfmlInit() {
@@ -38,6 +42,7 @@ sfmlJeu::~sfmlJeu () {
 
 void sfmlJeu::sfmlAff() {
     m_window->clear(Color(230, 240, 255, 255));
+    m_window->draw(background);
 
     // Afficher les blocs
     for(int y=0;y<level->getHeight();y++){
