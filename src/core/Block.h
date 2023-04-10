@@ -71,6 +71,9 @@ class Block
          * @param currentLevel The actual level 
          */
         virtual void update(Player& p0, Player& p1, Level& currentLevel);
+
+        int getX();
+        int getY();
 }; 
 
 

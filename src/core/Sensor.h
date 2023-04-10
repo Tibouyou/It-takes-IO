@@ -8,6 +8,8 @@ class Level;
 
 class Sensor : public Block
 {
+    private :
+        bool activated;
     public :
         /**
          * @brief Construct a new Sensor object
@@ -33,6 +35,8 @@ class Sensor : public Block
          * @param currentLevel current level
          */
         void update(Player& p0, Player& p1, Level& currentLevel);
+
+        bool isActivated();
 }; 
 
 

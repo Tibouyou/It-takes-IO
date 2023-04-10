@@ -1,7 +1,9 @@
 #include <SFML/Graphics/Color.hpp>
+#include <SFML/Window/Sensor.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <cassert>
 #include <time.h>
+#include "sensorSfml.h"
 #include "sfmlJeu.h"
 #include <stdlib.h>
 
@@ -29,6 +31,15 @@ sfmlJeu::sfmlJeu () {
     background.setTexture(backgroundTexture);
     background.setTextureRect(sf::IntRect(0, 0, dimx, dimy));
     background.setPosition(0, 0);
+
+    for(int y=0;y<level->getHeight();y++){
+		for(int x=0;x<level->getWidth();x++){
+			char blockC = level->getBlock(x,y)->getType();
+			if (blockC == SENSOR) {
+				sensorsSfml.push_back(new SensorSfml(level->getBlock(x,y)));
+            }
+        }
+    }        
 }
 
 void sfmlJeu::sfmlInit() {
@@ -58,13 +69,6 @@ void sfmlJeu::sfmlAff() {
                     m_window->draw(rectangle);
                     }
 					break;
-				case SENSOR:{
-					sf::RectangleShape rectangle(sf::Vector2f(50.f, 10.f));
-                    rectangle.setPosition(x*50, y*50+40);
-                    rectangle.setFillColor(sf::Color::Red);
-                    m_window->draw(rectangle);
-                    }
-					break;
 				case TRAP:{
 					sf::RectangleShape rectangle(sf::Vector2f(50.f, 10.f));
                     rectangle.setPosition(x*50, y*50+20);
@@ -85,6 +89,10 @@ void sfmlJeu::sfmlAff() {
 			}
 		}
 	}
+
+    for (SensorSfml* sensor : sensorsSfml) {
+		m_window->draw(sensor->getSprite());
+    }
 
     for(int y=0;y<level->getHeight();y++){
 		for(int x=0;x<level->getWidth();x++){
@@ -191,6 +199,9 @@ void sfmlJeu::sfmlBoucle () {
         level->update(elapsed);
         playerSfml0->update(elapsed);
         playerSfml1->update(elapsed);
+        for (SensorSfml* sensor : sensorsSfml) {
+		    sensor->update(level->getPlayer0(), level->getPlayer1(), elapsed);
+        }
         clock.restart();
 
         if(level->getDoor()->isOpened() && frameDoor != 6) {

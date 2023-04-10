@@ -8,6 +8,7 @@
 #include <SFML/System/Clock.hpp>
 #include <vector>
 #include "playerSfml.h"
+#include "sensorSfml.h"
 
 /**
     La classe g�rant le jeu avec un affichage SFML
@@ -27,6 +28,7 @@ private :
     sf::Clock doorClock;
     sf::Texture backgroundTexture;
     sf::Sprite background;
+    std::vector<SensorSfml*> sensorsSfml;
 
 public :
 

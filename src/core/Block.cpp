@@ -32,3 +32,11 @@ void Block::update(Player& p0, Player& p1, Level& currentLevel)
 {
 
 }
+
+int Block::getX() {
+    return tileX;
+}
+
+int Block::getY() {
+    return tileY;
+}

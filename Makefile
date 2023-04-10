@@ -2,8 +2,8 @@ all: bin/main_txt
 
 sfml: bin/main_sfml
 
-bin/main_sfml: obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o
-	g++ -g -Wall -o bin/main_sfml obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o -lsfml-graphics -lsfml-window -lsfml-system
+bin/main_sfml: obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o obj/sensorSfml.o
+	g++ -g -Wall -o bin/main_sfml obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o obj/sensorSfml.o -lsfml-graphics -lsfml-window -lsfml-system
 
 bin/main_txt: obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o
 	g++ -g -Wall -o bin/main_txt obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o
@@ -19,6 +19,9 @@ obj/sfmlJeu.o: src/sfml/sfmlJeu.cpp src/sfml/sfmlJeu.h src/core/Level.h src/sfml
 
 obj/playerSfml.o: src/sfml/playerSfml.cpp src/sfml/playerSfml.h src/core/Player.h
 	g++ -g -Wall -c src/sfml/playerSfml.cpp -o obj/playerSfml.o
+
+obj/sensorSfml.o: src/sfml/sensorSfml.cpp src/sfml/sensorSfml.h src/core/Player.h src/core/Sensor.h
+	g++ -g -Wall -c src/sfml/sensorSfml.cpp -o obj/sensorSfml.o	
 
 obj/winTxt.o: src/txt/winTxt.cpp src/txt/winTxt.h
 	g++ -g -Wall -c src/txt/winTxt.cpp -o obj/winTxt.o
