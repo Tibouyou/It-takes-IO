@@ -20,6 +20,11 @@ sfmlJeu::sfmlJeu () {
     m_window->setFramerateLimit(120);
     playerSfml0 = new PlayerSfml(level->getPlayer0(), 0);
     playerSfml1 = new PlayerSfml(level->getPlayer1(), 1);
+    doorTexture.loadFromFile("data/object/door.png");
+    door.setTexture(doorTexture);
+    door.setTextureRect(sf::IntRect(0, 0, 100, 200));
+    door.setScale(0.5, 0.5);
+    frameDoor = 0;
 }
 
 void sfmlJeu::sfmlInit() {
@@ -67,10 +72,9 @@ void sfmlJeu::sfmlAff() {
 				case GATE:
 					break;
 				case DOOR:{
-					sf::RectangleShape rectangle(sf::Vector2f(50.f, 50.f));
-                    rectangle.setPosition(x*50, y*50);
-                    rectangle.setFillColor(sf::Color::Green);
-                    m_window->draw(rectangle);
+                    door.setPosition(x*50, y*50-50);
+                    door.setTextureRect(sf::IntRect(frameDoor*100, 0, 100, 200));
+                    m_window->draw(door);
                     }
 					break;	
 			}
@@ -157,6 +161,18 @@ void sfmlJeu::sfmlAff() {
     
     m_window->draw(playerSfml0->getSprite());
     m_window->draw(playerSfml1->getSprite());
+    if (level->getPlayer0()->getHeldItem() != nullptr) {
+        sf::RectangleShape rectangle(sf::Vector2f(50.f, 40.f));
+                    rectangle.setPosition(level->getPlayer0()->getX()-8, level->getPlayer0()->getY()-level->getPlayer0()->getHeight()+10);
+                    rectangle.setFillColor(sf::Color::Red);
+                    m_window->draw(rectangle);
+    }
+    if (level->getPlayer1()->getHeldItem() != nullptr) {
+        sf::RectangleShape rectangle(sf::Vector2f(50.f, 40.f));
+                    rectangle.setPosition(level->getPlayer1()->getX()-8, level->getPlayer1()->getY()-level->getPlayer1()->getHeight()+10);
+                    rectangle.setFillColor(sf::Color::Red);
+                    m_window->draw(rectangle);
+    }
     m_window->display();
 }
 
@@ -171,6 +187,14 @@ void sfmlJeu::sfmlBoucle () {
         playerSfml0->update(elapsed);
         playerSfml1->update(elapsed);
         clock.restart();
+
+        if(level->getDoor()->isOpened() && frameDoor != 6) {
+            float elapsedDoor = doorClock.getElapsedTime().asSeconds();
+            if(elapsedDoor > 0.4) {
+                frameDoor++;
+                doorClock.restart();
+            }
+        }
 
         Event event;
 

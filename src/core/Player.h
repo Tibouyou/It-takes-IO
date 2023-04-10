@@ -27,18 +27,6 @@ class Player : public Entity
         float gravity;
 
         /**
-         * @brief is the player falling
-         * 
-         */
-        bool isFalling;
-
-        /**
-         * @brief is the player jumping
-         * 
-         */
-        bool isJumping;
-
-        /**
          * @brief is the player moving
          * 
          */
@@ -55,6 +43,8 @@ class Player : public Entity
          * 
          */
         bool isAlive;
+
+        bool isOnGround;
 
 
     public:
@@ -135,7 +125,11 @@ class Player : public Entity
 
         bool getDirection();
 
+        bool getMoving();
+
         bool getCollisionX(const Level& currentLevel, float moveX);
+
+        bool getOnGround();
 
 };
 

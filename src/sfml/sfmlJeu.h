@@ -4,6 +4,8 @@
 #include "../core/Level.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/System/Clock.hpp>
 #include <vector>
 #include "playerSfml.h"
 
@@ -19,6 +21,10 @@ private :
 	sf::RenderWindow * m_window;
     PlayerSfml * playerSfml0;
     PlayerSfml * playerSfml1;
+    sf::Sprite door;
+    sf::Texture doorTexture;
+    int frameDoor;
+    sf::Clock doorClock;
 
 public :
 
@@ -28,7 +34,7 @@ public :
     void sfmlInit();
     void sfmlBoucle();
     void sfmlAff();
-
+    void animDoor();
 };
 
 #endif
