@@ -18,6 +18,7 @@ private :
 	Level * level;
 	sf::RenderWindow * m_window;
     PlayerSfml * playerSfml0;
+    PlayerSfml * playerSfml1;
 
 public :
 

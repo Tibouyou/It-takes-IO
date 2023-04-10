@@ -18,7 +18,8 @@ sfmlJeu::sfmlJeu () {
     int dimy = level->getHeight()*50;
     m_window = new RenderWindow(VideoMode(dimx,dimy), "It-Takes-IO", sf::Style::Fullscreen);
     m_window->setFramerateLimit(120);
-    playerSfml0 = new PlayerSfml(level->getPlayer0());
+    playerSfml0 = new PlayerSfml(level->getPlayer0(), 0);
+    playerSfml1 = new PlayerSfml(level->getPlayer1(), 1);
 }
 
 void sfmlJeu::sfmlInit() {
@@ -155,20 +156,7 @@ void sfmlJeu::sfmlAff() {
 	}
     
     m_window->draw(playerSfml0->getSprite());
-    
-    sf::RectangleShape rectangle2(sf::Vector2f(50.f, 5));
-    rectangle2.setPosition(level->getPlayer1()->getX(), level->getPlayer1()->getY());
-    rectangle2.setFillColor(sf::Color::Yellow);
-    m_window->draw(rectangle2);
-
-    for (int i = 0; i < level->getPlayer0()->getHeight(); i++) {
-        sf::RectangleShape rectangleColl(sf::Vector2f(2, 2));
-        rectangleColl.setPosition(level->getPlayer1()->getX(), floor((level->getPlayer1()->getY()+i-50)/50)*50);
-        rectangleColl.setFillColor(sf::Color::Red);
-        m_window->draw(rectangleColl);
-    }
-
-
+    m_window->draw(playerSfml1->getSprite());
     m_window->display();
 }
 
@@ -181,6 +169,7 @@ void sfmlJeu::sfmlBoucle () {
         float elapsed = clock.getElapsedTime().asSeconds();
         level->update(elapsed);
         playerSfml0->update(elapsed);
+        playerSfml1->update(elapsed);
         clock.restart();
 
         Event event;
@@ -220,14 +209,13 @@ void sfmlJeu::sfmlBoucle () {
 
             if (event.type == Event::KeyReleased) {
                 switch (event.key.code) {
-                case Keyboard::Q : 
-                if (level->getPlayer0()->getDirection()) level->getPlayer0()->setMoving(false);
+                case Keyboard::Q : if (level->getPlayer0()->getDirection()) level->getPlayer0()->setMoving(false);
 					break;
                 case Keyboard::D : if (!level->getPlayer0()->getDirection()) level->getPlayer0()->setMoving(false);
 					break;    
-                case Keyboard::Left : level->getPlayer1()->setMoving(false);
+                case Keyboard::Left : if (level->getPlayer1()->getDirection()) level->getPlayer1()->setMoving(false);
                     break;
-                case Keyboard::Right : level->getPlayer1()->setMoving(false);
+                case Keyboard::Right : if (!level->getPlayer1()->getDirection()) level->getPlayer1()->setMoving(false);
                     break;
                 default : break;
                 }

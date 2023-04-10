@@ -1,12 +1,17 @@
 #include "playerSfml.h"
 #include <cmath>
 #include <iostream>
+#include <string>
 
-PlayerSfml::PlayerSfml(Player * player)
+PlayerSfml::PlayerSfml(Player * player, bool playerType)
 {
     this->player = player;
     this->animationFrame = 0;
-    this->texture.loadFromFile("data/player/sp_0.png");
+    if (playerType) {
+        this->texture.loadFromFile("data/player/sp_1.png");
+    } else {
+        this->texture.loadFromFile("data/player/sp_0.png");
+    }
     this->sprite.setTexture(this->texture);
     this->sprite.setTextureRect(sf::IntRect(0, 0, 125, 400));
     this->sprite.setPosition(player->getX(), player->getY()+50);

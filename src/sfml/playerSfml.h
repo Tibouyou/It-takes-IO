@@ -14,7 +14,7 @@ class PlayerSfml
         Player * player;
 
     public:
-        PlayerSfml(Player * player);
+        PlayerSfml(Player * player, bool playerType);
         ~PlayerSfml();
         sf::Sprite getSprite();
         void update(float elapsed);
