@@ -5,7 +5,7 @@
 #include <math.h>
 #include "Receptacle.h"
 
-Player::Player(bool playerType, float x, float y, int height, int width) : Entity( x, y, height, width)
+Player::Player(bool playerType, float x, float y, int height, int width, int spriteSize) : Entity( x, y, height, width, spriteSize)
 {
     this->playerType = playerType;
     heldItem = nullptr;
@@ -26,15 +26,15 @@ Player::~Player()
 void Player::update(const Level& currentLevel, float elapsed)
 {
     gravity += 9.81f * elapsed;
-    y += gravity*100*elapsed;
+    y += gravity*spriteSize*2*elapsed;
 
 
-    if (currentLevel.getBlock(getTileX(1),getTileY(50))->isSolid() || currentLevel.getBlock(getTileX(35),getTileY(50))->isSolid()) {
-        y = getTileY()*50;
+    if (currentLevel.getBlock(getTileX(1),getTileY(spriteSize))->isSolid() || currentLevel.getBlock(getTileX(spriteSize-10),getTileY(spriteSize))->isSolid()) {
+        y = getTileY()*spriteSize;
         gravity = 0;
         isOnGround = true;
     } else isOnGround = false;
-    if (currentLevel.getBlock(getTileX(1),getTileY(-50))->isSolid() || currentLevel.getBlock(getTileX(35),getTileY(-50))->isSolid()) {
+    if (currentLevel.getBlock(getTileX(1),getTileY(-spriteSize))->isSolid() || currentLevel.getBlock(getTileX(spriteSize),getTileY(-spriteSize))->isSolid()) {
         y = y+1;
         gravity = 0;
     } 
@@ -93,7 +93,7 @@ void Player::drop(const Level& currentLevel)
         if (dynamic_cast<Receptacle*>(block)->getHeldItem() == nullptr) dynamic_cast<Receptacle*>(block)->setHeldItem(heldItem);
     } 
         
-    heldItem->setPosition(getTileX(15)*50,getTileY()*50);
+    heldItem->setPosition(getTileX(spriteSize*0.3)*spriteSize,getTileY()*spriteSize);
     heldItem->toggleHeld();
     heldItem = nullptr;
     }
@@ -127,7 +127,7 @@ bool Player::getDirection()
 bool Player::getCollisionX(const Level &currentLevel, float moveX) {
     bool collision = false;
     for (int i = 0; i < height; i++) {
-        if (currentLevel.getBlock(getTileX(moveX),getTileY(i-50))->isSolid()) {
+        if (currentLevel.getBlock(getTileX(moveX),getTileY(i-spriteSize))->isSolid()) {
             collision = true;
         }
     }
@@ -143,3 +143,14 @@ bool Player::getOnGround()
 {
     return isOnGround;
 }
+
+void Player::setHeight(int height)
+{
+    this->height = height;
+}
+
+void Player::setSpriteSize(int spriteSize)
+{
+    this->spriteSize = spriteSize;
+}
+

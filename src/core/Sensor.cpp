@@ -3,9 +3,10 @@
 #include "Enum.h"
 #include <math.h>
 
-Sensor::Sensor(int x, int y, BlockType type) : Block( x, y, type)
+Sensor::Sensor(int x, int y, int spriteSize, BlockType type) : Block( x, y, type)
 {
     activated = false;
+    this->spriteSize = spriteSize;
 }
 
 bool Sensor::isSolid()
@@ -16,8 +17,8 @@ bool Sensor::isSolid()
 
 void Sensor::update(Player& p0, Player& p1, Level& currentLevel)
 {
-    bool p0OnSensor = (floor(p0.getX()/50) == tileX && floor(p0.getY()/50) == tileY);
-    bool p1OnSensor = (floor(p1.getX()/50) == tileX && floor(p1.getY()/50) == tileY);
+    bool p0OnSensor = (floor(p0.getX()/spriteSize) == tileX && floor(p0.getY()/spriteSize) == tileY);
+    bool p1OnSensor = (floor(p1.getX()/spriteSize) == tileX && floor(p1.getY()/spriteSize) == tileY);
 
     if (!(p0OnSensor && p1OnSensor)) 
     {    
@@ -34,8 +35,7 @@ void Sensor::update(Player& p0, Player& p1, Level& currentLevel)
         }
     } else {
         activated = false;
-    }
-        
+    } 
 }
 
 bool Sensor::isActivated()

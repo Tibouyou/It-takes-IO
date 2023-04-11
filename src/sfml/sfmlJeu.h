@@ -18,6 +18,7 @@ class sfmlJeu {
 
 private :
 
+    int spriteSize;
 	Level * level;
 	sf::RenderWindow * m_window;
     PlayerSfml * playerSfml0;

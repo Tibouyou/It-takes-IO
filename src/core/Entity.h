@@ -30,6 +30,8 @@ class Entity
          */
         int width;
 
+        int spriteSize;
+
     public:
 
         /**
@@ -40,7 +42,7 @@ class Entity
          * @param height The height of the entity
          * @param width The width of the entity
          */
-        Entity(float x, float y, int height, int width);
+        Entity(float x, float y, int height, int width, int spriteSize);
 
         /**
          * @brief Destroy the Entity object
@@ -94,6 +96,7 @@ class Entity
         int getWidth() const;
 
         int getHeight() const;
+
 }; 
 
 #endif

@@ -31,7 +31,7 @@ class Pickable : public Entity
          * @param height The height of the pickable
          * @param width The width of the pickable
          */
-        Pickable(PickableType type, int x, int y, int height, int width);
+        Pickable(PickableType type, int x, int y, int height, int width, int spriteSize);
 
         /**
          * @brief Destroy the Pickable object

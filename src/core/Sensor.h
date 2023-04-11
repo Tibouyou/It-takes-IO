@@ -10,6 +10,7 @@ class Sensor : public Block
 {
     private :
         bool activated;
+        int spriteSize;
     public :
         /**
          * @brief Construct a new Sensor object
@@ -18,7 +19,7 @@ class Sensor : public Block
          * @param y y coordinate
          * @param type type of the block
          */
-        Sensor(int x, int y, BlockType type = SENSOR);
+        Sensor(int x, int y, int spriteSize, BlockType type = SENSOR);
 
         /**
          * @brief Get the solidity of the sensor

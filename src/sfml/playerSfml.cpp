@@ -3,9 +3,11 @@
 #include <iostream>
 #include <string>
 
-PlayerSfml::PlayerSfml(Player * player, bool playerType)
+PlayerSfml::PlayerSfml(Player * player, bool playerType, int spriteSize)
 {
+    this->spriteSize = spriteSize;
     this->player = player;
+    player->setHeight(spriteSize*2);
     this->animationFrame = 0;
     if (playerType) {
         this->texture.loadFromFile("data/player/sp_1.png");
@@ -14,7 +16,7 @@ PlayerSfml::PlayerSfml(Player * player, bool playerType)
     }
     this->sprite.setTexture(this->texture);
     this->sprite.setTextureRect(sf::IntRect(animationFrame, 0, 150, 400));
-    this->sprite.setPosition(player->getX(), player->getY()+50);
+    this->sprite.setPosition(player->getX(), player->getY()+spriteSize);
     this->sprite.setOrigin(0, 400);
     this->sprite.setScale((float)player->getHeight()/400, (float)player->getHeight()/400);
 }
@@ -49,9 +51,9 @@ void PlayerSfml::update(float elapsed)
     }
 
     if (player->getDirection()) {
-        this->sprite.setPosition(player->getX(), player->getY()+50);
+        this->sprite.setPosition(player->getX(), player->getY()+spriteSize);
     } else {
-        this->sprite.setPosition(player->getX()+35, player->getY()+50);
+        this->sprite.setPosition(player->getX()+spriteSize*0.7, player->getY()+spriteSize);
     }
     
 }

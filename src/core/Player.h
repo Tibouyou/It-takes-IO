@@ -46,7 +46,6 @@ class Player : public Entity
 
         bool isOnGround;
 
-
     public:
         /**
          * @brief Construct a new Player object
@@ -57,7 +56,7 @@ class Player : public Entity
          * @param height height of the player
          * @param width width of the player
          */
-        Player(bool playerType, float x, float y, int height, int width);
+        Player(bool playerType, float x, float y, int height, int width, int spriteSize);
 
         /**
          * @brief Destroy the Player object
@@ -130,6 +129,10 @@ class Player : public Entity
         bool getCollisionX(const Level& currentLevel, float moveX);
 
         bool getOnGround();
+
+        void setHeight(int height);
+
+        void setSpriteSize(int spriteSize);
 
 };
 

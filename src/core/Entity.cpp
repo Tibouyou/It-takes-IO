@@ -3,12 +3,13 @@
 #include "Level.h"
 #include <math.h>
 
-Entity::Entity(float x, float y, int height, int width)
+Entity::Entity(float x, float y, int height, int width, int spriteSize)
 {
     this->x = x;
     this->y = y;
     this->height = height;
     this->width = width;
+    this->spriteSize = spriteSize;
 }
 
 Entity::~Entity()
@@ -27,12 +28,12 @@ int Entity::getY() const
 
 int Entity::getTileX(int offset)
 {
-    return floor((x+offset)/50);
+    return floor((x+offset)/spriteSize);
 }
 
 int Entity::getTileY(int offset)
 {
-    return floor((y+offset)/50);
+    return floor((y+offset)/spriteSize);
 }
 
 void Entity::setPosition(int x, int y)

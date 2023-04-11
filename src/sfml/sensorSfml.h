@@ -14,9 +14,10 @@ class SensorSfml
         sf::Texture texture;
         int tileX;
         int tileY;
+        int spriteSize;
 
     public:
-        SensorSfml(Block * sensor);
+        SensorSfml(Block * sensor, int spriteSize);
         ~SensorSfml();
         sf::Sprite getSprite();
         void update(Player* p0, Player* p1, float elapsed);

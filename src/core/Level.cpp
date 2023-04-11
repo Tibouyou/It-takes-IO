@@ -11,14 +11,17 @@
 #include <cassert>
 #include <iostream>
 #include <fstream>
+#include <math.h>
 
-Level::Level(int levelNumber)
+Level::Level(int levelNumber, int dimWindowX, int dimWindowY)
 {
     this->levelNumber = levelNumber;
-    this->p0 = new Player(0,0,50,100,50);
-    this->p1 = new Player(1,0,50,100,50);
     this->isWon = false;
-    loadLevel();
+    this->p0 = new Player(0,0,50,100,50,0);
+    this->p1 = new Player(1,0,50,100,50,0);
+    loadLevel(dimWindowX, dimWindowY);
+    this->p0->setSpriteSize(spriteSize);
+    this->p1->setSpriteSize(spriteSize);
 }
 
 Level::~Level()
@@ -44,7 +47,7 @@ Level::~Level()
     }
 }
 
-void Level::loadLevel()
+void Level::loadLevel(int dimWindowX, int dimWindowY)
 {
     std::vector<Vector2D*> input;
     std::vector<Vector2D*> output;
@@ -57,6 +60,14 @@ void Level::loadLevel()
     fichierLevel >> width >> height;
     this->width = width;
     this->height = height;
+    if (dimWindowX/width < dimWindowY/height)
+    {
+        this->spriteSize = dimWindowX/width;
+    }
+    else
+    {
+        this->spriteSize = dimWindowY/height;
+    }
     char type;
     for (int y = 0; y < height; y++)
     {
@@ -72,7 +83,7 @@ void Level::loadLevel()
                     tabBlock.push_back(new Platform(x,y));
                     break;
                 case '_':
-                    tabBlock.push_back(new Sensor(x,y));
+                    tabBlock.push_back(new Sensor(x,y,spriteSize));
                     break;
                 case '0':
                     p0->setPosition(x*50,y*50);
@@ -90,7 +101,7 @@ void Level::loadLevel()
                     break;
                 case 'N':
                     tabBlock.push_back(new Block(x,y));
-                    tabPickable.push_back(new Pickable(NON ,x*50,y*50, 50, 50));
+                    tabPickable.push_back(new Pickable(NON ,x*spriteSize,y*spriteSize, spriteSize, spriteSize, spriteSize));
                     break; 
                 case 'I':
                     tabBlock.push_back(new Block(x,y));

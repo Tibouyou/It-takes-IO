@@ -80,13 +80,15 @@ class Level
          */
         bool isWon;
 
+        int spriteSize;
+
     public :
         /**
          * @brief Construct a new Level object
          * 
          * @param levelNumber 
          */
-        Level(int levelNumber);
+        Level(int levelNumber, int dimWindowX, int dimWindowY);
 
         /**
          * @brief Destroy the Level object
@@ -112,7 +114,7 @@ class Level
          * @brief Load the level from a txt file
          * 
          */
-        void loadLevel();
+        void loadLevel(int dimWindowX, int dimWindowY);
 
         /**
          * @brief Reset the level

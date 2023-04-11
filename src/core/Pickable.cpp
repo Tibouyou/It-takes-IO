@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Pickable.h"
 
-Pickable::Pickable(PickableType type, int x, int y, int height, int width) : Entity(x, y, height, width)
+Pickable::Pickable(PickableType type, int x, int y, int height, int width, int spriteSize) : Entity(x, y, height, width, spriteSize)
 {
     this->type = type;
     this->isHeld = false;
