@@ -77,10 +77,12 @@ void Player::use(const Level& currentLevel)
 void Player::pickUp(const Level& currentLevel)
 {
     for (Pickable* pickable : currentLevel.getPickable()) {
-        if (pickable->getTileX() == getTileX(15) && pickable->getTileY() == getTileY()) {
-            heldItem = pickable;
-            heldItem->toggleHeld();
-            if (currentLevel.getBlock(getTileX(15),getTileY())->getType() == RECEPTACLE) dynamic_cast<Receptacle*>(currentLevel.getBlock(getTileX(),getTileY()))->setHeldItem(nullptr);
+        if (pickable->getTileX() == getTileX(width/2) && pickable->getTileY() == getTileY()) {
+            if (!pickable->getHeld()){
+                heldItem = pickable;
+                heldItem->toggleHeld();
+                if (currentLevel.getBlock(getTileX(width/2),getTileY())->getType() == RECEPTACLE) dynamic_cast<Receptacle*>(currentLevel.getBlock(getTileX(width/2),getTileY()))->setHeldItem(nullptr);
+            }
         }
     }
 }
@@ -88,12 +90,12 @@ void Player::pickUp(const Level& currentLevel)
 void Player::drop(const Level& currentLevel)
 {
     if (isOnGround) {
-    Block* block = currentLevel.getBlock(getTileX(),getTileY());
+    Block* block = currentLevel.getBlock(getTileX(width/2),getTileY());
     if (block->getType() == RECEPTACLE) {
         if (dynamic_cast<Receptacle*>(block)->getHeldItem() == nullptr) dynamic_cast<Receptacle*>(block)->setHeldItem(heldItem);
     } 
         
-    heldItem->setPosition(getTileX(spriteSize*0.3)*spriteSize,getTileY()*spriteSize);
+    heldItem->setPosition(getTileX(width/2)*spriteSize,getTileY()*spriteSize);
     heldItem->toggleHeld();
     heldItem = nullptr;
     }
