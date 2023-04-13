@@ -7,12 +7,15 @@ PlayerSfml::PlayerSfml(Player * player, bool playerType, int spriteSize)
 {
     this->spriteSize = spriteSize;
     this->player = player;
-    player->setHeight(spriteSize*2);
     this->animationFrame = 0;
     if (playerType) {
         this->texture.loadFromFile("data/player/sp_1.png");
+        player->setHeight(spriteSize*1.5);
+        player->setWidth(player->getHeight()*150/400);
     } else {
         this->texture.loadFromFile("data/player/sp_0.png");
+        player->setHeight(spriteSize);
+        player->setWidth(player->getHeight()*150/400);
     }
     this->sprite.setTexture(this->texture);
     this->sprite.setTextureRect(sf::IntRect(animationFrame, 0, 150, 400));
@@ -53,7 +56,7 @@ void PlayerSfml::update(float elapsed)
     if (player->getDirection()) {
         this->sprite.setPosition(player->getX(), player->getY()+spriteSize);
     } else {
-        this->sprite.setPosition(player->getX()+spriteSize*0.7, player->getY()+spriteSize);
+        this->sprite.setPosition(player->getX()+player->getWidth(), player->getY()+spriteSize);
     }
     
 }

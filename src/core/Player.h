@@ -131,7 +131,9 @@ class Player : public Entity
         bool getOnGround();
 
         void setHeight(int height);
-
+        
+        void setWidth(int width);
+        
         void setSpriteSize(int spriteSize);
 
 };

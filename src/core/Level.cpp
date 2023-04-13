@@ -86,11 +86,11 @@ void Level::loadLevel(int dimWindowX, int dimWindowY)
                     tabBlock.push_back(new Sensor(x,y,spriteSize));
                     break;
                 case '0':
-                    p0->setPosition(x*50,y*50);
+                    p0->setPosition(x*spriteSize,y*spriteSize);
                     tabBlock.push_back(new Block(x,y));
                     break;
                 case '1':
-                    p1->setPosition(x*50,y*50);
+                    p1->setPosition(x*spriteSize,y*spriteSize);
                     tabBlock.push_back(new Block(x,y));
                     break;
                 case 'R':

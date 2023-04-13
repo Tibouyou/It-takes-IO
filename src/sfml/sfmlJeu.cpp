@@ -1,4 +1,5 @@
 #include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Window/Sensor.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <cassert>
@@ -175,15 +176,25 @@ void sfmlJeu::sfmlAff() {
     
     m_window->draw(playerSfml0->getSprite());
     m_window->draw(playerSfml1->getSprite());
+
+    sf::RectangleShape rectangle(sf::Vector2f(2, 2));
+    rectangle.setPosition(level->getPlayer0()->getX(), level->getPlayer0()->getY()+spriteSize-2);
+    rectangle.setFillColor(sf::Color::Red);
+    m_window->draw(rectangle);
+
+    rectangle.setPosition(level->getPlayer0()->getX()+level->getPlayer0()->getWidth(), level->getPlayer0()->getY()+spriteSize-2);
+    rectangle.setFillColor(sf::Color::Red);
+    m_window->draw(rectangle);
+
     if (level->getPlayer0()->getHeldItem() != nullptr) {
         sf::RectangleShape rectangle(sf::Vector2f(spriteSize, spriteSize/1.25));
-                    rectangle.setPosition(level->getPlayer0()->getX()-8, level->getPlayer0()->getY()-level->getPlayer0()->getHeight()+10);
+                    rectangle.setPosition(level->getPlayer0()->getX()+level->getPlayer0()->getWidth()/2.0-spriteSize/2.0, level->getPlayer0()->getY()-level->getPlayer0()->getHeight()+spriteSize*0.25/1.25);
                     rectangle.setFillColor(sf::Color::Red);
                     m_window->draw(rectangle);
     }
     if (level->getPlayer1()->getHeldItem() != nullptr) {
         sf::RectangleShape rectangle(sf::Vector2f(spriteSize, spriteSize/1.25));
-                    rectangle.setPosition(level->getPlayer1()->getX()-8, level->getPlayer1()->getY()-level->getPlayer1()->getHeight()+10);
+                    rectangle.setPosition(level->getPlayer1()->getX()+level->getPlayer1()->getWidth()/2.0-spriteSize/2.0, level->getPlayer1()->getY()-level->getPlayer1()->getHeight()+spriteSize*0.25/1.25);
                     rectangle.setFillColor(sf::Color::Red);
                     m_window->draw(rectangle);
     }

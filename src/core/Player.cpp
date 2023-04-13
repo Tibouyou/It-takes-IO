@@ -28,13 +28,13 @@ void Player::update(const Level& currentLevel, float elapsed)
     gravity += 9.81f * elapsed;
     y += gravity*spriteSize*2*elapsed;
 
-
-    if (currentLevel.getBlock(getTileX(1),getTileY(spriteSize))->isSolid() || currentLevel.getBlock(getTileX(spriteSize-10),getTileY(spriteSize))->isSolid()) {
+    
+    if (currentLevel.getBlock(getTileX(1),getTileY(spriteSize))->isSolid() || currentLevel.getBlock(getTileX(width-1),getTileY(spriteSize))->isSolid()) {
         y = getTileY()*spriteSize;
         gravity = 0;
         isOnGround = true;
     } else isOnGround = false;
-    if (currentLevel.getBlock(getTileX(1),getTileY(-spriteSize))->isSolid() || currentLevel.getBlock(getTileX(spriteSize),getTileY(-spriteSize))->isSolid()) {
+    if (currentLevel.getBlock(getTileX(1),getTileY(spriteSize-height))->isSolid() || currentLevel.getBlock(getTileX(width-1),getTileY(spriteSize-height))->isSolid()) {
         y = y+1;
         gravity = 0;
     } 
@@ -43,7 +43,7 @@ void Player::update(const Level& currentLevel, float elapsed)
         if (direction) {
             if (!getCollisionX(currentLevel, -elapsed*300)) x -= elapsed*300;
         } else {
-            if (!getCollisionX(currentLevel, elapsed*300+35)) x += elapsed*300;
+            if (!getCollisionX(currentLevel, elapsed*300+width)) x += elapsed*300;
         }
     }
 }
@@ -126,8 +126,8 @@ bool Player::getDirection()
 
 bool Player::getCollisionX(const Level &currentLevel, float moveX) {
     bool collision = false;
-    for (int i = 0; i < height; i++) {
-        if (currentLevel.getBlock(getTileX(moveX),getTileY(i-spriteSize))->isSolid()) {
+    for (int i = 1; i < height-(spriteSize/100.0)*5.0; i++) {
+        if (currentLevel.getBlock(getTileX(moveX),getTileY(-i+spriteSize))->isSolid()) {
             collision = true;
         }
     }
@@ -147,6 +147,11 @@ bool Player::getOnGround()
 void Player::setHeight(int height)
 {
     this->height = height;
+}
+
+void Player::setWidth(int width)
+{
+    this->width = width;
 }
 
 void Player::setSpriteSize(int spriteSize)
