@@ -54,7 +54,7 @@ class Receptacle : public Block
          * @param type type of the power
          * @param currentLevel current level
          */
-        void power(PowerType type, const Level& currentLevel);
+        void power(PowerType type, const Level& currentLevel, unsigned char directionMask);
 }; 
 
 

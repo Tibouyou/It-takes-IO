@@ -23,7 +23,7 @@ BlockType Block::getType() {
     return type;
 }
 
-void Block::power(PowerType type, const Level& currentLevel) 
+void Block::power(PowerType type, const Level& currentLevel, unsigned char directionMask) 
 {
 
 }

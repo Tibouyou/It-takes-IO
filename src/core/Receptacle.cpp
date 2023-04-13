@@ -1,4 +1,5 @@
 #include "Receptacle.h"
+#include "Enum.h"
 #include "Level.h"
 
 
@@ -12,21 +13,37 @@ bool Receptacle::isSolid()
     return false;
 }
 
-void Receptacle::power(PowerType type, const Level& currentLevel)
+void Receptacle::power(PowerType type, const Level& currentLevel, unsigned char directionMask)
 {    
     if (heldItem != nullptr)
     {
         if (heldItem->getType() == NON)
         {
+            PowerType toSend;
             if (type == ZERO)
             {
-                currentLevel.getCable(tileX + 1, tileY)->power(ONE, PowerDirection::LEFT, currentLevel);
+                toSend = ONE;
             }
             else if (type == ONE)
             {
-                currentLevel.getCable(tileX + 1, tileY)->power(ZERO, PowerDirection::LEFT, currentLevel);
+                toSend = ZERO;
             }
-        
+            if (directionMask & PowerDirection::LEFT)
+            {
+                currentLevel.getCable(tileX + 1, tileY)->power(toSend, PowerDirection::LEFT, currentLevel);
+            }
+            if (directionMask & PowerDirection::RIGHT)
+            {
+                currentLevel.getCable(tileX - 1, tileY)->power(toSend, PowerDirection::RIGHT, currentLevel);
+            }
+            if (directionMask & PowerDirection::UP)
+            {
+                currentLevel.getCable(tileX, tileY + 1)->power(toSend, PowerDirection::UP, currentLevel);
+            }
+            if (directionMask & PowerDirection::DOWN)
+            {
+                currentLevel.getCable(tileX, tileY - 1)->power(toSend, PowerDirection::DOWN, currentLevel);
+            }
         }
     }
 }

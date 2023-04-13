@@ -61,7 +61,7 @@ class Block
          * @param type The type of the power
          * @param currentLevel The actual level
          */
-        virtual void power(PowerType type, const Level& currentLevel);
+        virtual void power(PowerType type, const Level& currentLevel, unsigned char directionMask);
 
         /**
          * @brief Overridable function for the block to do something when it is updated

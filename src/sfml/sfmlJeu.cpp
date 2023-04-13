@@ -27,7 +27,7 @@ sfmlJeu::sfmlJeu () {
     doorTexture.loadFromFile("data/object/door.png");
     door.setTexture(doorTexture);
     door.setTextureRect(sf::IntRect(0, 0, 100, 200));
-    door.setScale(0.5, 0.5);
+    door.setScale(spriteSize*2.0/200, spriteSize*2.0/200);
     frameDoor = 0;
     backgroundTexture.loadFromFile("data/background.png");
     background.setTexture(backgroundTexture);
@@ -177,14 +177,6 @@ void sfmlJeu::sfmlAff() {
     m_window->draw(playerSfml0->getSprite());
     m_window->draw(playerSfml1->getSprite());
 
-    sf::RectangleShape rectangle(sf::Vector2f(2, 2));
-    rectangle.setPosition(level->getPlayer0()->getX(), level->getPlayer0()->getY()+spriteSize-2);
-    rectangle.setFillColor(sf::Color::Red);
-    m_window->draw(rectangle);
-
-    rectangle.setPosition(level->getPlayer0()->getX()+level->getPlayer0()->getWidth(), level->getPlayer0()->getY()+spriteSize-2);
-    rectangle.setFillColor(sf::Color::Red);
-    m_window->draw(rectangle);
 
     if (level->getPlayer0()->getHeldItem() != nullptr) {
         sf::RectangleShape rectangle(sf::Vector2f(spriteSize, spriteSize/1.25));
@@ -223,6 +215,15 @@ void sfmlJeu::sfmlBoucle () {
                 doorClock.restart();
             }
         }
+
+        if(level->getDoor()->isOpened() && level->getDoor()->getX()==level->getPlayer0()->getTileX() && level->getDoor()->getY()==level->getPlayer0()->getTileY()) {
+            m_window->close();
+        }
+        if(level->getDoor()->isOpened() && level->getDoor()->getX()==level->getPlayer1()->getTileX() && level->getDoor()->getY()==level->getPlayer1()->getTileY()) {
+            m_window->close();
+        }
+
+        if(!level->getPlayer0()->getAlive() || !level->getPlayer1()->getAlive()) m_window->close();
 
         Event event;
 

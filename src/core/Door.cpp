@@ -9,7 +9,7 @@ Door::Door(int x, int y, BlockType type) : Block(x, y, type)
 
 bool Door::isSolid()
 {
-    return !open;
+    return false;
 }
 
 bool Door::isOpened()
@@ -37,4 +37,5 @@ void Door::update(Player& p0, Player& p1, Level& currentLevel)
         currentLevel.win();
     }
 }
+
 

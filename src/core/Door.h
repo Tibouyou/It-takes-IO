@@ -22,6 +22,7 @@ class Door : public Block
          * 
          */
         bool win;
+
     public :
 
         /**
@@ -56,6 +57,7 @@ class Door : public Block
          * @brief Function called when the door is update
          */
         void update(Player& p0, Player& p1, Level& currentLevel);
+
 };
 
 #endif
