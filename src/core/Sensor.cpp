@@ -17,8 +17,8 @@ bool Sensor::isSolid()
 
 void Sensor::update(Player& p0, Player& p1, Level& currentLevel)
 {
-    bool p0OnSensor = (floor(p0.getX()/spriteSize) == tileX && floor(p0.getY()/spriteSize) == tileY);
-    bool p1OnSensor = (floor(p1.getX()/spriteSize) == tileX && floor(p1.getY()/spriteSize) == tileY);
+    bool p0OnSensor = (p0.getTileX(p0.getWidth()/2) == tileX && p0.getTileY() == tileY);
+    bool p1OnSensor = (p1.getTileX(p1.getWidth()/2) == tileX && p1.getTileY() == tileY);
 
     if (!(p0OnSensor && p1OnSensor)) 
     {    

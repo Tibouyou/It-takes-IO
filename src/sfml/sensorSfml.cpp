@@ -17,8 +17,9 @@ SensorSfml::SensorSfml(Block * sensor, int spriteSize)
 
 void SensorSfml::update(Player* p0, Player* p1,float elapsed)
 {
-    bool p0OnSensor = (floor(p0->getX()/spriteSize) == tileX && floor(p0->getY()/spriteSize) == tileY);
-    bool p1OnSensor = (floor(p1->getX()/spriteSize) == tileX && floor(p1->getY()/spriteSize) == tileY);
+   bool p0OnSensor = (p0->getTileX(p0->getWidth()/2) == tileX && p0->getTileY() == tileY);
+    bool p1OnSensor = (p1->getTileX(p1->getWidth()/2) == tileX && p1->getTileY() == tileY);
+
     if (p0OnSensor || p1OnSensor)
     {
         this->sprite.setTextureRect(sf::IntRect(50, 0, 50, 50));
