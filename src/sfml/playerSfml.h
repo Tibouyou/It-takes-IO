@@ -16,9 +16,10 @@ class PlayerSfml
         sf::Clock WalkingClock;
         sf::Clock JumpingClock;
         int spriteSize;
+        bool playerType;
 
     public:
-        PlayerSfml(Player * player, bool playerType, int spriteSize);
+        PlayerSfml(Player * player, int spriteSize);
         ~PlayerSfml();
         sf::Sprite getSprite();
         void update(float elapsed);

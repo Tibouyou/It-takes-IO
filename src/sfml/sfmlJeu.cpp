@@ -16,14 +16,14 @@ using namespace sf;
 using namespace std;
 
 sfmlJeu::sfmlJeu () {
-    m_window = new RenderWindow(sf::VideoMode(), "It-Takes-IO", sf::Style::Fullscreen);
+    m_window = new RenderWindow(sf::VideoMode(1920, 1080), "It-Takes-IO", sf::Style::Fullscreen);
     int dimx = m_window->getSize().x;
     int dimy = m_window->getSize().y;
     level = new Level(1, dimx, dimy);
     spriteSize = min(dimx/level->getWidth(), dimy/level->getHeight());
     m_window->setFramerateLimit(120);
-    playerSfml0 = new PlayerSfml(level->getPlayer0(), 0, spriteSize);
-    playerSfml1 = new PlayerSfml(level->getPlayer1(), 1, spriteSize);
+    playerSfml0 = new PlayerSfml(level->getPlayer0(), spriteSize);
+    playerSfml1 = new PlayerSfml(level->getPlayer1(), spriteSize);
     doorTexture.loadFromFile("data/object/door.png");
     door.setTexture(doorTexture);
     door.setTextureRect(sf::IntRect(0, 0, 100, 200));
@@ -180,15 +180,25 @@ void sfmlJeu::sfmlAff() {
 
     if (level->getPlayer0()->getHeldItem() != nullptr) {
         sf::RectangleShape rectangle(sf::Vector2f(spriteSize, spriteSize/1.25));
-                    rectangle.setPosition(level->getPlayer0()->getX()+level->getPlayer0()->getWidth()/2.0-spriteSize/2.0, level->getPlayer0()->getY()-level->getPlayer0()->getHeight()+spriteSize*0.25/1.25);
-                    rectangle.setFillColor(sf::Color::Red);
-                    m_window->draw(rectangle);
+        if(level->getPlayer0()->getOnGround()) {
+            rectangle.setPosition(level->getPlayer0()->getX()+level->getPlayer0()->getWidth()/2.0-spriteSize/2.0, level->getPlayer0()->getY()-level->getPlayer0()->getHeight()+spriteSize*0.25/1.25);
+            rectangle.setFillColor(sf::Color::Red);
+        } else {
+            rectangle.setPosition(level->getPlayer0()->getX()+level->getPlayer0()->getWidth()/2.0-spriteSize/2.0, level->getPlayer0()->getY()-level->getPlayer0()->getHeight()*0.8125+spriteSize*0.25/1.25);
+            rectangle.setFillColor(sf::Color::Red);
+        }    
+        m_window->draw(rectangle);
     }
     if (level->getPlayer1()->getHeldItem() != nullptr) {
         sf::RectangleShape rectangle(sf::Vector2f(spriteSize, spriteSize/1.25));
-                    rectangle.setPosition(level->getPlayer1()->getX()+level->getPlayer1()->getWidth()/2.0-spriteSize/2.0, level->getPlayer1()->getY()-level->getPlayer1()->getHeight()+spriteSize*0.25/1.25);
-                    rectangle.setFillColor(sf::Color::Red);
-                    m_window->draw(rectangle);
+        if (level->getPlayer1()->getOnGround()){
+            rectangle.setPosition(level->getPlayer1()->getX()+level->getPlayer1()->getWidth()/2.0-spriteSize/2.0, level->getPlayer1()->getY()-level->getPlayer1()->getHeight()+spriteSize*0.25/1.25);
+            rectangle.setFillColor(sf::Color::Red);
+        } else {
+            rectangle.setPosition(level->getPlayer1()->getX()+level->getPlayer1()->getWidth()/2.0-spriteSize/2.0, level->getPlayer1()->getY()-level->getPlayer1()->getHeight()*0.8125+spriteSize*0.25/1.25);
+            rectangle.setFillColor(sf::Color::Red);
+        }    
+        m_window->draw(rectangle);
     }
     m_window->display();
 }

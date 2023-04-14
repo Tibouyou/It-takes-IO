@@ -136,6 +136,8 @@ class Player : public Entity
         
         void setSpriteSize(int spriteSize);
 
+        bool getPlayerType();
+
 };
 
 #endif

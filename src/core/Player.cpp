@@ -161,3 +161,8 @@ void Player::setSpriteSize(int spriteSize)
     this->spriteSize = spriteSize;
 }
 
+bool Player::getPlayerType()
+{
+    return playerType;
+}
+
