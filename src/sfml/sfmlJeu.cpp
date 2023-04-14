@@ -17,9 +17,17 @@ using namespace std;
 
 sfmlJeu::sfmlJeu () {
     m_window = new RenderWindow(sf::VideoMode(1920, 1080), "It-Takes-IO", sf::Style::Fullscreen);
+    this->levelNumber = 1;
+}
+
+void sfmlJeu::sfmlInit() {
+    loadLevel();
+}
+
+void sfmlJeu::loadLevel() {
     int dimx = m_window->getSize().x;
     int dimy = m_window->getSize().y;
-    level = new Level(1, dimx, dimy);
+    level = new Level(this->levelNumber, dimx, dimy);
     spriteSize = min(dimx/level->getWidth(), dimy/level->getHeight());
     m_window->setFramerateLimit(120);
     playerSfml0 = new PlayerSfml(level->getPlayer0(), spriteSize);
@@ -34,6 +42,8 @@ sfmlJeu::sfmlJeu () {
     background.setScale((float)dimx/4960, (float)dimx/4960);
     background.setPosition(0, 0);
 
+    sensorsSfml.clear();
+
     for(int y=0;y<level->getHeight();y++){
 		for(int x=0;x<level->getWidth();x++){
 			char blockC = level->getBlock(x,y)->getType();
@@ -43,11 +53,6 @@ sfmlJeu::sfmlJeu () {
         }
     }        
 }
-
-void sfmlJeu::sfmlInit() {
-
-}
-
 
 sfmlJeu::~sfmlJeu () {
     if (m_window != NULL) delete m_window;
@@ -227,10 +232,20 @@ void sfmlJeu::sfmlBoucle () {
         }
 
         if(level->getDoor()->isOpened() && level->getDoor()->getX()==level->getPlayer0()->getTileX() && level->getDoor()->getY()==level->getPlayer0()->getTileY()) {
-            m_window->close();
+            if (this->levelNumber < 2) {
+                this->levelNumber++;
+                this->loadLevel();
+            } else {
+                m_window->close();
+            }
         }
         if(level->getDoor()->isOpened() && level->getDoor()->getX()==level->getPlayer1()->getTileX() && level->getDoor()->getY()==level->getPlayer1()->getTileY()) {
-            m_window->close();
+            if (this->levelNumber < 2) {
+                this->levelNumber++;
+                this->loadLevel();
+            } else {
+                m_window->close();
+            }
         }
 
         if(!level->getPlayer0()->getAlive() || !level->getPlayer1()->getAlive()) m_window->close();

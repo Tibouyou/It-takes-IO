@@ -30,6 +30,7 @@ private :
     sf::Texture backgroundTexture;
     sf::Sprite background;
     std::vector<SensorSfml*> sensorsSfml;
+    int levelNumber;
 
 public :
 
@@ -40,6 +41,7 @@ public :
     void sfmlBoucle();
     void sfmlAff();
     void animDoor();
+    void loadLevel();
 };
 
 #endif

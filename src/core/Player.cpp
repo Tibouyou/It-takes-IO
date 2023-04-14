@@ -41,9 +41,9 @@ void Player::update(const Level& currentLevel, float elapsed)
     
     if (isMoving) {
         if (direction) {
-            if (!getCollisionX(currentLevel, -elapsed*300)) x -= elapsed*300;
+            if (!getCollisionX(currentLevel, -elapsed*300*spriteSize/82.0)) x -= elapsed*300*spriteSize/82.0;
         } else {
-            if (!getCollisionX(currentLevel, elapsed*300+width)) x += elapsed*300;
+            if (!getCollisionX(currentLevel, elapsed*300*spriteSize/82.0+width)) x += elapsed*300*spriteSize/82.0;
         }
     }
 }
