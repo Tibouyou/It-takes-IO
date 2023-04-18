@@ -11,6 +11,7 @@
 #include "blockSfml.h"
 #include "playerSfml.h"
 #include "sensorSfml.h"
+#include "../sfml/menu/Menu.h"
 
 /**
     La classe g�rant le jeu avec un affichage SFML
@@ -37,6 +38,9 @@ private :
     std::vector<BlockSfml*> blocksSfml;
     sf::Texture gateAnd;
     sf::Texture pickN;
+    Menu * mainMenu;
+    Menu * optionMenu;
+    Menu * selectLevelMenu;
     int levelNumber;
 
 public :
@@ -49,6 +53,7 @@ public :
     void sfmlAff();
     void animDoor();
     void loadLevel();
+    void sfmlMenu();
 };
 
 #endif

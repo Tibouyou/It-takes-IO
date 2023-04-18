@@ -137,3 +137,9 @@ void Menu::addOptionButton (Button* button)
 {
     optionsButtons.push_back(button);
 }
+
+void Menu::addSelectLevelButton (Button* button)
+{
+    selectLevelButtons.push_back(button);
+}
+

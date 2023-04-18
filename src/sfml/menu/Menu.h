@@ -34,6 +34,7 @@ class Menu
         void handleEvent(Event event);
         void addButton (Button* button);
         void addOptionButton (Button* button);
+        void addSelectLevelButton (Button* button);
 };
 
 #endif 
