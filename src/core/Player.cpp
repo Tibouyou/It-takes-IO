@@ -34,7 +34,7 @@ void Player::update(const Level& currentLevel, float elapsed)
         gravity = 0;
         isOnGround = true;
     } else isOnGround = false;
-    if (currentLevel.getBlock(getTileX(1),getTileY(spriteSize-height))->isSolid() || currentLevel.getBlock(getTileX(width-1),getTileY(spriteSize-height))->isSolid()) {
+    if (currentLevel.getBlock(getTileX(1),getTileY(spriteSize-height*0.8125))->isSolid() || currentLevel.getBlock(getTileX(width-1),getTileY(spriteSize-height*0.8125))->isSolid()) {
         y = y+1;
         gravity = 0;
     } 
@@ -127,8 +127,10 @@ bool Player::getDirection()
 }
 
 bool Player::getCollisionX(const Level &currentLevel, float moveX) {
+    float coef = 1;
+    if (!isOnGround) coef = 0.8125;
     bool collision = false;
-    for (int i = 1; i < height-(spriteSize/100.0)*5.0; i++) {
+    for (int i = 1; i < coef*height-(spriteSize/100.0)*5.0; i++) {
         if (currentLevel.getBlock(getTileX(moveX),getTileY(-i+spriteSize))->isSolid()) {
             collision = true;
         }
