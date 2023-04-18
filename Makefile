@@ -70,6 +70,12 @@ obj/Level.o: src/core/Level.cpp	src/core/Level.h src/core/Player.h src/core/Bloc
 
 obj/Vector2D.o: src/core/Vector2D.cpp src/core/Vector2D.h
 	g++ -g -Wall -c src/core/Vector2D.cpp -o obj/Vector2D.o	
+
+obj/Button.o : src/sfml/menu/Button.cpp src/sfml/menu/Button.h
+	g++ -g -Wall -c src/sfml/menu/Button.cpp -o obj/Button.o
+
+obj/Menu.o : src/sfml/menu/Menu.cpp src/sfml/menu/Menu.h src/sfml/menu/Button.h 
+	g++ -g -Wall -c src/sfml/menu/Menu.cpp -o obj/Menu.o
 	
 clean:
 	rm -f obj/*
