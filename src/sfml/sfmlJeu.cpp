@@ -243,16 +243,23 @@ void sfmlJeu::sfmlAff() {
 void sfmlJeu::sfmlBoucle () {
 
     Clock clock;
+    bool menu = true;
 
     while (m_window->isOpen())
     {
         float elapsed = clock.getElapsedTime().asSeconds();
-        level->update(elapsed);
-        playerSfml0->update(elapsed);
-        playerSfml1->update(elapsed);
-        for (SensorSfml* sensor : sensorsSfml) {
-		    sensor->update(level->getPlayer0(), level->getPlayer1(), elapsed);
+        if (menu) {
+            
+        } else {
+            level->update(elapsed);
+            playerSfml0->update(elapsed);
+            playerSfml1->update(elapsed);
+            for (SensorSfml* sensor : sensorsSfml) {
+                sensor->update(level->getPlayer0(), level->getPlayer1(), elapsed);
+            }
         }
+        
+        
         clock.restart();
 
         if(level->getDoor()->isOpened() && frameDoor != 6) {
@@ -291,6 +298,8 @@ void sfmlJeu::sfmlBoucle () {
 
             if (event.type == Event::KeyPressed) {
                 switch (event.key.code) {
+                case Keyboard::Escape : menu = !menu;
+					break;
                 case Keyboard::P : m_window->close();
 					break;
                 case Keyboard::Z : level->getPlayer0()->jump();
@@ -332,7 +341,18 @@ void sfmlJeu::sfmlBoucle () {
             }
         }
 
-        sfmlAff();
+        if (menu) {
+            sfmlMenu();
+        } else sfmlAff();
     }
 
+}
+
+void sfmlJeu::sfmlMenu () {
+    m_window->clear();
+    RectangleShape rectangle(sf::Vector2f(800, 600));
+    rectangle.setPosition(0, 0);
+    rectangle.setFillColor(sf::Color(0,0,0,80));
+    m_window->draw(rectangle);
+    m_window->display();
 }
