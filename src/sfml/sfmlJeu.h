@@ -35,6 +35,8 @@ private :
     sf::Texture elec;
     sf::Texture elecAct;
     std::vector<BlockSfml*> blocksSfml;
+    sf::Texture gateAnd;
+    sf::Texture pickN;
     int levelNumber;
 
 public :

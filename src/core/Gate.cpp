@@ -75,3 +75,13 @@ Gate::~Gate()
         delete output;
     }
 }
+
+std::vector<Vector2D*> Gate::getInput()
+{
+    return input;
+}
+
+std::vector<Vector2D*> Gate::getOutput()
+{
+    return output;
+}

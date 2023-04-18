@@ -94,6 +94,10 @@ class Gate : public Block
          * @brief Function called when the gate is update
          */
         void update(Level& currentLevel);
+
+        std::vector<Vector2D*> getInput();
+
+        std::vector<Vector2D*> getOutput();
 }; 
 
 
