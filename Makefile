@@ -2,8 +2,8 @@ all: bin/main_txt
 
 sfml: bin/main_sfml
 
-bin/main_sfml: obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o obj/sensorSfml.o
-	g++ -g -Wall -o bin/main_sfml obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o obj/sensorSfml.o -lsfml-graphics -lsfml-window -lsfml-system
+bin/main_sfml: obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o obj/sensorSfml.o obj/blockSfml.o
+	g++ -g -Wall -o bin/main_sfml obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o obj/sensorSfml.o obj/blockSfml.o -lsfml-graphics -lsfml-window -lsfml-system
 
 bin/main_txt: obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o
 	g++ -g -Wall -o bin/main_txt obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o
@@ -15,7 +15,10 @@ obj/Main_txt.o: src/txt/main_txt.cpp src/txt/winTxt.h src/txt/txtJeu.h src/core/
 	g++ -g -Wall -c src/txt/main_txt.cpp -o obj/Main_txt.o
 
 obj/sfmlJeu.o: src/sfml/sfmlJeu.cpp src/sfml/sfmlJeu.h src/core/Level.h src/sfml/playerSfml.h
-	g++ -g -Wall -c src/sfml/sfmlJeu.cpp -o obj/sfmlJeu.o	
+	g++ -g -Wall -c src/sfml/sfmlJeu.cpp -o obj/sfmlJeu.o
+
+obj/blockSfml.o: src/sfml/blockSfml.cpp src/sfml/blockSfml.h src/core/Level.h
+	g++ -g -Wall -c src/sfml/blockSfml.cpp -o obj/blockSfml.o	
 
 obj/playerSfml.o: src/sfml/playerSfml.cpp src/sfml/playerSfml.h src/core/Player.h
 	g++ -g -Wall -c src/sfml/playerSfml.cpp -o obj/playerSfml.o

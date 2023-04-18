@@ -17,6 +17,11 @@ using namespace std;
 
 sfmlJeu::sfmlJeu () {
     m_window = new RenderWindow(sf::VideoMode(1920, 1080), "It-Takes-IO", sf::Style::Fullscreen);
+    doorTexture.loadFromFile("data/object/door.png");
+    door.setTexture(doorTexture);
+    door.setTextureRect(sf::IntRect(0, 0, 100, 200));
+    elec.loadFromFile("data/blocks/elec.png");
+    elecAct.loadFromFile("data/blocks/elec2.png");
     this->levelNumber = 1;
 }
 
@@ -32,9 +37,6 @@ void sfmlJeu::loadLevel() {
     m_window->setFramerateLimit(120);
     playerSfml0 = new PlayerSfml(level->getPlayer0(), spriteSize);
     playerSfml1 = new PlayerSfml(level->getPlayer1(), spriteSize);
-    doorTexture.loadFromFile("data/object/door.png");
-    door.setTexture(doorTexture);
-    door.setTextureRect(sf::IntRect(0, 0, 100, 200));
     door.setScale(spriteSize*2.0/200, spriteSize*2.0/200);
     frameDoor = 0;
     backgroundTexture.loadFromFile("data/background.png");
@@ -51,7 +53,18 @@ void sfmlJeu::loadLevel() {
 				sensorsSfml.push_back(new SensorSfml(level->getBlock(x,y),spriteSize));
             }
         }
-    }        
+    }     
+
+    blocksSfml.clear();
+
+    for(int y=0;y<level->getHeight();y++){
+        for(int x=0;x<level->getWidth();x++){
+            char blockC = level->getBlock(x,y)->getType();
+            if (blockC == PLATFORM) {
+                blocksSfml.push_back(new BlockSfml(level,spriteSize,x,y));
+            }
+        }
+    }    
 }
 
 sfmlJeu::~sfmlJeu () {
@@ -69,17 +82,16 @@ void sfmlJeu::sfmlAff() {
 			switch (blockC) {
 				case AIR:
 					break;
-				case PLATFORM:{
-                    sf::RectangleShape rectangle(sf::Vector2f(spriteSize, spriteSize));
-                    rectangle.setPosition(x*spriteSize, y*spriteSize);
-                    rectangle.setFillColor(sf::Color::Black);
-                    m_window->draw(rectangle);
-                    }
+				case PLATFORM:
 					break;
 				case TRAP:{
-					sf::RectangleShape rectangle(sf::Vector2f(spriteSize, (float)spriteSize/5));
-                    rectangle.setPosition(x*spriteSize, y*spriteSize+spriteSize/2.5);
-                    rectangle.setFillColor(sf::Color::Cyan);
+                    sf::RectangleShape rectangle(sf::Vector2f(spriteSize, spriteSize));
+                    rectangle.setPosition(x*spriteSize, y*spriteSize);
+                    if (level->getCable(x, y)->getPowerType()==ONE) {
+                        rectangle.setTexture(&this->elecAct);
+                    } else {
+                        rectangle.setTexture(&this->elec);
+                    }
                     m_window->draw(rectangle);
                     }
 					break;
@@ -101,6 +113,10 @@ void sfmlJeu::sfmlAff() {
 		m_window->draw(sensor->getSprite());
     }
 
+    for (BlockSfml* block : blocksSfml) {
+        m_window->draw(block->getSprite());
+    }
+
     for(int y=0;y<level->getHeight();y++){
 		for(int x=0;x<level->getWidth();x++){
 			int blockC = level->getCable(x,y)->getPowerType();
@@ -116,7 +132,7 @@ void sfmlJeu::sfmlAff() {
 					colorCable = sf::Color(0, 0, 255);
 					break;
 			}
-            		if (!(level->getCable(x,y)->getDirectionMask() == NONE))
+            		if (!(level->getCable(x,y)->getDirectionMask() == NONE) && level->getBlock(x,y)->getType() != TRAP)
 					{
             
                         if (level->getCable(x,y)->getDirectionMask() &PowerDirection::UP) {
