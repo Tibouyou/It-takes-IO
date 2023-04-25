@@ -12,53 +12,30 @@ Button::Button(std::string buttonTitle, int x, int y, int width, int height, int
     this->height = height;
     this->font = font;
     this->onClick = onClick;
-    
-    this->rectangle = sf::RectangleShape(sf::Vector2f(width, height));
+    this->text.setFont(*font);
+    this->text.setString(buttonTitle);
+    this->text.setCharacterSize(100);
+    this->text.setFillColor(sf::Color(255,0,0,255));
+
+    FloatRect textBounds = this->text.getGlobalBounds();
+    this->text.setPosition(x + width/2.0 - (textBounds.width /2), y + height/2.0 -(textBounds.height /2));
+
+    this->rectangle.setSize(sf::Vector2f(width, height));
     this->rectangle.setPosition(x, y);
-    this->rectangle.setFillColor(sf::Color::White);
-    
+    this->rectangle.setFillColor(sf::Color(84,62,48,200));
 }
 
 void Button::draw(sf::RenderWindow *window)
 {
     window->draw(rectangle);
+    window->draw(text);
 }
 
-void Button::update()
-{
-    if (click)
-    {
-        this->onClick();
-        click = false;
-    }
-}
 
-void Button::handleEvent(sf::Event event)
+void Button::handleEvent(int x, int y)
 {
-    if (event.type == sf::Event::MouseMoved) {
-        if (rectangle.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y))) {
-            hover = true;
-        } else {
-            hover = false;
-        }
-        } else if (event.type == sf::Event::MouseButtonPressed) {
-            if (event.mouseButton.button == sf::Mouse::Left) {
-                if (rectangle.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
-                    active = true;
-                } else {
-                    active = false;
-                }
-            }
-        } else if (event.type == sf::Event::MouseButtonReleased) {
-            if (event.mouseButton.button == sf::Mouse::Left) {
-                if (rectangle.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
-                    active = false;
-                    hover = false;
-                    click = true;
-                } else {
-                    active = false;
-                }
-            }
+    if (rectangle.getGlobalBounds().contains(sf::Vector2f(x, y))) {
+        onClick();
     }
 }
 

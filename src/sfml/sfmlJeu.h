@@ -38,9 +38,7 @@ private :
     std::vector<BlockSfml*> blocksSfml;
     sf::Texture gateAnd;
     sf::Texture pickN;
-    Menu * mainMenu;
-    Menu * optionMenu;
-    Menu * selectLevelMenu;
+    Menu * menu;
     int levelNumber;
 
 public :

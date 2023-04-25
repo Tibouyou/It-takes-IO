@@ -24,10 +24,11 @@ sfmlJeu::sfmlJeu () {
     elecAct.loadFromFile("data/blocks/elec2.png");
     gateAnd.loadFromFile("data/object/&.png");
     pickN.loadFromFile("data/object/non.png");
-    this->levelNumber = 1;
+    menu = new Menu(m_window->getSize().x, m_window->getSize().y, 50);
 }
 
 void sfmlJeu::sfmlInit() {
+    this->levelNumber = 1;
     loadLevel();
 }
 
@@ -288,6 +289,10 @@ void sfmlJeu::sfmlBoucle () {
         }
 
         if(!level->getPlayer0()->getAlive() || !level->getPlayer1()->getAlive()) m_window->close();
+        if(this->menu->getQuit()) m_window->close();
+        if(!this->menu->getPlay()) menu = true;
+        std::cout << menu << std::endl;
+        std::cout << this->menu->getPlay() << std::endl;
 
         Event event;
 
@@ -295,48 +300,60 @@ void sfmlJeu::sfmlBoucle () {
         {
             if (event.type == Event::Closed)
                 m_window->close();
-
-            if (event.type == Event::KeyPressed) {
-                switch (event.key.code) {
-                case Keyboard::Escape : menu = !menu;
-					break;
-                case Keyboard::P : m_window->close();
-					break;
-                case Keyboard::Z : level->getPlayer0()->jump();
-					break;
-                case Keyboard::Q : level->getPlayer0()->setMoving(true);
-                    level->getPlayer0()->setDirection(true);
-					break;
-                case Keyboard::D : level->getPlayer0()->setMoving(true);
-                    level->getPlayer0()->setDirection(false);
-					break; 
-                case Keyboard::S : level->getPlayer0()->use(*level);
-					break;   
-                case Keyboard::Up : level->getPlayer1()->jump();
-                    break;
-                case Keyboard::Left : level->getPlayer1()->setMoving(true);
-                    level->getPlayer1()->setDirection(true);
-                    break;
-                case Keyboard::Right : level->getPlayer1()->setMoving(true);
-                    level->getPlayer1()->setDirection(false);
-                    break;
-                case Keyboard::Down : level->getPlayer1()->use(*level);
-                    break;
-                default : break;
+            if (menu) {
+                if (event.type == Event::MouseButtonPressed) {
+                    if (event.mouseButton.button == Mouse::Left) {
+                        this->menu->click(event.mouseButton.x, event.mouseButton.y);
+                    }
                 }
-            }
-
-            if (event.type == Event::KeyReleased) {
-                switch (event.key.code) {
-                case Keyboard::Q : if (level->getPlayer0()->getDirection()) level->getPlayer0()->setMoving(false);
-					break;
-                case Keyboard::D : if (!level->getPlayer0()->getDirection()) level->getPlayer0()->setMoving(false);
-					break;    
-                case Keyboard::Left : if (level->getPlayer1()->getDirection()) level->getPlayer1()->setMoving(false);
-                    break;
-                case Keyboard::Right : if (!level->getPlayer1()->getDirection()) level->getPlayer1()->setMoving(false);
-                    break;
-                default : break;
+                if (event.type == Event::KeyPressed) {
+                    switch (event.key.code) {
+                    case Keyboard::Escape : menu = !menu;
+                    this->menu->Pause();
+                        break;
+                    default : break;
+                    }
+                }
+            } else {
+                if (event.type == Event::KeyPressed) {
+                    switch (event.key.code) {
+                    case Keyboard::Escape : menu = !menu;
+                        break;
+                    case Keyboard::Z : level->getPlayer0()->jump();
+                        break;
+                    case Keyboard::Q : level->getPlayer0()->setMoving(true);
+                        level->getPlayer0()->setDirection(true);
+                        break;
+                    case Keyboard::D : level->getPlayer0()->setMoving(true);
+                        level->getPlayer0()->setDirection(false);
+                        break; 
+                    case Keyboard::S : level->getPlayer0()->use(*level);
+                        break;   
+                    case Keyboard::Up : level->getPlayer1()->jump();
+                        break;
+                    case Keyboard::Left : level->getPlayer1()->setMoving(true);
+                        level->getPlayer1()->setDirection(true);
+                        break;
+                    case Keyboard::Right : level->getPlayer1()->setMoving(true);
+                        level->getPlayer1()->setDirection(false);
+                        break;
+                    case Keyboard::Down : level->getPlayer1()->use(*level);
+                        break;
+                    default : break;
+                    }
+                }
+                if (event.type == Event::KeyReleased) {
+                    switch (event.key.code) {
+                    case Keyboard::Q : if (level->getPlayer0()->getDirection()) level->getPlayer0()->setMoving(false);
+                        break;
+                    case Keyboard::D : if (!level->getPlayer0()->getDirection()) level->getPlayer0()->setMoving(false);
+                        break;    
+                    case Keyboard::Left : if (level->getPlayer1()->getDirection()) level->getPlayer1()->setMoving(false);
+                        break;
+                    case Keyboard::Right : if (!level->getPlayer1()->getDirection()) level->getPlayer1()->setMoving(false);
+                        break;
+                    default : break;
+                    }
                 }
             }
         }
@@ -350,9 +367,6 @@ void sfmlJeu::sfmlBoucle () {
 
 void sfmlJeu::sfmlMenu () {
     m_window->clear();
-    RectangleShape rectangle(sf::Vector2f(800, 600));
-    rectangle.setPosition(0, 0);
-    rectangle.setFillColor(sf::Color(0,0,0,80));
-    m_window->draw(rectangle);
+    menu->draw(m_window);
     m_window->display();
 }

@@ -20,21 +20,22 @@ class Menu
         bool optionMenuActive = false;
         bool selectLevelMenuActive = false;
         RectangleShape rectangleMenu;
-        Font *font;
-        //Texture textureMenu;
-        //Texture textureOption;
-        //Texture textureSelectLevel;
+        Font font;
+        bool quit = false;
+        bool play = false;
 
     public :
-        Menu(int windowWidth, int windowHeight, int fontSize, Font font);
+        Menu(int windowWidth, int windowHeight, int fontSize);
         ~Menu();
 
         void draw(RenderWindow *window);
-        void update();
-        void handleEvent(Event event);
+        void click(int x, int y);
         void addButton (Button* button);
         void addOptionButton (Button* button);
         void addSelectLevelButton (Button* button);
+        bool getQuit();
+        bool getPlay();
+        void Pause();
 };
 
 #endif 

@@ -6,39 +6,40 @@
 using namespace sf;
 using namespace std;
 
-Menu::Menu (int windowWidth, int windowHeight, int fontSize, Font font)
+Menu::Menu (int windowWidth, int windowHeight, int fontSize)
 {
     this->menuTitle = "Menu principal";
     this->rectangleMenu = RectangleShape(Vector2f(windowWidth, windowHeight));
     this->rectangleMenu.setFillColor(Color::White);
-    this->font = &font;
+    this->font.loadFromFile("data/Holidays Homework.ttf");
     //this->textureMenu.loadFromFile("assets/menu.png");
     //this->textureOption.loadFromFile("assets/option.png");
     //this->textureSelectLevel.loadFromFile("assets/selectLevel.png");
-
-    addButton (new Button("Play", 0, 0, 200, 50, fontSize, &font, [this]() 
+    int buttonheight = windowHeight/5;
+    
+    addButton (new Button("Play", windowWidth/4.0, buttonheight/100*10, windowWidth/2.0, buttonheight-buttonheight/100*20, fontSize, &font, [this]() 
     {
-        cout << "Play" << endl;
+        play = true;
     }));
 
-    addButton (new Button("Options", 0, 50, 200, 50, fontSize, &font, [this]() 
+    addButton (new Button("Options", windowWidth/4.0, buttonheight*1+buttonheight/100*10, windowWidth/2.0, buttonheight-buttonheight/100*20, fontSize, &font, [this]() 
     {
         cout << "Options" << endl;
         this->optionMenuActive = true;
     }));
 
-     addButton (new Button("Select Level", 0, 50, 200, 50, fontSize, &font, [this]() 
+     addButton (new Button("Select Level", windowWidth/4.0, buttonheight*2+buttonheight/100*10, windowWidth/2.0, buttonheight-buttonheight/100*20, fontSize, &font, [this]() 
     {
         cout << "Select Level" << endl;
         this->selectLevelMenuActive = true;
     }));
 
-    addButton (new Button("Quit", 0, 100, 200, 50, fontSize, &font, [this]() 
+    addButton (new Button("Quit", windowWidth/4.0, buttonheight*3+buttonheight/100*10, windowWidth/2.0, buttonheight-buttonheight/100*20, fontSize, &font, [this]() 
     {
-        cout << "Quit" << endl;
+        quit = true;
     }));
 
-    addOptionButton (new Button("Emmanuel", 0, 0, 200, 50, fontSize, &font, [this]() 
+    addButton (new Button("Emmanuel", windowWidth/4.0, buttonheight*4+buttonheight/100*10, windowWidth/2.0, buttonheight-buttonheight/100*20, fontSize, &font, [this]() 
     {
         cout << "Emmanuel" << endl;
         this->optionMenuActive = false;
@@ -48,7 +49,7 @@ Menu::Menu (int windowWidth, int windowHeight, int fontSize, Font font)
 
 Menu::~Menu()
 {
-    delete this->font;
+    
 }
 
 void Menu::draw(RenderWindow *window)
@@ -78,52 +79,28 @@ void Menu::draw(RenderWindow *window)
     }
 }
 
-void Menu::update()
-{
-    if (optionMenuActive)
-    {
-        for (Button *button : optionsButtons)
-        {
-            button->update();
-        }
-    }
-    else if (selectLevelMenuActive)
-    {
-        for (Button *button : selectLevelButtons)
-        {
-            button->update();
-        }
-    }
-    else 
-    {
-        for (Button *button : buttons)
-        {
-            button->update();
-        }
-    }
-}
 
-void Menu::handleEvent(Event event)
+void Menu::click(int x, int y)
 {
     if (optionMenuActive)
     {
         for (Button *button : optionsButtons)
         {
-            button->handleEvent(event);
+            button->handleEvent(x,y);
         }
     }
     else if (selectLevelMenuActive)
     {
         for (Button *button : selectLevelButtons)
         {
-            button->handleEvent(event);
+            button->handleEvent(x,y);
         }
     }
     else 
     {
         for (Button *button : buttons)
         {
-            button->handleEvent(event);
+            button->handleEvent(x,y);
         }
     }
 }
@@ -143,3 +120,15 @@ void Menu::addSelectLevelButton (Button* button)
     selectLevelButtons.push_back(button);
 }
 
+bool Menu::getQuit() {
+    return quit;
+}
+
+bool Menu::getPlay() {
+    return play;
+}
+
+void Menu::Pause()
+{
+    play = false;
+}
