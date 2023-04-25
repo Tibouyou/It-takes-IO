@@ -23,7 +23,7 @@ enum PowerDirection {
  * @brief The type of a block
  * 
  */
-enum BlockType{AIR, PLATFORM, SENSOR, TRAP, RECEPTACLE, GATE, DOOR};
+enum BlockType{AIR, PLATFORM, SENSOR, TRAP, RECEPTACLE, GATE, DOOR, GENERATOR};
 
 /**
  * @brief The type of a gate

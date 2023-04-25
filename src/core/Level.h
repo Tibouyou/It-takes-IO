@@ -10,6 +10,7 @@
 #include "Receptacle.h"
 #include "Gate.h"
 #include "Door.h"
+#include "Generator.h"
 
 class Level
 {

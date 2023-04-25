@@ -14,6 +14,7 @@ class Menu
 {
     private :
         string menuTitle;
+        sf::RenderWindow * m_window;
         vector<Button*> buttons;
         vector<Button*> optionsButtons;
         vector<Button*> selectLevelButtons;
@@ -23,9 +24,10 @@ class Menu
         Font font;
         bool quit = false;
         bool play = false;
+        int currentLevel = 1;
 
     public :
-        Menu(int windowWidth, int windowHeight, int fontSize);
+        Menu(int windowWidth, int windowHeight, int fontSize, sf::RenderWindow * m_window);
         ~Menu();
 
         void draw(RenderWindow *window);
@@ -35,7 +37,9 @@ class Menu
         void addSelectLevelButton (Button* button);
         bool getQuit();
         bool getPlay();
-        void Pause();
+        void pause();
+        int getCurrentLevel();
+        sf::Keyboard::Key getKeybind() const;
 };
 
 #endif 

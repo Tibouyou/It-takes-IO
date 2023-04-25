@@ -2,8 +2,8 @@ all: bin/main_txt
 
 sfml: bin/main_sfml
 
-bin/main_sfml: obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o obj/sensorSfml.o obj/blockSfml.o obj/Menu.o obj/Button.o
-	g++ -g -Wall -o bin/main_sfml obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o obj/sensorSfml.o obj/blockSfml.o obj/Menu.o obj/Button.o -lsfml-graphics -lsfml-window -lsfml-system
+bin/main_sfml: obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o obj/sensorSfml.o obj/blockSfml.o obj/Menu.o obj/Button.o obj/Generator.o
+	g++ -g -Wall -o bin/main_sfml obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o obj/sensorSfml.o obj/blockSfml.o obj/Menu.o obj/Button.o obj/Generator.o -lsfml-graphics -lsfml-window -lsfml-system
 
 bin/main_txt: obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o
 	g++ -g -Wall -o bin/main_txt obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o
@@ -31,6 +31,9 @@ obj/winTxt.o: src/txt/winTxt.cpp src/txt/winTxt.h
 
 obj/txtJeu.o: src/txt/txtJeu.cpp src/txt/txtJeu.h src/core/Level.h
 	g++ -g -Wall -c src/txt/txtJeu.cpp -o obj/txtJeu.o	
+
+obj/Generator.o: src/core/Generator.cpp src/core/Generator.h src/core/Enum.h src/core/Block.h src/core/Player.h
+	g++ -g -Wall -c src/core/Generator.cpp -o obj/Generator.o
 
 obj/Block.o: src/core/Block.cpp	src/core/Block.h src/core/Player.h src/core/Enum.h
 	g++ -g -Wall -c src/core/Block.cpp -o obj/Block.o

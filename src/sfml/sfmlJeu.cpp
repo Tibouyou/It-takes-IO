@@ -24,7 +24,7 @@ sfmlJeu::sfmlJeu () {
     elecAct.loadFromFile("data/blocks/elec2.png");
     gateAnd.loadFromFile("data/object/&.png");
     pickN.loadFromFile("data/object/non.png");
-    menu = new Menu(m_window->getSize().x, m_window->getSize().y, 50);
+    menu = new Menu(m_window->getSize().x, m_window->getSize().y, spriteSize, m_window);
 }
 
 void sfmlJeu::sfmlInit() {
@@ -98,6 +98,17 @@ void sfmlJeu::sfmlAff() {
                     m_window->draw(rectangle);
                     }
 					break;
+                case GENERATOR:{
+                    sf::RectangleShape rectangle(sf::Vector2f(spriteSize, spriteSize));
+                    rectangle.setPosition(x*spriteSize, y*spriteSize);
+                    if (dynamic_cast<Generator*>(level->getBlock(x, y))->getPowerType()==ONE) {
+                        rectangle.setFillColor(sf::Color(0, 0, 255));
+                    } else {
+                        rectangle.setFillColor(sf::Color(255, 0, 0));
+                    }
+                    m_window->draw(rectangle);
+                    }
+                    break;
 				case RECEPTACLE:
 					break;
 				case GATE:
@@ -107,7 +118,7 @@ void sfmlJeu::sfmlAff() {
                     door.setTextureRect(sf::IntRect(frameDoor*100, 0, 100, 200));
                     m_window->draw(door);
                     }
-					break;	
+					break;
 			}
 		}
 	}
@@ -244,22 +255,18 @@ void sfmlJeu::sfmlAff() {
 void sfmlJeu::sfmlBoucle () {
 
     Clock clock;
-    bool menu = true;
 
     while (m_window->isOpen())
     {
         float elapsed = clock.getElapsedTime().asSeconds();
-        if (menu) {
-            
-        } else {
+        if (menu->getPlay()) {
             level->update(elapsed);
             playerSfml0->update(elapsed);
             playerSfml1->update(elapsed);
             for (SensorSfml* sensor : sensorsSfml) {
                 sensor->update(level->getPlayer0(), level->getPlayer1(), elapsed);
             }
-        }
-        
+        }   
         
         clock.restart();
 
@@ -270,7 +277,10 @@ void sfmlJeu::sfmlBoucle () {
                 doorClock.restart();
             }
         }
-
+        if(menu->getCurrentLevel()!=this->levelNumber) {
+            this->levelNumber = menu->getCurrentLevel();
+            this->loadLevel();
+        }
         if(level->getDoor()->isOpened() && level->getDoor()->getX()==level->getPlayer0()->getTileX() && level->getDoor()->getY()==level->getPlayer0()->getTileY()) {
             if (this->levelNumber < 2) {
                 this->levelNumber++;
@@ -290,9 +300,6 @@ void sfmlJeu::sfmlBoucle () {
 
         if(!level->getPlayer0()->getAlive() || !level->getPlayer1()->getAlive()) m_window->close();
         if(this->menu->getQuit()) m_window->close();
-        if(!this->menu->getPlay()) menu = true;
-        std::cout << menu << std::endl;
-        std::cout << this->menu->getPlay() << std::endl;
 
         Event event;
 
@@ -300,7 +307,7 @@ void sfmlJeu::sfmlBoucle () {
         {
             if (event.type == Event::Closed)
                 m_window->close();
-            if (menu) {
+            if (!menu->getPlay()) {
                 if (event.type == Event::MouseButtonPressed) {
                     if (event.mouseButton.button == Mouse::Left) {
                         this->menu->click(event.mouseButton.x, event.mouseButton.y);
@@ -308,16 +315,17 @@ void sfmlJeu::sfmlBoucle () {
                 }
                 if (event.type == Event::KeyPressed) {
                     switch (event.key.code) {
-                    case Keyboard::Escape : menu = !menu;
-                    this->menu->Pause();
-                        break;
+                    case Keyboard::Escape : {
+                        this->menu->pause();
+                    }
+                    break;
                     default : break;
                     }
                 }
             } else {
                 if (event.type == Event::KeyPressed) {
                     switch (event.key.code) {
-                    case Keyboard::Escape : menu = !menu;
+                    case Keyboard::Escape : this->menu->pause();
                         break;
                     case Keyboard::Z : level->getPlayer0()->jump();
                         break;
@@ -358,7 +366,7 @@ void sfmlJeu::sfmlBoucle () {
             }
         }
 
-        if (menu) {
+        if (!menu->getPlay()) {
             sfmlMenu();
         } else sfmlAff();
     }

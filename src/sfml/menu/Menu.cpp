@@ -6,9 +6,10 @@
 using namespace sf;
 using namespace std;
 
-Menu::Menu (int windowWidth, int windowHeight, int fontSize)
+Menu::Menu (int windowWidth, int windowHeight, int fontSize, sf::RenderWindow * m_window)
 {
     this->menuTitle = "Menu principal";
+    this->m_window = m_window;
     this->rectangleMenu = RectangleShape(Vector2f(windowWidth, windowHeight));
     this->rectangleMenu.setFillColor(Color::White);
     this->font.loadFromFile("data/Holidays Homework.ttf");
@@ -30,7 +31,6 @@ Menu::Menu (int windowWidth, int windowHeight, int fontSize)
 
      addButton (new Button("Select Level", windowWidth/4.0, buttonheight*2+buttonheight/100*10, windowWidth/2.0, buttonheight-buttonheight/100*20, fontSize, &font, [this]() 
     {
-        cout << "Select Level" << endl;
         this->selectLevelMenuActive = true;
     }));
 
@@ -45,6 +45,19 @@ Menu::Menu (int windowWidth, int windowHeight, int fontSize)
         this->optionMenuActive = false;
     }));
 
+    for (int i = 1; i <= 2; i++) {
+        addSelectLevelButton(new Button("Level " + to_string(i), windowWidth/4.0, buttonheight*i+buttonheight/100*10, windowWidth/2.0, buttonheight-buttonheight/100*20, fontSize, &font, [this,i]() 
+        {
+            this->currentLevel = i;
+            this->selectLevelMenuActive = false;
+            play = true;
+        }));
+    }
+
+    addOptionButton(new Button("Keybinds", windowWidth/4.0, buttonheight*1+buttonheight/100*10, windowWidth/2.0, buttonheight-buttonheight/100*20, fontSize, &font, [this]() 
+    {
+        std::cout<< "test : "<< this->getKeybind() << std::endl;
+    }));
 }
 
 Menu::~Menu()
@@ -128,7 +141,31 @@ bool Menu::getPlay() {
     return play;
 }
 
-void Menu::Pause()
+void Menu::pause()
 {
     play = false;
+}
+
+int Menu::getCurrentLevel()
+{
+    return currentLevel;
+}
+
+sf::Keyboard::Key Menu::getKeybind() const {
+    while (m_window->isOpen())
+    {
+        sf::Event event;
+        while (m_window->pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+            {
+                m_window->close();
+            }
+            else if (event.type == sf::Event::KeyPressed)
+            {
+                std::cout<<event.key.code<<std::endl;
+                return event.key.code;
+            }
+        }
+    }
 }

@@ -119,6 +119,12 @@ void Level::loadLevel(int dimWindowX, int dimWindowY)
                     door = new Door(x,y);
                     tabBlock.push_back(door);
                     break;  
+                case 'g':
+                    tabBlock.push_back(new Generator(x,y,ZERO));
+                    break;
+                case 'G':
+                    tabBlock.push_back(new Generator(x,y,ONE));
+                    break;
                 default:
                     tabBlock.push_back(new Block(x,y));
                     break;
@@ -171,6 +177,10 @@ void Level::update(float elapsed)
         for (unsigned int i = 0; i < tabBlock.size(); i++)
         {
             if (tabBlock[i]->getType() == SENSOR)
+            {
+                tabBlock[i]->update(*p0,*p1,*this);
+            }
+            if (tabBlock[i]->getType() == GENERATOR)
             {
                 tabBlock[i]->update(*p0,*p1,*this);
             }
