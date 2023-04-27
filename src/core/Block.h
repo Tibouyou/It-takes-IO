@@ -74,6 +74,7 @@ class Block
 
         int getX();
         int getY();
+        void reset();
 }; 
 
 

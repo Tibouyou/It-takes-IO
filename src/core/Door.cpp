@@ -1,5 +1,6 @@
 #include "Door.h"
 #include "Level.h"
+#include <iostream>
 
 Door::Door(int x, int y, BlockType type) : Block(x, y, type)
 {
@@ -38,4 +39,9 @@ void Door::update(Player& p0, Player& p1, Level& currentLevel)
     }
 }
 
+void Door::reset()
+{
+    this->open = false;
+    this->win = false;
+}
 

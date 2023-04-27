@@ -24,13 +24,21 @@ void Sensor::update(Player& p0, Player& p1, Level& currentLevel)
     {    
         if (p0OnSensor)
         {
-            currentLevel.getCable(tileX , tileY)->power(ZERO, PowerDirection::NONE, currentLevel);
+            if (currentLevel.getCable(tileX, tileY)->getPowerType() != EMPTY){
+                currentLevel.getCable(tileX , tileY)->power(EMPTY, PowerDirection::NONE, currentLevel);
+            } else {
+                currentLevel.getCable(tileX , tileY)->power(ZERO, PowerDirection::NONE, currentLevel);
+            }
             activated = true;
         }
     
         if (p1OnSensor)
         {
-            currentLevel.getCable(tileX , tileY)->power(ONE, PowerDirection::NONE, currentLevel);
+            if (currentLevel.getCable(tileX, tileY)->getPowerType() != EMPTY){
+                currentLevel.getCable(tileX , tileY)->power(EMPTY, PowerDirection::NONE, currentLevel);
+            } else {
+                currentLevel.getCable(tileX , tileY)->power(ONE, PowerDirection::NONE, currentLevel);
+            }
             activated = true;
         }
     } else {

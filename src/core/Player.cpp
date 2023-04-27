@@ -5,7 +5,7 @@
 #include <math.h>
 #include "Receptacle.h"
 
-Player::Player(bool playerType, float x, float y, int height, int width, int spriteSize) : Entity( x, y, height, width, spriteSize)
+Player::Player(bool playerType, float x, float y, int height, int width, int spriteSize, float originX, float originY) : Entity( x, y, height, width, spriteSize, originX, originY)
 {
     this->playerType = playerType;
     heldItem = nullptr;
@@ -28,7 +28,8 @@ void Player::update(const Level& currentLevel, float elapsed)
     gravity += 9.81f * elapsed;
     y += gravity*spriteSize*2*elapsed;
 
-    
+    if (heldItem != nullptr) heldItem->setDirection(!direction);
+
     if (currentLevel.getBlock(getTileX(1),getTileY(spriteSize))->isSolid() || currentLevel.getBlock(getTileX(width-1),getTileY(spriteSize))->isSolid()) {
         y = getTileY()*spriteSize;
         gravity = 0;
@@ -168,3 +169,14 @@ bool Player::getPlayerType()
     return playerType;
 }
 
+void Player::reset()
+{
+    gravity = 0.0f;
+    isOnGround = true;
+    isMoving = false;
+    direction = false;
+    isAlive = true;
+    heldItem = nullptr;
+    x = originX;
+    y = originY;
+}

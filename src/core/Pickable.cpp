@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Pickable.h"
 
-Pickable::Pickable(PickableType type, int x, int y, int height, int width, int spriteSize) : Entity(x, y, height, width, spriteSize)
+Pickable::Pickable(PickableType type, int x, int y, int height, int width, int spriteSize, int originX, int originY) : Entity(x, y, height, width, spriteSize, originX, originY)
 {
     this->type = type;
     this->isHeld = false;
@@ -28,4 +28,22 @@ void Pickable::toggleHeld()
 bool Pickable::getHeld()
 {
     return isHeld;
+}
+
+bool Pickable::getDirection()
+{
+    return direction;
+}
+
+void Pickable::setDirection(bool direction)
+{
+    this->direction = direction;
+}
+
+void Pickable::reset()
+{
+    isHeld = false;
+    direction = false;
+    x = originX;
+    y = originY;
 }

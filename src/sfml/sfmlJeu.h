@@ -38,8 +38,11 @@ private :
     std::vector<BlockSfml*> blocksSfml;
     sf::Texture gateAnd;
     sf::Texture pickN;
+    sf::Texture generator0;
+    sf::Texture generator1;
     Menu * menu;
     int levelNumber;
+    int levelMax;
 
 public :
 

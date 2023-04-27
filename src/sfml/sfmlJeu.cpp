@@ -24,11 +24,13 @@ sfmlJeu::sfmlJeu () {
     elecAct.loadFromFile("data/blocks/elec2.png");
     gateAnd.loadFromFile("data/object/&.png");
     pickN.loadFromFile("data/object/non.png");
+    generator0.loadFromFile("data/object/generator0.png");
+    generator1.loadFromFile("data/object/generator1.png");
     menu = new Menu(m_window->getSize().x, m_window->getSize().y, spriteSize, m_window);
 }
 
 void sfmlJeu::sfmlInit() {
-    this->levelNumber = 1;
+    this->levelNumber = 0;
     loadLevel();
 }
 
@@ -75,8 +77,58 @@ sfmlJeu::~sfmlJeu () {
 }
 
 void sfmlJeu::sfmlAff() {
-    m_window->clear(Color(230, 240, 255, 255));
     m_window->draw(background);
+
+
+    for(int y=0;y<level->getHeight();y++){
+		for(int x=0;x<level->getWidth();x++){
+			int blockC = level->getCable(x,y)->getPowerType();
+            sf::Color colorCable;
+			switch (blockC) {
+				case EMPTY:
+                    colorCable = sf::Color(250, 150, 100);
+					break;
+				case ZERO:
+					colorCable = sf::Color(255, 0, 0);
+					break;
+				case ONE:
+					colorCable = sf::Color(0, 0, 255);
+					break;
+            }
+            if (!(level->getCable(x,y)->getDirectionMask() == NONE) && level->getBlock(x,y)->getType() != TRAP){
+                if (level->getCable(x,y)->getDirectionMask() &PowerDirection::UP) {
+                    sf::RectangleShape lineUp(sf::Vector2f(spriteSize/8.0, spriteSize/2.0));
+                    lineUp.setPosition(x*spriteSize+spriteSize/2.3, y*spriteSize);
+                    lineUp.setFillColor(colorCable);
+                    m_window->draw(lineUp);
+                }
+                if (level->getCable(x,y)->getDirectionMask() & PowerDirection::DOWN && (level->getBlock(x,y)->getType() != SENSOR || level->getCable(x,y)->getDirectionMask() & PowerDirection::UP)) {
+                    sf::RectangleShape lineDown(sf::Vector2f(spriteSize/8.0, spriteSize/2.0));
+                    lineDown.setPosition(x*spriteSize+spriteSize/2.3, y*spriteSize+spriteSize/2.0);
+                    lineDown.setFillColor(colorCable);
+                    m_window->draw(lineDown);
+                }
+                if (level->getCable(x,y)->getDirectionMask() & PowerDirection::LEFT) {
+                    sf::RectangleShape lineLeft(sf::Vector2f(spriteSize/2.0, spriteSize/8.0));
+                    lineLeft.setPosition(x*spriteSize, y*spriteSize+spriteSize/2.3);
+                    lineLeft.setFillColor(colorCable);
+                    m_window->draw(lineLeft);
+                }
+                if (level->getCable(x,y)->getDirectionMask() & PowerDirection::RIGHT) {
+                    sf::RectangleShape lineRight(sf::Vector2f(spriteSize/2.0, spriteSize/8.0));
+                    lineRight.setPosition(x*spriteSize+spriteSize/2.0, y*spriteSize+spriteSize/2.3);
+                    lineRight.setFillColor(colorCable);
+                    m_window->draw(lineRight);
+                }
+                if (level->getBlock(x,y)->getType() != SENSOR) {
+                sf::RectangleShape center(sf::Vector2f(spriteSize/8.0, spriteSize/8.0));
+                    center.setPosition(x*spriteSize+spriteSize/2.3, y*spriteSize+spriteSize/2.3);
+                    center.setFillColor(colorCable);
+                    m_window->draw(center);
+                }   
+            }
+        }
+	}
 
     // Afficher les blocs
     for(int y=0;y<level->getHeight();y++){
@@ -102,9 +154,9 @@ void sfmlJeu::sfmlAff() {
                     sf::RectangleShape rectangle(sf::Vector2f(spriteSize, spriteSize));
                     rectangle.setPosition(x*spriteSize, y*spriteSize);
                     if (dynamic_cast<Generator*>(level->getBlock(x, y))->getPowerType()==ONE) {
-                        rectangle.setFillColor(sf::Color(0, 0, 255));
+                        rectangle.setTexture(&this->generator1);
                     } else {
-                        rectangle.setFillColor(sf::Color(255, 0, 0));
+                        rectangle.setTexture(&this->generator0);
                     }
                     m_window->draw(rectangle);
                     }
@@ -120,59 +172,6 @@ void sfmlJeu::sfmlAff() {
                     }
 					break;
 			}
-		}
-	}
-
-    for(int y=0;y<level->getHeight();y++){
-		for(int x=0;x<level->getWidth();x++){
-			int blockC = level->getCable(x,y)->getPowerType();
-            sf::Color colorCable;
-			switch (blockC) {
-				case EMPTY:
-                    colorCable = sf::Color(250, 150, 100);
-					break;
-				case ZERO:
-					colorCable = sf::Color(255, 0, 0);
-					break;
-				case ONE:
-					colorCable = sf::Color(0, 0, 255);
-					break;
-			}
-            		if (!(level->getCable(x,y)->getDirectionMask() == NONE) && level->getBlock(x,y)->getType() != TRAP)
-					{
-            
-                        if (level->getCable(x,y)->getDirectionMask() &PowerDirection::UP) {
-                            sf::RectangleShape lineUp(sf::Vector2f(spriteSize/8.0, spriteSize/2.0));
-                            lineUp.setPosition(x*spriteSize+spriteSize/2.3, y*spriteSize);
-                            lineUp.setFillColor(colorCable);
-                            m_window->draw(lineUp);
-                        }
-                        if (level->getCable(x,y)->getDirectionMask() & PowerDirection::DOWN && (level->getBlock(x,y)->getType() != SENSOR || level->getCable(x,y)->getDirectionMask() & PowerDirection::UP)) {
-                            sf::RectangleShape lineDown(sf::Vector2f(spriteSize/8.0, spriteSize/2.0));
-                            lineDown.setPosition(x*spriteSize+spriteSize/2.3, y*spriteSize+spriteSize/2.0);
-                            lineDown.setFillColor(colorCable);
-                            m_window->draw(lineDown);
-                        }
-                        
-                        if (level->getCable(x,y)->getDirectionMask() & PowerDirection::LEFT) {
-                            sf::RectangleShape lineLeft(sf::Vector2f(spriteSize/2.0, spriteSize/8.0));
-                            lineLeft.setPosition(x*spriteSize, y*spriteSize+spriteSize/2.3);
-                            lineLeft.setFillColor(colorCable);
-                            m_window->draw(lineLeft);
-                        }
-                        if (level->getCable(x,y)->getDirectionMask() & PowerDirection::RIGHT) {
-                            sf::RectangleShape lineRight(sf::Vector2f(spriteSize/2.0, spriteSize/8.0));
-                            lineRight.setPosition(x*spriteSize+spriteSize/2.0, y*spriteSize+spriteSize/2.3);
-                            lineRight.setFillColor(colorCable);
-                            m_window->draw(lineRight);
-                        }
-                        if (level->getBlock(x,y)->getType() != SENSOR) {
-                        sf::RectangleShape center(sf::Vector2f(spriteSize/8.0, spriteSize/8.0));
-                            center.setPosition(x*spriteSize+spriteSize/2.3, y*spriteSize+spriteSize/2.3);
-                            center.setFillColor(colorCable);
-                            m_window->draw(center);
-                        }    
-                    }
 		}
 	}
 
@@ -192,6 +191,11 @@ void sfmlJeu::sfmlAff() {
 					sf::RectangleShape rectangle(sf::Vector2f(spriteSize, spriteSize));
                     rectangle.setPosition(pickable->getTileX()*spriteSize, pickable->getTileY()*spriteSize);
                     rectangle.setTexture(&pickN);
+                    if (pickable->getDirection()) {
+                        rectangle.setTextureRect(sf::IntRect(0, 0, 100, 100));
+                    } else {
+                        rectangle.setTextureRect(sf::IntRect(100, 0, 100, 100));
+                    }
                     m_window->draw(rectangle);
                 }
 				break;
@@ -229,6 +233,11 @@ void sfmlJeu::sfmlAff() {
 
     if (level->getPlayer0()->getHeldItem() != nullptr) {
         sf::RectangleShape rectangle(sf::Vector2f(spriteSize, spriteSize));
+        if (level->getPlayer0()->getHeldItem()->getDirection()) {
+            rectangle.setTextureRect(sf::IntRect(0, 0, 100, 100));
+        } else {
+            rectangle.setTextureRect(sf::IntRect(100, 0, 100, 100));
+        }
         if(level->getPlayer0()->getOnGround()) {
             rectangle.setPosition(level->getPlayer0()->getX()+level->getPlayer0()->getWidth()/2.0-spriteSize/2.0, level->getPlayer0()->getY()-level->getPlayer0()->getHeight());
             rectangle.setTexture(&pickN);
@@ -240,6 +249,11 @@ void sfmlJeu::sfmlAff() {
     }
     if (level->getPlayer1()->getHeldItem() != nullptr) {
         sf::RectangleShape rectangle(sf::Vector2f(spriteSize, spriteSize));
+        if (level->getPlayer1()->getHeldItem()->getDirection()) {
+            rectangle.setTextureRect(sf::IntRect(0, 0, 100, 100));
+        } else {
+            rectangle.setTextureRect(sf::IntRect(100, 0, 100, 100));
+        }
         if (level->getPlayer1()->getOnGround()){
             rectangle.setPosition(level->getPlayer1()->getX()+level->getPlayer1()->getWidth()/2.0-spriteSize/2.0, level->getPlayer1()->getY()-level->getPlayer1()->getHeight());
             rectangle.setTexture(&pickN);
@@ -249,7 +263,6 @@ void sfmlJeu::sfmlAff() {
         }    
         m_window->draw(rectangle);
     }
-    m_window->display();
 }
 
 void sfmlJeu::sfmlBoucle () {
@@ -282,23 +295,22 @@ void sfmlJeu::sfmlBoucle () {
             this->loadLevel();
         }
         if(level->getDoor()->isOpened() && level->getDoor()->getX()==level->getPlayer0()->getTileX() && level->getDoor()->getY()==level->getPlayer0()->getTileY()) {
-            if (this->levelNumber < 2) {
-                this->levelNumber++;
-                this->loadLevel();
-            } else {
-                m_window->close();
-            }
+            this->levelNumber++;
+            if(levelNumber>3)levelNumber=0;
+            this->menu->setLevel(this->levelNumber);
+            this->loadLevel();
         }
         if(level->getDoor()->isOpened() && level->getDoor()->getX()==level->getPlayer1()->getTileX() && level->getDoor()->getY()==level->getPlayer1()->getTileY()) {
-            if (this->levelNumber < 2) {
-                this->levelNumber++;
-                this->loadLevel();
-            } else {
-                m_window->close();
-            }
+            this->levelNumber++;
+            if(levelNumber>3)levelNumber=0;
+            this->menu->setLevel(this->levelNumber);
+            this->loadLevel();
         }
 
-        if(!level->getPlayer0()->getAlive() || !level->getPlayer1()->getAlive()) m_window->close();
+        if(!level->getPlayer0()->getAlive() || !level->getPlayer1()->getAlive()) {
+            this->level->resetLevel();
+            frameDoor = 0;
+        }
         if(this->menu->getQuit()) m_window->close();
 
         Event event;
@@ -367,14 +379,18 @@ void sfmlJeu::sfmlBoucle () {
         }
 
         if (!menu->getPlay()) {
+            m_window->clear(Color(230, 240, 255, 255));
+            sfmlAff();
             sfmlMenu();
-        } else sfmlAff();
+        } else {
+            m_window->clear(Color(230, 240, 255, 255));
+            sfmlAff();
+        }    
+        m_window->display();    
     }
 
 }
 
 void sfmlJeu::sfmlMenu () {
-    m_window->clear();
     menu->draw(m_window);
-    m_window->display();
 }

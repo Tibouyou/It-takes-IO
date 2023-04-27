@@ -56,7 +56,7 @@ class Player : public Entity
          * @param height height of the player
          * @param width width of the player
          */
-        Player(bool playerType, float x, float y, int height, int width, int spriteSize);
+        Player(bool playerType, float x, float y, int height, int width, int spriteSize, float originX, float originY);
 
         /**
          * @brief Destroy the Player object
@@ -138,6 +138,7 @@ class Player : public Entity
 
         bool getPlayerType();
 
+        void reset();
 };
 
 #endif

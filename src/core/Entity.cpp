@@ -3,10 +3,12 @@
 #include "Level.h"
 #include <math.h>
 
-Entity::Entity(float x, float y, int height, int width, int spriteSize)
+Entity::Entity(float x, float y, int height, int width, int spriteSize, float originX, float originY)
 {
     this->x = x;
     this->y = y;
+    this->originX = originX;
+    this->originY = originY;
     this->height = height;
     this->width = width;
     this->spriteSize = spriteSize;
@@ -51,3 +53,4 @@ int Entity::getWidth() const
 {
     return width;
 }
+

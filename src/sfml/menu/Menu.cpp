@@ -11,7 +11,6 @@ Menu::Menu (int windowWidth, int windowHeight, int fontSize, sf::RenderWindow * 
     this->menuTitle = "Menu principal";
     this->m_window = m_window;
     this->rectangleMenu = RectangleShape(Vector2f(windowWidth, windowHeight));
-    this->rectangleMenu.setFillColor(Color::White);
     this->font.loadFromFile("data/Holidays Homework.ttf");
     //this->textureMenu.loadFromFile("assets/menu.png");
     //this->textureOption.loadFromFile("assets/option.png");
@@ -45,7 +44,7 @@ Menu::Menu (int windowWidth, int windowHeight, int fontSize, sf::RenderWindow * 
         this->optionMenuActive = false;
     }));
 
-    for (int i = 1; i <= 2; i++) {
+    for (int i = 0; i <= 3; i++) {
         addSelectLevelButton(new Button("Level " + to_string(i), windowWidth/4.0, buttonheight*i+buttonheight/100*10, windowWidth/2.0, buttonheight-buttonheight/100*20, fontSize, &font, [this,i]() 
         {
             this->currentLevel = i;
@@ -67,7 +66,7 @@ Menu::~Menu()
 
 void Menu::draw(RenderWindow *window)
 {
-    window->draw(rectangleMenu);
+    //window->draw(rectangleMenu);
 
     if (optionMenuActive)
     {
@@ -168,4 +167,9 @@ sf::Keyboard::Key Menu::getKeybind() const {
             }
         }
     }
+}
+
+void Menu::setLevel(int level)
+{
+    this->currentLevel = level;
 }

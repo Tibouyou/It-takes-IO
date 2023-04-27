@@ -24,7 +24,7 @@ class Menu
         Font font;
         bool quit = false;
         bool play = false;
-        int currentLevel = 1;
+        int currentLevel = 0;
 
     public :
         Menu(int windowWidth, int windowHeight, int fontSize, sf::RenderWindow * m_window);
@@ -39,6 +39,7 @@ class Menu
         bool getPlay();
         void pause();
         int getCurrentLevel();
+        void setLevel(int level);
         sf::Keyboard::Key getKeybind() const;
 };
 

@@ -2,6 +2,7 @@
 #include "Enum.h"
 #include "Level.h"
 
+#include <iostream>
 
 Receptacle::Receptacle(int x, int y, BlockType type) : Block(x, y, type)
 {
@@ -28,11 +29,11 @@ void Receptacle::power(PowerType type, const Level& currentLevel, unsigned char 
             {
                 toSend = ZERO;
             }
-            if (directionMask & PowerDirection::LEFT)
+            if (directionMask & PowerDirection::LEFT && heldItem->getDirection())
             {
                 currentLevel.getCable(tileX + 1, tileY)->power(toSend, PowerDirection::LEFT, currentLevel);
             }
-            if (directionMask & PowerDirection::RIGHT)
+            if (directionMask & PowerDirection::RIGHT && !heldItem->getDirection())
             {
                 currentLevel.getCable(tileX - 1, tileY)->power(toSend, PowerDirection::RIGHT, currentLevel);
             }
@@ -56,4 +57,9 @@ void Receptacle::setHeldItem(Pickable * item)
 Pickable * Receptacle::getHeldItem()
 {
     return heldItem;
+}
+
+void Receptacle::reset()
+{
+    heldItem = nullptr;
 }

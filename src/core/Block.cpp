@@ -40,3 +40,7 @@ int Block::getX() {
 int Block::getY() {
     return tileY;
 }
+
+void Block::reset() {
+
+}

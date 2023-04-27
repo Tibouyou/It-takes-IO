@@ -18,6 +18,10 @@ class Entity
          */
         float y; 
 
+        float originX;
+
+        float originY;
+
         /**
          * @brief The height of the entity
          * 
@@ -42,7 +46,7 @@ class Entity
          * @param height The height of the entity
          * @param width The width of the entity
          */
-        Entity(float x, float y, int height, int width, int spriteSize);
+        Entity(float x, float y, int height, int width, int spriteSize, float originX, float originY);
 
         /**
          * @brief Destroy the Entity object
@@ -96,6 +100,8 @@ class Entity
         int getWidth() const;
 
         int getHeight() const;
+
+        void reset();
 
 }; 
 

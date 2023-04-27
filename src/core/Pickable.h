@@ -19,6 +19,8 @@ class Pickable : public Entity
          * 
          */
         bool isHeld;
+
+        bool direction = false;
     
     public:
 
@@ -31,7 +33,7 @@ class Pickable : public Entity
          * @param height The height of the pickable
          * @param width The width of the pickable
          */
-        Pickable(PickableType type, int x, int y, int height, int width, int spriteSize);
+        Pickable(PickableType type, int x, int y, int height, int width, int spriteSize, int originX, int originY);
 
         /**
          * @brief Destroy the Pickable object
@@ -65,6 +67,12 @@ class Pickable : public Entity
          * @return false The pickable is not held
          */
         bool getHeld();
+
+        bool getDirection();
+
+        void setDirection(bool direction);
+
+        void reset();
 };
 
 #endif

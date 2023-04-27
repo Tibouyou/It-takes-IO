@@ -55,6 +55,8 @@ class Receptacle : public Block
          * @param currentLevel current level
          */
         void power(PowerType type, const Level& currentLevel, unsigned char directionMask);
+
+        void reset();
 }; 
 
 

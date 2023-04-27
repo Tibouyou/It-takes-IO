@@ -1,8 +1,10 @@
 #include "Level.h"
+#include "Block.h"
 #include "Enum.h"
 #include "Gate.h"
 #include "Pickable.h"
 #include "Platform.h"
+#include "Player.h"
 #include "Sensor.h"
 #include "Receptacle.h"
 #include "Trap.h"
@@ -17,8 +19,6 @@ Level::Level(int levelNumber, int dimWindowX, int dimWindowY)
 {
     this->levelNumber = levelNumber;
     this->isWon = false;
-    this->p0 = new Player(0,0,50,100,50,0);
-    this->p1 = new Player(1,0,50,100,50,0);
     loadLevel(dimWindowX, dimWindowY);
     this->p0->setSpriteSize(spriteSize);
     this->p1->setSpriteSize(spriteSize);
@@ -86,11 +86,11 @@ void Level::loadLevel(int dimWindowX, int dimWindowY)
                     tabBlock.push_back(new Sensor(x,y,spriteSize));
                     break;
                 case '0':
-                    p0->setPosition(x*spriteSize,y*spriteSize);
+                    this->p0 = new Player(0,x*spriteSize,y*spriteSize,100,50,0,x*spriteSize,y*spriteSize);
                     tabBlock.push_back(new Block(x,y));
                     break;
                 case '1':
-                    p1->setPosition(x*spriteSize,y*spriteSize);
+                    this->p1 = new Player(1,x*spriteSize,y*spriteSize,100,50,0,x*spriteSize,y*spriteSize);
                     tabBlock.push_back(new Block(x,y));
                     break;
                 case 'R':
@@ -101,7 +101,7 @@ void Level::loadLevel(int dimWindowX, int dimWindowY)
                     break;
                 case 'N':
                     tabBlock.push_back(new Block(x,y));
-                    tabPickable.push_back(new Pickable(NON ,x*spriteSize,y*spriteSize, spriteSize, spriteSize, spriteSize));
+                    tabPickable.push_back(new Pickable(NON ,x*spriteSize,y*spriteSize, spriteSize, spriteSize, spriteSize,x*spriteSize,y*spriteSize));
                     break; 
                 case 'I':
                     tabBlock.push_back(new Block(x,y));
@@ -212,6 +212,21 @@ void Level::update(float elapsed)
 
 void Level::resetLevel()
 {
+    this->isWon = false;
+    p0->reset();
+    p1->reset();
+    for (Pickable* pickable: tabPickable)
+    {
+        pickable->reset();
+    }
+    for(Block* block: tabBlock)
+    {
+        if (block->getType() == RECEPTACLE)
+        {
+            dynamic_cast<Receptacle*>(block)->reset();
+        }
+    }
+    getDoor()->reset();
 }
 
 int Level::getHeight() const

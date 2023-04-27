@@ -9,7 +9,7 @@ Generator::Generator(int x, int y, PowerType powerType, BlockType type) : Block(
 
 bool Generator::isSolid()
 {
-    return true;
+    return false;
 }
 
 PowerType Generator::getPowerType()
