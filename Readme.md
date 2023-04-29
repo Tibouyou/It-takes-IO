@@ -5,19 +5,54 @@ _It takes IO_ est un jeu de plateforme à deux joueurs. Ceux-ci doivent évoluer
 
 ## Pour commencer
 
-### Pré-requis
+### Organisation des fichiers de notre archive
 
-Ce jeu a été réalisé grâce à la librairie SFML. Vous aurez donc besoin ...
+Notre code est construit de manière à avoir les fonctionalités de base regroupées dans des classes noyau, puis, d'avoir une surcouche pour l'affichage texte et SFML.
 
-### Organisation de notre archive
+L'organistion des fichiers est la suivante.
+
+- **It-Takes-IO/src/core** : les classes de base du jeu qui compile sans aucune dépendance.
+- **It-Takes-IO/src/sfml** : les classes s'occupant de faire fonctionner le jeu et de l'afficher avec SFML.
+- **It-Takes-IO/src/txt** : les classes s'occupant de faire fonctionner le jeu et de l'afficher en version console.
+
+- **It-Takes-IO/data** : les assets du jeu.
+- **It-Takes-IO/data/blocks** : les images des différents blocks à afficher.
+- **It-Takes-IO/data/levels** : les fichiers .txt des niveaux.
+- **It-Takes-IO/data/object** : les images des différents objets à afficher.
+- **It-Takes-IO/data/player** : les sprites des deux personnages pour réaliser les animations.
+- **It-Takes-IO/data/preview** : les images des previews des niveaux dans le menu _Select level_.
+
+- **It-Takes-IO/bin** : répertoire où les executables seront compilés.
+
+- **It-Takes-IO/obj** : répertoire comportant les compilations intermédiaires (.o).
+
+- **It-Takes-IO/doc** : la documentation de notre projet 
+- **It-Takes-IO/doc/html** : la documentation du code générée par doxygen.
+
+- **It-Takes-IO/Makefile** : permet d'effectuer toute le phase de compilation de notre code.
+
+- **It-Takes-IO/SFML** : librairie afin d'afficher l'interface du jeu.
 
 ### Compilation du programme
 
+#### Version Texte 
+Pour effectuer la compilation du programme, vous devez exécuter la commande `make`
+
+#### Version SFML
+Pour effectuer la compilation du programme, vous devez exécuter la commande `make sfml`
 
 ## Exécution et démarrage du jeu 
 
+#### Version Texte 
+Pour procéder à l'exécution, il suffit d'exécuter `bin/main_txt`
+
+#### Version SFML
+Ce jeu a été réalisé grâce à la librairie SFML. Vous aurez donc besoin de l'installer à partir de la commande ... ou bien de la télécharger directement à partir de l'archive.
+
+Puis, pour procéder à l'exécution, il suffit d'exécuter `bin/main_sfml`
+
 Comment jouer : 
-- Lancer le jeu : vous apparaîssez alors dans le niveau 0.
+- Après le lancement du jeu, vous apparaîssez alors dans le niveau 0.
 - Déplacez le permier personnage en utilisant les touches Z,Q,S,D et le second en utilisant les flèches directionnelles.
 - Activez les capteurs d'énergie en vous plaçant simplement au-dessus.
 - Récupérez des objets au sol en vous plaçant dessus et en appuyant sur la touche S ou la flèche du bas. 
@@ -29,15 +64,12 @@ Comment jouer :
 
 > **Tip :** n'oubliez pas d'activer le son afin de profiter de la musique du jeu
 
-
 ## Auteurs
 
 * **HONORÉ Alexandre** p2107949
 * **SITHIDEJ Clara** p2101573
 
 Le jeu porte l'indentifiant 27901 sur la forge de Lyon 1, pour le retrouver [cliquez ici](https://forge.univ-lyon1.fr/p2107949/It-Takes-IO).
-
-## License
 
 
 
