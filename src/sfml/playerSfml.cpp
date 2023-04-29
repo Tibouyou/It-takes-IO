@@ -73,6 +73,7 @@ void PlayerSfml::update(float elapsed)
 
 PlayerSfml::~PlayerSfml()
 {
+    delete player;
 }
 
 sf::Sprite PlayerSfml::getSprite()

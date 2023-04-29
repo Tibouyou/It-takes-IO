@@ -2,39 +2,45 @@
 #include <iostream>
 #include <functional>
 #include <SFML/Graphics.hpp>
+#include <string>
 
-Button::Button(std::string buttonTitle, int x, int y, int width, int height, int fontSize, sf::Font *font, std::function<void()> onClick)
+Button::Button(std::string buttonTitle, int x, int y, int fontSize,float scale, sf::Font *font ,std::function<void()> onClick, int levelNumber)
 {
     this->buttonTitle = buttonTitle;
     this->x = x;
     this->y = y;
-    this->width = width;
-    this->height = height;
     this->font = font;
     this->onClick = onClick;
     this->text.setFont(*font);
     this->text.setString(buttonTitle);
-    this->text.setCharacterSize(100);
-    this->text.setFillColor(sf::Color(255,0,0,255));
-
-    FloatRect textBounds = this->text.getGlobalBounds();
-    this->text.setPosition(x + width/2.0 - (textBounds.width /2), y + height/2.0 -(textBounds.height /2));
-
-    this->rectangle.setSize(sf::Vector2f(width, height));
-    this->rectangle.setPosition(x, y);
-    this->rectangle.setFillColor(sf::Color(84,62,48,200));
+    this->text.setCharacterSize(fontSize);
+    this->text.setOrigin(this->text.getGlobalBounds().width/2.0, this->text.getGlobalBounds().height/2.0);
+    this->text.setFillColor(sf::Color(0,0,0,255));
+    this->texture = new sf::Texture();
+    if (levelNumber != -1) {
+        this->texture->loadFromFile("data/preview/lvl"+std::to_string(levelNumber)+".png");
+    } else {
+        this->texture->loadFromFile("data/button.png");
+    }
+    this->sprite = new sf::Sprite();
+    this->sprite->setTexture(*this->texture);
+    this->sprite->setOrigin(this->texture->getSize().x/2.0, this->texture->getSize().y/2.0);
+    this->sprite->setPosition(x, y);
+    this->sprite->setScale(scale, scale);
+    FloatRect textBounds = this->sprite->getGlobalBounds();
+    this->text.setPosition(x, y);
 }
 
 void Button::draw(sf::RenderWindow *window)
 {
-    window->draw(rectangle);
+    window->draw(*sprite);
     window->draw(text);
 }
 
 
 void Button::handleEvent(int x, int y)
 {
-    if (rectangle.getGlobalBounds().contains(sf::Vector2f(x, y))) {
+    if (sprite->getGlobalBounds().contains(sf::Vector2f(x, y))) {
         onClick();
     }
 }

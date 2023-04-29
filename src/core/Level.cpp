@@ -11,6 +11,7 @@
 #include "Vector2D.h"
 #include "Door.h"
 #include <cassert>
+#include <cstddef>
 #include <iostream>
 #include <fstream>
 #include <math.h>

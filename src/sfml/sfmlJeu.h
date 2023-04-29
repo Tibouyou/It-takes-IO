@@ -22,7 +22,7 @@ class sfmlJeu {
 private :
 
     int spriteSize;
-	Level * level;
+	Level * level = nullptr;
 	sf::RenderWindow * m_window;
     PlayerSfml * playerSfml0;
     PlayerSfml * playerSfml1;

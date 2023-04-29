@@ -23,11 +23,11 @@ class Menu
         RectangleShape rectangleMenu;
         Font font;
         bool quit = false;
-        bool play = false;
+        bool play = true;
         int currentLevel = 0;
 
     public :
-        Menu(int windowWidth, int windowHeight, int fontSize, sf::RenderWindow * m_window);
+        Menu(int windowWidth, int windowHeight, sf::RenderWindow * m_window);
         ~Menu();
 
         void draw(RenderWindow *window);

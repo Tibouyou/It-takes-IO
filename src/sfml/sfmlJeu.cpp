@@ -26,7 +26,7 @@ sfmlJeu::sfmlJeu () {
     pickN.loadFromFile("data/object/non.png");
     generator0.loadFromFile("data/object/generator0.png");
     generator1.loadFromFile("data/object/generator1.png");
-    menu = new Menu(m_window->getSize().x, m_window->getSize().y, spriteSize, m_window);
+    menu = new Menu(m_window->getSize().x, m_window->getSize().y, m_window);
 }
 
 void sfmlJeu::sfmlInit() {
@@ -37,6 +37,7 @@ void sfmlJeu::sfmlInit() {
 void sfmlJeu::loadLevel() {
     int dimx = m_window->getSize().x;
     int dimy = m_window->getSize().y;
+    if (level != nullptr) delete level;
     level = new Level(this->levelNumber, dimx, dimy);
     spriteSize = min(dimx/level->getWidth(), dimy/level->getHeight());
     m_window->setFramerateLimit(120);
@@ -74,6 +75,8 @@ void sfmlJeu::loadLevel() {
 
 sfmlJeu::~sfmlJeu () {
     if (m_window != NULL) delete m_window;
+    if (level != nullptr) delete level;
+    if (menu != nullptr) delete menu;
 }
 
 void sfmlJeu::sfmlAff() {
@@ -141,14 +144,17 @@ void sfmlJeu::sfmlAff() {
 					break;
 				case TRAP:{
                     sf::RectangleShape rectangle(sf::Vector2f(spriteSize, spriteSize));
-                    rectangle.setPosition(x*spriteSize, y*spriteSize);
                     if (level->getCable(x, y)->getPowerType()==ONE) {
                         rectangle.setTexture(&this->elecAct);
                     } else {
                         rectangle.setTexture(&this->elec);
                     }
+                    if(level->getBlock(x, y+1)->getType()==TRAP || level->getBlock(x, y-1)->getType()==TRAP) {
+                        rectangle.rotate(90);
+                        rectangle.setPosition(x*spriteSize+spriteSize, y*spriteSize);
+                    } else rectangle.setPosition(x*spriteSize, y*spriteSize);
                     m_window->draw(rectangle);
-                    }
+                    } 
 					break;
                 case GENERATOR:{
                     sf::RectangleShape rectangle(sf::Vector2f(spriteSize, spriteSize));

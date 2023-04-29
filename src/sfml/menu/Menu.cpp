@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include <cmath>
 #include <iostream>
 #include <vector>
 #include <SFML/Graphics.hpp>
@@ -6,62 +7,72 @@
 using namespace sf;
 using namespace std;
 
-Menu::Menu (int windowWidth, int windowHeight, int fontSize, sf::RenderWindow * m_window)
+Menu::Menu (int windowWidth, int windowHeight, sf::RenderWindow * m_window)
 {
     this->menuTitle = "Menu principal";
     this->m_window = m_window;
     this->rectangleMenu = RectangleShape(Vector2f(windowWidth, windowHeight));
     this->font.loadFromFile("data/Holidays Homework.ttf");
-    //this->textureMenu.loadFromFile("assets/menu.png");
-    //this->textureOption.loadFromFile("assets/option.png");
-    //this->textureSelectLevel.loadFromFile("assets/selectLevel.png");
-    int buttonheight = windowHeight/5;
+    float scale;
+    if (windowHeight/172 > windowWidth/640) {
+        scale = windowHeight/5.0/172.0;
+    } else {
+        scale = windowWidth/2.0/640.0;
+    }
     
-    addButton (new Button("Play", windowWidth/4.0, buttonheight/100*10, windowWidth/2.0, buttonheight-buttonheight/100*20, fontSize, &font, [this]() 
+    addButton (new Button("Play", windowWidth/2.0, windowHeight/8.0, 100*scale,scale, &font, [this]() 
     {
         play = true;
     }));
 
-    addButton (new Button("Options", windowWidth/4.0, buttonheight*1+buttonheight/100*10, windowWidth/2.0, buttonheight-buttonheight/100*20, fontSize, &font, [this]() 
-    {
-        cout << "Options" << endl;
-        this->optionMenuActive = true;
-    }));
-
-     addButton (new Button("Select Level", windowWidth/4.0, buttonheight*2+buttonheight/100*10, windowWidth/2.0, buttonheight-buttonheight/100*20, fontSize, &font, [this]() 
+     addButton (new Button("Select Level", windowWidth/2.0, 1*windowHeight/4.0+windowHeight/8.0, 100*scale/1.4, scale, &font, [this]() 
     {
         this->selectLevelMenuActive = true;
     }));
 
-    addButton (new Button("Quit", windowWidth/4.0, buttonheight*3+buttonheight/100*10, windowWidth/2.0, buttonheight-buttonheight/100*20, fontSize, &font, [this]() 
+    addButton (new Button("Quit", windowWidth/2.0, 2*windowHeight/4.0+windowHeight/8.0, 100*scale, scale, &font, [this]() 
     {
         quit = true;
     }));
 
-    addButton (new Button("Emmanuel", windowWidth/4.0, buttonheight*4+buttonheight/100*10, windowWidth/2.0, buttonheight-buttonheight/100*20, fontSize, &font, [this]() 
+    addButton (new Button("Manuel", windowWidth/2.0, 3*windowHeight/4.0+windowHeight/8.0, 100*scale, scale, &font, [this]() 
     {
-        cout << "Emmanuel" << endl;
+        cout << "Manuel" << endl;
         this->optionMenuActive = false;
     }));
 
+    int col = 0;
+    int row = -1;
     for (int i = 0; i <= 3; i++) {
-        addSelectLevelButton(new Button("Level " + to_string(i), windowWidth/4.0, buttonheight*i+buttonheight/100*10, windowWidth/2.0, buttonheight-buttonheight/100*20, fontSize, &font, [this,i]() 
+        if (i%3==0){
+            col = 0;
+            row++;
+        } else {
+            col++;
+        }
+        addSelectLevelButton(new Button("Level " + to_string(i), col*windowWidth/3.0+windowWidth/6.0, row*windowHeight/3.0+windowHeight/6.0, 100*scale/1.4, scale, &font,[this,i]() 
         {
             this->currentLevel = i;
             this->selectLevelMenuActive = false;
             play = true;
-        }));
+        },i));
     }
-
-    addOptionButton(new Button("Keybinds", windowWidth/4.0, buttonheight*1+buttonheight/100*10, windowWidth/2.0, buttonheight-buttonheight/100*20, fontSize, &font, [this]() 
-    {
-        std::cout<< "test : "<< this->getKeybind() << std::endl;
-    }));
 }
 
 Menu::~Menu()
 {
-    
+    for (Button *button : buttons)
+    {
+        delete button;
+    }
+    for (Button *button : optionsButtons)
+    {
+        delete button;
+    }
+    for (Button *button : selectLevelButtons)
+    {
+        delete button;
+    } 
 }
 
 void Menu::draw(RenderWindow *window)
