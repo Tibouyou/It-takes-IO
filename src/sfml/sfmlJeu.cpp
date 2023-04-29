@@ -7,13 +7,8 @@
 #include "sensorSfml.h"
 #include "sfmlJeu.h"
 #include <stdlib.h>
-
 #include <math.h>
-
-using namespace sf;
-
 #include <iostream>
-using namespace std;
 
 sfmlJeu::sfmlJeu () {
     m_window = new RenderWindow(sf::VideoMode(1920, 1080), "It-Takes-IO", sf::Style::Fullscreen);

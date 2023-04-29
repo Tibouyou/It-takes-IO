@@ -177,11 +177,15 @@ void Level::update(float elapsed)
 
         for (unsigned int i = 0; i < tabBlock.size(); i++)
         {
-            if (tabBlock[i]->getType() == SENSOR)
+            if (tabBlock[i]->getType() == GENERATOR)
             {
                 tabBlock[i]->update(*p0,*p1,*this);
             }
-            if (tabBlock[i]->getType() == GENERATOR)
+        }
+
+        for (unsigned int i = 0; i < tabBlock.size(); i++)
+        {
+            if (tabBlock[i]->getType() == SENSOR)
             {
                 tabBlock[i]->update(*p0,*p1,*this);
             }

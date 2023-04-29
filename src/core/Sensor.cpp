@@ -2,6 +2,7 @@
 #include "Level.h"
 #include "Enum.h"
 #include <math.h>
+#include <iostream>
 
 Sensor::Sensor(int x, int y, int spriteSize, BlockType type) : Block( x, y, type)
 {
@@ -19,6 +20,7 @@ void Sensor::update(Player& p0, Player& p1, Level& currentLevel)
 {
     bool p0OnSensor = (p0.getTileX(p0.getWidth()/2) == tileX && p0.getTileY() == tileY);
     bool p1OnSensor = (p1.getTileX(p1.getWidth()/2) == tileX && p1.getTileY() == tileY);
+    activated = false;
 
     if (!(p0OnSensor && p1OnSensor)) 
     {    
@@ -41,9 +43,7 @@ void Sensor::update(Player& p0, Player& p1, Level& currentLevel)
             }
             activated = true;
         }
-    } else {
-        activated = false;
-    } 
+    }
 }
 
 bool Sensor::isActivated()

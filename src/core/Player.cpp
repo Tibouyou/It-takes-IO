@@ -94,11 +94,18 @@ void Player::drop(const Level& currentLevel)
     Block* block = currentLevel.getBlock(getTileX(width/2),getTileY());
     if (block->getType() == RECEPTACLE) {
         if (dynamic_cast<Receptacle*>(block)->getHeldItem() == nullptr) dynamic_cast<Receptacle*>(block)->setHeldItem(heldItem);
+    }
+    bool dropable = true;
+    for (Pickable* pickable : currentLevel.getPickable()) {
+        if (pickable->getTileX() == getTileX(width/2) && pickable->getTileY() == getTileY()) {
+            if (!pickable->getHeld()) dropable = false;
+        }
+    }
+    if (dropable) {
+        heldItem->setPosition(getTileX(width/2)*spriteSize,getTileY()*spriteSize);
+        heldItem->toggleHeld();
+        heldItem = nullptr;
     } 
-        
-    heldItem->setPosition(getTileX(width/2)*spriteSize,getTileY()*spriteSize);
-    heldItem->toggleHeld();
-    heldItem = nullptr;
     }
 }
 

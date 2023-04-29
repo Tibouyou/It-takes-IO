@@ -9,18 +9,16 @@ SensorSfml::SensorSfml(Block * sensor, int spriteSize)
     this->sprite.setTexture(this->texture);
     this->sprite.setTextureRect(sf::IntRect(0, 0, 50, 50));
     this->sprite.setPosition(sensor->getX()*spriteSize, sensor->getY()*spriteSize);
+    this->sensor = dynamic_cast<Sensor*>(sensor);
     this->tileX = sensor->getX();
     this->tileY = sensor->getY();
     this->spriteSize = spriteSize;
     this->sprite.setScale((float)spriteSize/50, (float)spriteSize/50);
 }
 
-void SensorSfml::update(Player* p0, Player* p1,float elapsed)
+void SensorSfml::update(Player* p0, Player* p1, float elapsed)
 {
-   bool p0OnSensor = (p0->getTileX(p0->getWidth()/2) == tileX && p0->getTileY() == tileY);
-    bool p1OnSensor = (p1->getTileX(p1->getWidth()/2) == tileX && p1->getTileY() == tileY);
-
-    if (p0OnSensor || p1OnSensor)
+    if (sensor->isActivated())
     {
         this->sprite.setTextureRect(sf::IntRect(50, 0, 50, 50));
     }

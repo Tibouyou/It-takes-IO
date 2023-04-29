@@ -23,6 +23,6 @@ class PlayerSfml
         ~PlayerSfml();
         sf::Sprite getSprite();
         void update(float elapsed);
+        void setColor(sf::Color color);
 };
-
 #endif

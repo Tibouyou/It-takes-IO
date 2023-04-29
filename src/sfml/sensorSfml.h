@@ -9,7 +9,7 @@
 class SensorSfml
 {
     private:
-        Block * sensor;
+        Sensor * sensor;
         sf::Sprite sprite;
         sf::Texture texture;
         int tileX;

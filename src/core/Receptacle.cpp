@@ -29,13 +29,17 @@ void Receptacle::power(PowerType type, const Level& currentLevel, unsigned char 
             {
                 toSend = ZERO;
             }
-            if (directionMask & PowerDirection::LEFT && heldItem->getDirection())
+            if (directionMask & PowerDirection::LEFT)
             {
-                currentLevel.getCable(tileX + 1, tileY)->power(toSend, PowerDirection::LEFT, currentLevel);
+                if (heldItem->getDirection()) {
+                    currentLevel.getCable(tileX + 1, tileY)->power(toSend, PowerDirection::LEFT, currentLevel);
+                } else currentLevel.getCable(tileX + 1, tileY)->power(EMPTY, PowerDirection::LEFT, currentLevel);
             }
-            if (directionMask & PowerDirection::RIGHT && !heldItem->getDirection())
+            if (directionMask & PowerDirection::RIGHT)
             {
-                currentLevel.getCable(tileX - 1, tileY)->power(toSend, PowerDirection::RIGHT, currentLevel);
+                if (!heldItem->getDirection()) {
+                    currentLevel.getCable(tileX - 1, tileY)->power(toSend, PowerDirection::RIGHT, currentLevel);
+                } else currentLevel.getCable(tileX - 1, tileY)->power(EMPTY, PowerDirection::RIGHT, currentLevel);
             }
             if (directionMask & PowerDirection::UP)
             {
