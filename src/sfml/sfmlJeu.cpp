@@ -4,11 +4,13 @@
 #include <SFML/Window/WindowStyle.hpp>
 #include <cassert>
 #include <time.h>
+#include "playerSfml.h"
 #include "sensorSfml.h"
 #include "sfmlJeu.h"
 #include <stdlib.h>
 #include <math.h>
 #include <iostream>
+
 
 sfmlJeu::sfmlJeu () {
     m_window = new RenderWindow(sf::VideoMode(1920, 1080), "It-Takes-IO", sf::Style::Fullscreen);
@@ -24,7 +26,8 @@ sfmlJeu::sfmlJeu () {
     menu = new Menu(m_window->getSize().x, m_window->getSize().y, m_window);
     music.openFromFile("data/music.ogg");
     buffer.loadFromFile("data/bruitages/electricite.ogg");
-
+    sound.setBuffer(buffer);
+    sound.setLoop(true);
 }
 
 void sfmlJeu::sfmlInit() {
@@ -131,6 +134,7 @@ void sfmlJeu::sfmlAff() {
         }
 	}
 
+    bool elec = false;
     // Afficher les blocs
     for(int y=0;y<level->getHeight();y++){
 		for(int x=0;x<level->getWidth();x++){
@@ -144,11 +148,9 @@ void sfmlJeu::sfmlAff() {
                     sf::RectangleShape rectangle(sf::Vector2f(spriteSize, spriteSize));
                     if (level->getCable(x, y)->getPowerType()==ONE) {
                         rectangle.setTexture(&this->elecAct);
+                        elec = true;
                     } else {
                         rectangle.setTexture(&this->elec);
-                        sound.setBuffer(buffer);
-                        sound.setLoop(true);
-                        sound.play();
                     }
                     if(level->getBlock(x, y+1)->getType()==TRAP || level->getBlock(x, y-1)->getType()==TRAP) {
                         rectangle.rotate(90);
@@ -168,7 +170,12 @@ void sfmlJeu::sfmlAff() {
                     m_window->draw(rectangle);
                     }
                     break;
-				case RECEPTACLE:
+				case RECEPTACLE:{
+                    sf::RectangleShape rectangle(sf::Vector2f(spriteSize, spriteSize));
+                    rectangle.setPosition(x*spriteSize, y*spriteSize);
+                    rectangle.setFillColor(sf::Color(250, 150, 100,80));
+                    m_window->draw(rectangle);
+                    }
 					break;
 				case GATE:
 					break;
@@ -181,7 +188,12 @@ void sfmlJeu::sfmlAff() {
 			}
 		}
 	}
-
+    if (elec) {
+        if (sound.getStatus()==sf::Sound::Stopped) sound.play();
+    } else {
+        if (sound.getStatus()==sf::Sound::Playing) sound.stop();
+    }
+    
     for (SensorSfml* sensor : sensorsSfml) {
 		m_window->draw(sensor->getSprite());
     }
@@ -282,9 +294,23 @@ void sfmlJeu::sfmlBoucle () {
     {   
         float elapsed = clock.getElapsedTime().asSeconds();
         if (menu->getPlay()) {
-            level->update(elapsed);
-            playerSfml0->update(elapsed);
-            playerSfml1->update(elapsed);
+            if (level->getPlayer0()->getAlive() && level->getPlayer1()->getAlive()) {
+                level->update(elapsed);
+            }
+            if (level->getPlayer0()->getAlive()) {
+                if (level->getPlayer1()->getAlive()) {
+                    playerSfml0->update(elapsed);
+                } else {
+                    playerSfml1->update(elapsed);
+                }
+            }
+            if (level->getPlayer1()->getAlive()) {
+                if (level->getPlayer0()->getAlive()) {
+                    playerSfml1->update(elapsed);
+                } else {
+                    playerSfml0->update(elapsed);
+                }
+            }
             for (SensorSfml* sensor : sensorsSfml) {
                 sensor->update(level->getPlayer0(), level->getPlayer1(), elapsed);
             }
@@ -312,7 +338,6 @@ void sfmlJeu::sfmlBoucle () {
             if(levelNumber>3)levelNumber=0;
             this->menu->setLevel(this->levelNumber);
             this->loadLevel();
-            sound.stop();
         }
 
         //Passage au niveau suivant lorque le joueur 1 est sur la porte
@@ -321,11 +346,14 @@ void sfmlJeu::sfmlBoucle () {
             if(levelNumber>3)levelNumber=0;
             this->menu->setLevel(this->levelNumber);
             this->loadLevel();
-            sound.stop();
         }
 
         //Reinitialisation du niveau si un des joueurs est mort
-        if(!level->getPlayer0()->getAlive() || !level->getPlayer1()->getAlive()) {
+        if(playerSfml0->getDeathAnimationDone()) {
+            this->level->resetLevel();
+            frameDoor = 0;
+        }
+        if(playerSfml1->getDeathAnimationDone()) {
             this->level->resetLevel();
             frameDoor = 0;
         }
@@ -413,3 +441,4 @@ void sfmlJeu::sfmlBoucle () {
 void sfmlJeu::sfmlMenu () {
     menu->draw(m_window);
 }
+

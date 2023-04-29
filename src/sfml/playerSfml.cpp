@@ -68,7 +68,19 @@ void PlayerSfml::update(float elapsed)
     } else {
         this->sprite.setPosition(player->getX()+player->getWidth(), player->getY()+spriteSize);
     }
-    
+    if (!player->getAlive()){
+        if (deathClock.getElapsedTime().asSeconds() > 0.2) {
+            if (deathAnimationFrame <= 8) {
+                deathAnimationFrame++;
+                deathClock.restart();
+            }
+        }
+        if (deathAnimationFrame == 8) {
+            deathAnimationFrame = 0;
+            deathAnimationDone = true;
+        }
+        this->sprite.setTextureRect(sf::IntRect(deathAnimationFrame%4*150, 1600, 150, 400));
+    }
 }
 
 PlayerSfml::~PlayerSfml()
@@ -84,5 +96,15 @@ sf::Sprite PlayerSfml::getSprite()
 void PlayerSfml::setColor(sf::Color color)
 {
     this->sprite.setColor(color);
+}
+
+bool PlayerSfml::getDeathAnimationDone()
+{
+    if(deathAnimationDone) {
+        deathAnimationDone = false;
+        return true;
+    } else {
+        return false;
+    }    
 }
 

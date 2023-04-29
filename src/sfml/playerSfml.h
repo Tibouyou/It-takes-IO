@@ -17,6 +17,9 @@ class PlayerSfml
         sf::Clock JumpingClock;
         int spriteSize;
         bool playerType;
+        sf::Clock deathClock;
+        bool deathAnimationDone = false;
+        int deathAnimationFrame = 0;
 
     public:
         PlayerSfml(Player * player, int spriteSize);
@@ -24,5 +27,6 @@ class PlayerSfml
         sf::Sprite getSprite();
         void update(float elapsed);
         void setColor(sf::Color color);
+        bool getDeathAnimationDone();
 };
 #endif

@@ -25,6 +25,7 @@ Player::~Player()
 
 void Player::update(const Level& currentLevel, float elapsed)
 {
+    if (!isAlive) return;
     gravity += 9.81f * elapsed;
     y += gravity*spriteSize*2*elapsed;
 
