@@ -27,6 +27,7 @@ sfmlJeu::sfmlJeu () {
     generator0.loadFromFile("data/object/generator0.png");
     generator1.loadFromFile("data/object/generator1.png");
     menu = new Menu(m_window->getSize().x, m_window->getSize().y, m_window);
+    music.openFromFile("data/music.ogg");
 }
 
 void sfmlJeu::sfmlInit() {
@@ -274,9 +275,11 @@ void sfmlJeu::sfmlAff() {
 void sfmlJeu::sfmlBoucle () {
 
     Clock clock;
+    music.setLoop(true);
+    music.play();
 
     while (m_window->isOpen())
-    {
+    {   
         float elapsed = clock.getElapsedTime().asSeconds();
         if (menu->getPlay()) {
             level->update(elapsed);

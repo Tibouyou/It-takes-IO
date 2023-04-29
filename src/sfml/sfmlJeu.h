@@ -7,6 +7,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Clock.hpp>
+#include <SFML/Audio/Music.hpp>
 #include <vector>
 #include "blockSfml.h"
 #include "playerSfml.h"
@@ -41,6 +42,7 @@ private :
     sf::Texture generator0;
     sf::Texture generator1;
     Menu * menu;
+    sf::Music music;
     int levelNumber;
     int levelMax;
 
