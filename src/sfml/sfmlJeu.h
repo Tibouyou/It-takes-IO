@@ -8,6 +8,8 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Clock.hpp>
 #include <SFML/Audio/Music.hpp>
+#include <SFML/Audio/Sound.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
 #include <vector>
 #include "blockSfml.h"
 #include "playerSfml.h"
@@ -43,6 +45,8 @@ private :
     sf::Texture generator1;
     Menu * menu;
     sf::Music music;
+    sf::SoundBuffer buffer;
+    sf::Sound sound;
     int levelNumber;
     int levelMax;
 

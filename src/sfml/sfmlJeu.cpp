@@ -28,6 +28,8 @@ sfmlJeu::sfmlJeu () {
     generator1.loadFromFile("data/object/generator1.png");
     menu = new Menu(m_window->getSize().x, m_window->getSize().y, m_window);
     music.openFromFile("data/music.ogg");
+    buffer.loadFromFile("data/bruitages/electricite.ogg");
+
 }
 
 void sfmlJeu::sfmlInit() {
@@ -149,6 +151,9 @@ void sfmlJeu::sfmlAff() {
                         rectangle.setTexture(&this->elecAct);
                     } else {
                         rectangle.setTexture(&this->elec);
+                        sound.setBuffer(buffer);
+                        sound.setLoop(true);
+                        sound.play();
                     }
                     if(level->getBlock(x, y+1)->getType()==TRAP || level->getBlock(x, y-1)->getType()==TRAP) {
                         rectangle.rotate(90);
@@ -292,6 +297,7 @@ void sfmlJeu::sfmlBoucle () {
         
         clock.restart();
 
+        //Ouverture de la porte 
         if(level->getDoor()->isOpened() && frameDoor != 6) {
             float elapsedDoor = doorClock.getElapsedTime().asSeconds();
             if(elapsedDoor > 0.4) {
@@ -299,27 +305,36 @@ void sfmlJeu::sfmlBoucle () {
                 doorClock.restart();
             }
         }
+
         if(menu->getCurrentLevel()!=this->levelNumber) {
             this->levelNumber = menu->getCurrentLevel();
             this->loadLevel();
         }
+
+        //Passage au niveau suivant lorque le joueur O est sur la porte
         if(level->getDoor()->isOpened() && level->getDoor()->getX()==level->getPlayer0()->getTileX() && level->getDoor()->getY()==level->getPlayer0()->getTileY()) {
             this->levelNumber++;
             if(levelNumber>3)levelNumber=0;
             this->menu->setLevel(this->levelNumber);
             this->loadLevel();
+            sound.stop();
         }
+
+        //Passage au niveau suivant lorque le joueur 1 est sur la porte
         if(level->getDoor()->isOpened() && level->getDoor()->getX()==level->getPlayer1()->getTileX() && level->getDoor()->getY()==level->getPlayer1()->getTileY()) {
             this->levelNumber++;
             if(levelNumber>3)levelNumber=0;
             this->menu->setLevel(this->levelNumber);
             this->loadLevel();
+            sound.stop();
         }
 
+        //Reinitialisation du niveau si un des joueurs est mort
         if(!level->getPlayer0()->getAlive() || !level->getPlayer1()->getAlive()) {
             this->level->resetLevel();
             frameDoor = 0;
         }
+
         if(this->menu->getQuit()) m_window->close();
 
         Event event;
