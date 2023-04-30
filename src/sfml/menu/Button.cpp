@@ -12,7 +12,9 @@ Button::Button(std::wstring buttonTitle, int x, int y, int fontSize,float scale,
     this->font = font;
     this->onClick = onClick;
     this->text.setFont(*font);
-    this->text.setString(buttonTitle);
+    if (buttonTitle!=L"Return") {
+        this->text.setString(buttonTitle);
+    }
     this->text.setCharacterSize(fontSize);
     this->text.setOrigin(this->text.getGlobalBounds().width/2.0, this->text.getGlobalBounds().height/2.0);
     this->text.setFillColor(sf::Color(0,0,0,255));
@@ -20,14 +22,17 @@ Button::Button(std::wstring buttonTitle, int x, int y, int fontSize,float scale,
     if (levelNumber != -1) {
         this->texture->loadFromFile("data/preview/lvl"+std::to_string(levelNumber)+".png");
     } else {
-        this->texture->loadFromFile("data/button.png");
+        if (buttonTitle==L"Return") {
+            this->texture->loadFromFile("data/return.png");
+        } else {
+            this->texture->loadFromFile("data/button.png");
+        }
     }
     this->sprite = new sf::Sprite();
     this->sprite->setTexture(*this->texture);
     this->sprite->setOrigin(this->texture->getSize().x/2.0, this->texture->getSize().y/2.0);
     this->sprite->setPosition(x, y);
     this->sprite->setScale(scale, scale);
-    FloatRect textBounds = this->sprite->getGlobalBounds();
     this->text.setPosition(x, y);
 }
 

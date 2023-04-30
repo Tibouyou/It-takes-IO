@@ -24,7 +24,7 @@ Manual::Manual (int windowWidth, int windowHeight, sf::RenderWindow * m_window)
     this->sprite.setOrigin(background.getSize().x/2.0,background.getSize().y/2.0);
     this->sprite.setPosition(windowWidth/2.0, windowHeight/2.0);
     
-    buttonReturn = new Button(L"Return", 640.0/2*scale+windowHeight/10.0, windowHeight/2.0, 100*scale, scale, &font, [this]() 
+    buttonReturn = new Button(L"Return", 296*scale/2+windowHeight/10.0, windowHeight/2.0, 100*scale, scale, &font, [this]() 
     {
         if (this->currentPage == 0) {
             quit = true;
