@@ -36,19 +36,23 @@ Manual::Manual (int windowWidth, int windowHeight, sf::RenderWindow * m_window)
 
     float rectangle = windowHeight*8.0/10.0;
     addButton (new Button(L"Boutons", windowWidth*950/1642, windowHeight*2.0/10.0+rectangle/4.0*0, 100*scale, scale, &font, [this]() {
-            this->currentPage = 1;
+            if (this->currentPage != 0)
+                this->currentPage = 1;
     }));
     
     addButton (new Button(L"Objets Déplaçables", windowWidth*950/1642, windowHeight*2.0/10.0+rectangle/4.0*1, 50*scale, scale, &font, [this]() {
-            this->currentPage = 2;
+            if (this->currentPage != 0)
+                this->currentPage = 2;
     }));
 
     addButton (new Button(L"Réceptacles", windowWidth*950/1642, windowHeight*2.0/10.0+rectangle/4.0*2, 75*scale, scale, &font, [this]() {
-            this->currentPage = 3;
+            if (this->currentPage != 0)
+                this->currentPage = 3;
     }));
 
     addButton (new Button(L"Portes Logiques", windowWidth*950/1642, windowHeight*2.0/10.0+rectangle/4.0*3, 60*scale, scale, &font, [this]() {
-            this->currentPage = 4;
+            if (this->currentPage != 0)
+                this->currentPage = 4;
     }));
 }
 
