@@ -10,7 +10,7 @@ using namespace sf;
 class Button 
 {
     private : 
-        std::string buttonTitle;
+        std::wstring buttonTitle;
         int x; 
         int y;
         Font *font;
@@ -20,7 +20,7 @@ class Button
         sf::Sprite* sprite = nullptr;
     
     public :
-        Button(std::string buttonTitle, int x, int y, int fontSize, float scale, Font *font,std::function<void()> onClick,int levelNumber=-1);  
+        Button(std::wstring buttonTitle, int x, int y, int fontSize, float scale, Font *font,std::function<void()> onClick,int levelNumber=-1);  
         void draw(RenderWindow *window);
         void handleEvent(int x, int y);
 };

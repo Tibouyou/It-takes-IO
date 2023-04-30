@@ -2,8 +2,8 @@ all: bin/main_txt
 
 sfml: bin/main_sfml
 
-bin/main_sfml: obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o obj/sensorSfml.o obj/blockSfml.o obj/Menu.o obj/Button.o obj/Generator.o
-	g++ -g -Wall -o bin/main_sfml obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o obj/sensorSfml.o obj/blockSfml.o obj/Menu.o obj/Button.o obj/Generator.o -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+bin/main_sfml: obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o obj/sensorSfml.o obj/blockSfml.o obj/Menu.o obj/Button.o obj/Generator.o obj/Manual.o
+	g++ -g -Wall -o bin/main_sfml obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o obj/sensorSfml.o obj/blockSfml.o obj/Menu.o obj/Button.o obj/Generator.o obj/Manual.o -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 bin/main_txt: obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o
 	g++ -g -Wall -o bin/main_txt obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o
@@ -79,6 +79,9 @@ obj/Button.o : src/sfml/menu/Button.cpp src/sfml/menu/Button.h
 
 obj/Menu.o : src/sfml/menu/Menu.cpp src/sfml/menu/Menu.h src/sfml/menu/Button.h 
 	g++ -g -Wall -c src/sfml/menu/Menu.cpp -o obj/Menu.o
+
+obj/Manual.o : src/sfml/menu/Manual.cpp src/sfml/menu/Manual.h src/sfml/menu/Button.h 
+	g++ -g -Wall -c src/sfml/menu/Manual.cpp -o obj/Manual.o
 	
 clean:
 	rm -f obj/*

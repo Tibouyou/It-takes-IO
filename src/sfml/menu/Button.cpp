@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
-Button::Button(std::string buttonTitle, int x, int y, int fontSize,float scale, sf::Font *font ,std::function<void()> onClick, int levelNumber)
+Button::Button(std::wstring buttonTitle, int x, int y, int fontSize,float scale, sf::Font *font ,std::function<void()> onClick, int levelNumber)
 {
     this->buttonTitle = buttonTitle;
     this->x = x;
