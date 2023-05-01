@@ -36,25 +36,25 @@ private :
      * @brief The window of the game
      * 
      */
-	sf::RenderWindow * m_window;
+	sf::RenderWindow * m_window = nullptr;
 
     /**
      * @brief The visual wrapper of the player 0
      * 
      */
-    PlayerSfml * playerSfml0;
+    PlayerSfml * playerSfml0 = nullptr;
 
     /**
      * @brief The visual wrapper of the player 1
      * 
      */
-    PlayerSfml * playerSfml1;
+    PlayerSfml * playerSfml1 = nullptr;
 
     /**
      * @brief The main menu of the game
      * 
      */
-    Menu * menu;
+    Menu * menu = nullptr;
 
     /**
      * @brief List of the wrappers of the sensors of the level
@@ -177,6 +177,12 @@ public :
      * 
      */
     void sfmlInit();
+
+    /**
+     * @brief Helper method to reset the level before switching to another
+     * 
+     */
+    void freeAndClearWrappers();
 
     /**
      * @brief The main loop of the game

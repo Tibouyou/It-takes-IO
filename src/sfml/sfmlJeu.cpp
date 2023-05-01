@@ -38,7 +38,9 @@ void sfmlJeu::sfmlInit() {
 void sfmlJeu::loadLevel() {
     int dimx = m_window->getSize().x;
     int dimy = m_window->getSize().y;
-    if (level != nullptr) delete level;
+    
+    freeAndClearWrappers();
+
     level = new Level(this->levelNumber, dimx, dimy);
     spriteSize = std::min(dimx/level->getWidth(), dimy/level->getHeight());
     m_window->setFramerateLimit(120);
@@ -51,8 +53,6 @@ void sfmlJeu::loadLevel() {
     background.setScale((float)dimx/4960, (float)dimx/4960);
     background.setPosition(0, 0);
 
-    sensorsSfml.clear();
-
     for(int y=0;y<level->getHeight();y++){
 		for(int x=0;x<level->getWidth();x++){
 			char blockC = level->getBlock(x,y)->getType();
@@ -60,9 +60,7 @@ void sfmlJeu::loadLevel() {
 				sensorsSfml.push_back(new SensorSfml(level->getBlock(x,y),spriteSize));
             }
         }
-    }     
-
-    blocksSfml.clear();
+    }
 
     for(int y=0;y<level->getHeight();y++){
         for(int x=0;x<level->getWidth();x++){
@@ -74,22 +72,12 @@ void sfmlJeu::loadLevel() {
     }    
 }
 
-sfmlJeu::~sfmlJeu () {
-    if (m_window != nullptr) {
-        delete m_window;
-        m_window = nullptr;
-    }
-
+void sfmlJeu::freeAndClearWrappers() {
     if (level != nullptr) {
         delete level;
         level = nullptr;
     }
-
-    if (menu != nullptr) {
-        delete menu;
-        menu = nullptr;
-    }
-
+    
     if (playerSfml0 != nullptr) {
         delete playerSfml0;
         playerSfml0 = nullptr;
@@ -104,12 +92,28 @@ sfmlJeu::~sfmlJeu () {
         delete block;
     }
     blocksSfml.clear();
-
+    
     for (SensorSfml* sensor : sensorsSfml) {
         delete sensor;
     }
     
     sensorsSfml.clear();
+}
+
+sfmlJeu::~sfmlJeu () {
+    if (m_window != nullptr) {
+        delete m_window;
+        m_window = nullptr;
+    }
+
+    if (menu != nullptr) {
+        delete menu;
+        menu = nullptr;
+    }
+
+    sound.resetBuffer();
+
+    freeAndClearWrappers();
 }
 
 void sfmlJeu::sfmlAff() {

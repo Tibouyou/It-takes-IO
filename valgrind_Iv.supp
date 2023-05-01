@@ -1,6 +1,7 @@
 {
    <SFML:Graphics>
    Memcheck:Leak
+   match-leak-kinds: all
    ...
    obj:libsfml-graphics.so.2.5
 }
@@ -8,7 +9,7 @@
 {
    <SFML:window>
    Memcheck:Leak
-   match-leak-kinds: reachable
+   match-leak-kinds: all
    ...
    obj:libsfml-window.so.2.5
 }
@@ -16,8 +17,17 @@
 {
    <SFML:system>
    Memcheck:Leak
+   match-leak-kinds: all
    ...
    obj:libsfml-system.so.2.5
+}
+
+{
+   <SFML:system>
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   obj:libsfml-audio.so.2.5
 }
 
 {
@@ -45,7 +55,7 @@
    lib_2_x86_64
    Memcheck:Leak
    ...
-   obj:/usr/lib/x86_64-linux-gnu/libLLVM-15.so.1
+   obj:/usr/lib/x86_64-linux-gn
 }
 
 {
@@ -81,4 +91,18 @@
    fun:do_loop
    fun:start_thread
    fun:clone
+}
+
+{
+   aaaaaaa
+   Memcheck:Addr32
+   ...
+   fun:compare
+}
+
+{
+   a
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   obj:/usr/lib/ld-linux-x86-64.so.2
 }
