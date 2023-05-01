@@ -1,6 +1,5 @@
 #include "Door.h"
 #include "Level.h"
-#include <iostream>
 
 Door::Door(int x, int y, BlockType type) : Block(x, y, type)
 {

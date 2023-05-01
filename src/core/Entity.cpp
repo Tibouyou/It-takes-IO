@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Entity.h"
 #include "Level.h"
 #include <math.h>

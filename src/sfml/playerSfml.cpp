@@ -1,6 +1,4 @@
 #include "playerSfml.h"
-#include <cmath>
-#include <iostream>
 #include <string>
 
 PlayerSfml::PlayerSfml(Player * player, int spriteSize)

@@ -1,6 +1,4 @@
-#include <iostream>
 #include "Cable.h"
-#include "Enum.h"
 #include "Level.h"
 
 Cable::Cable(int tileX, int tileY, unsigned char directionMaskCable,PowerType power)

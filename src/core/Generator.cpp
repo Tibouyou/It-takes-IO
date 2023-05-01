@@ -1,5 +1,4 @@
 #include "Generator.h"
-#include "Enum.h"
 #include "Level.h"
 
 Generator::Generator(int x, int y, PowerType powerType, BlockType type) : Block(x, y, type)

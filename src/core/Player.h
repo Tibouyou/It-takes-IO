@@ -3,7 +3,6 @@
 
 #include "Entity.h"
 #include "Pickable.h"
-#include "Vector2D.h"
 
 class Player : public Entity
 {

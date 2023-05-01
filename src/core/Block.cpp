@@ -1,6 +1,5 @@
 #include "Block.h"
 #include "Enum.h"
-#include <iostream>
 
 Block::Block(int x, int y, BlockType type)
 {

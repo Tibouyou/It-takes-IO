@@ -1,11 +1,8 @@
 #include <iostream>
 #include <new>
 #include <string>
-#ifdef _WIN32
-#include <windows.h>
-#else
+
 #include <unistd.h>
-#endif // WIN32
 #include "winTxt.h"
 
 #include "../core/Level.h"
@@ -113,10 +110,12 @@ void txtBoucle (Level& level) {
 				level.getPlayer0()->jump();
 				break;
 			case 'q':
-				level.getPlayer0()->moveLeft();
+				level.getPlayer0()->setMoving(true);
+                level.getPlayer0()->setDirection(true);
 				break;	
 			case 'd':
-				level.getPlayer0()->moveRight();
+				level.getPlayer0()->setMoving(true);
+                level.getPlayer0()->setDirection(false);
 				break;
 			case 's':
 				level.getPlayer0()->use(level);
@@ -125,10 +124,12 @@ void txtBoucle (Level& level) {
 				level.getPlayer1()->jump();
 				break;
 			case 'h':
-				level.getPlayer1()->moveLeft();
+				level.getPlayer1()->setMoving(true);
+                level.getPlayer1()->setDirection(true);
 				break;	
 			case 'k':
-				level.getPlayer1()->moveRight();
+				level.getPlayer1()->setMoving(true);
+                level.getPlayer1()->setDirection(false);
 				break;	
 			case 'j':
 				level.getPlayer1()->use(level);
@@ -143,6 +144,4 @@ void txtBoucle (Level& level) {
 		if(level.getWin()) ok = false;
 	} while (ok);
 	termClear();
-	if(level.getWin()) std::cout << "Bien joué" << std::endl;
-	else std::cout << "Gros nullos" << std::endl;
 }

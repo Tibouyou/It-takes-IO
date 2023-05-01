@@ -3,7 +3,6 @@
 
 #include "Block.h"
 #include "Enum.h"
-#include "Player.h"
 #include <vector>
 #include "Cable.h"
 #include "Vector2D.h"

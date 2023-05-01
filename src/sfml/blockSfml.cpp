@@ -1,6 +1,6 @@
 #include "blockSfml.h"
 #include <math.h>
-#include <iostream>
+#include <string>
 
 BlockSfml::BlockSfml(Level * level, int spriteSize, int tileX, int tileY)
 {

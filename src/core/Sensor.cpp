@@ -1,8 +1,6 @@
 #include "Sensor.h"
 #include "Level.h"
 #include "Enum.h"
-#include <math.h>
-#include <iostream>
 
 Sensor::Sensor(int x, int y, int spriteSize, BlockType type) : Block( x, y, type)
 {

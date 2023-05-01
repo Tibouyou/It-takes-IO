@@ -1,8 +1,5 @@
 #include "Button.h"
-#include <iostream>
 #include <functional>
-#include <SFML/Graphics.hpp>
-#include <string>
 
 Button::Button(std::wstring buttonTitle, int x, int y, int fontSize,float scale, sf::Font *font ,std::function<void()> onClick, int levelNumber)
 {

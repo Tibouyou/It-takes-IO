@@ -1,9 +1,10 @@
-#include <iostream>
-#include "Enum.h"
 #include "Player.h"
 #include "Level.h"
-#include <math.h>
+#include "Pickable.h"
+#include "Block.h"
 #include "Receptacle.h"
+
+#include <math.h>
 
 Player::Player(bool playerType, float x, float y, int height, int width, int spriteSize, float originX, float originY) : Entity( x, y, height, width, spriteSize, originX, originY)
 {
@@ -14,7 +15,6 @@ Player::Player(bool playerType, float x, float y, int height, int width, int spr
     isMoving = false;
     direction = false;
     isAlive = true;
-
 }
 
 Player::~Player()
@@ -41,6 +41,18 @@ void Player::update(const Level& currentLevel, float elapsed)
         gravity = 0;
     } 
     
+    
+
+    #ifdef TXT
+    if (isMoving) {
+        if (direction) {
+            if (!getCollisionX(currentLevel, -spriteSize)) x -= spriteSize;
+        } else {
+            if (!getCollisionX(currentLevel, spriteSize+width)) x += spriteSize;
+        }
+    }
+    isMoving = false;
+    #else
     if (isMoving) {
         if (direction) {
             if (!getCollisionX(currentLevel, -elapsed*300*spriteSize/82.0)) x -= elapsed*300*spriteSize/82.0;
@@ -48,6 +60,7 @@ void Player::update(const Level& currentLevel, float elapsed)
             if (!getCollisionX(currentLevel, elapsed*300*spriteSize/82.0+width)) x += elapsed*300*spriteSize/82.0;
         }
     }
+    #endif
 }
 
 void Player::setDead()

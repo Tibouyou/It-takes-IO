@@ -5,9 +5,7 @@
 #include "Player.h"
 #include "Block.h"
 #include "Cable.h"
-#include "Entity.h"
 #include <vector>
-#include "Receptacle.h"
 #include "Gate.h"
 #include "Door.h"
 #include "Generator.h"
@@ -127,7 +125,7 @@ class Level
          * @brief Function called when the level is update
          * 
          */
-        void update(float elapsed = 1.0f);
+        void update(float elapsed = 0.1f);
 
         /**
          * @brief Function called when the level is won

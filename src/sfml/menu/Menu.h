@@ -1,27 +1,24 @@
 #ifndef _MENU_H
 #define _MENU_H
 
-#include <iostream>
+#include <string>
 #include <vector>
-
 #include <SFML/Graphics.hpp>
+
 #include "Button.h"
 #include "Manual.h"
-
-using namespace sf;
-using namespace std;
 
 class Menu 
 {
     private :
-        string menuTitle;
+        std::string menuTitle;
         sf::RenderWindow * m_window;
-        vector<Button*> buttons;
-        vector<Button*> selectLevelButtons;
+        std::vector<Button*> buttons;
+        std::vector<Button*> selectLevelButtons;
         bool selectLevelMenuActive = false;
         bool manualMenuActive = false;
-        RectangleShape rectangleMenu;
-        Font font;
+        sf::RectangleShape rectangleMenu;
+        sf::Font font;
         bool quit = false;
         bool play = true;
         int currentLevel = 0;
@@ -31,7 +28,7 @@ class Menu
         Menu(int windowWidth, int windowHeight, sf::RenderWindow * m_window);
         ~Menu();
 
-        void draw(RenderWindow *window);
+        void draw(sf::RenderWindow *window);
         void click(int x, int y);
         void addButton (Button* button);
         void addOptionButton (Button* button);

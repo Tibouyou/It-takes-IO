@@ -1,6 +1,5 @@
 #include "Trap.h"
 #include "Level.h"
-#include <math.h>
 
 Trap::Trap(int x, int y, BlockType type) : Block( x, y, type)
 {

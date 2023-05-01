@@ -2,8 +2,6 @@
 #include "Enum.h"
 #include "Level.h"
 
-#include <iostream>
-
 Receptacle::Receptacle(int x, int y, BlockType type) : Block(x, y, type)
 {
     heldItem = nullptr;

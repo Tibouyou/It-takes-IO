@@ -1,6 +1,4 @@
 #include "Gate.h"
-#include "Enum.h"
-#include "Vector2D.h"
 #include <math.h>
 #include "Level.h"
 

@@ -1,0 +1,49 @@
+{
+   <SFML:Graphics>
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1
+}
+
+{
+   <SFML:window>
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1
+}
+
+{
+   <SFML:system>
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-system.so.2.5.1
+}
+
+{
+   driver_1_wsl
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_e96a2752f171d22c/libigd12um64xel.so
+}
+
+{
+   lib_1_wsl
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/wsl/lib/libd3d12.so
+}
+
+{
+   lib_1_x86_64
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/x86_64-linux-gnu/libGLX.so.0.0.0
+}
+
+{
+   lib_2_x86_64
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/x86_64-linux-gnu/libLLVM-15.so.1
+}
+

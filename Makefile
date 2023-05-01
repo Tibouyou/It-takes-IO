@@ -1,15 +1,15 @@
 INCLUDE := -Iextern/include
 LIB  := -Lextern/lib
 
-all: bin/main_txt
+all: bin/main_sfml
 
-sfml: bin/main_sfml
+txt: bin/main_txt
 
 bin/main_sfml: obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o obj/sensorSfml.o obj/blockSfml.o obj/Menu.o obj/Button.o obj/Generator.o obj/Manual.o
 	g++ -g -Wall -o bin/main_sfml obj/Main_sfml.o obj/sfmlJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/playerSfml.o obj/sensorSfml.o obj/blockSfml.o obj/Menu.o obj/Button.o obj/Generator.o obj/Manual.o $(INCLUDE) $(LIB) -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -Wl,-rpath,extern/lib
 
-bin/main_txt: obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o
-	g++ -g -Wall -o bin/main_txt obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o
+bin/main_txt: obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player_txt.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/Generator.o
+	g++ -g -Wall -o bin/main_txt obj/Main_txt.o obj/winTxt.o obj/txtJeu.o obj/Block.o obj/Cable.o obj/Entity.o obj/Level.o obj/Pickable.o obj/Platform.o obj/Player_txt.o obj/Receptacle.o obj/Sensor.o obj/Trap.o obj/Vector2D.o obj/Gate.o obj/Door.o obj/Generator.o
 
 obj/Main_sfml.o: src/sfml/main_sfml.cpp src/sfml/sfmlJeu.h src/core/Level.h
 	g++ -g -Wall -c src/sfml/main_sfml.cpp $(INCLUDE) -o obj/Main_sfml.o
@@ -31,6 +31,9 @@ obj/sensorSfml.o: src/sfml/sensorSfml.cpp src/sfml/sensorSfml.h src/core/Player.
 
 obj/winTxt.o: src/txt/winTxt.cpp src/txt/winTxt.h
 	g++ -g -Wall -c src/txt/winTxt.cpp -o obj/winTxt.o
+
+obj/Player_txt.o: src/core/Player.cpp src/core/Player.h src/core/Entity.h src/core/Level.h
+	g++ -g -Wall -c src/core/Player.cpp -DTXT -o obj/Player_txt.o
 
 obj/txtJeu.o: src/txt/txtJeu.cpp src/txt/txtJeu.h src/core/Level.h
 	g++ -g -Wall -c src/txt/txtJeu.cpp -o obj/txtJeu.o	

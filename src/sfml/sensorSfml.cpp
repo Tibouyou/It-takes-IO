@@ -1,6 +1,5 @@
 #include "sensorSfml.h"
-#include <math.h>
-#include <iostream>
+#include <string>
 
 SensorSfml::SensorSfml(Block * sensor, int spriteSize)
 {

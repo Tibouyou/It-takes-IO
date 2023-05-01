@@ -1,26 +1,21 @@
 #ifndef _MANUAL_H
 #define _MANUAL_H
 
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Texture.hpp>
-#include <iostream>
-#include <vector>
-
-#include <SFML/Graphics.hpp>
 #include "Button.h"
 
-using namespace sf;
-using namespace std;
+#include <string>
+#include <vector>
+#include <SFML/Graphics.hpp>
 
 class Manual 
 {
     private :
-        string menuTitle;
+        std::string menuTitle;
         sf::RenderWindow * m_window;
-        vector<Button*> buttons;
+        std::vector<Button*> buttons;
         Button * buttonReturn;
-        RectangleShape rectangleMenu;
-        Font font;
+        sf::RectangleShape rectangleMenu;
+        sf::Font font;
         bool quit = false;
         bool play = true;
         int currentLevel = 0;
@@ -36,7 +31,7 @@ class Manual
         Manual(int windowWidth, int windowHeight, sf::RenderWindow * m_window);
         ~Manual();
 
-        void draw(RenderWindow *window);
+        void draw(sf::RenderWindow *window);
         void click(int x, int y);
         void addButton (Button* button);
         bool getQuit();

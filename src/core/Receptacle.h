@@ -4,7 +4,6 @@
 #include "Enum.h"
 #include "Pickable.h"
 #include "Block.h"
-#include "Player.h"
 
 class Level;
 

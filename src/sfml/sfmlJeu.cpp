@@ -13,7 +13,7 @@
 
 
 sfmlJeu::sfmlJeu () {
-    m_window = new RenderWindow(sf::VideoMode(1920, 1080), "It-Takes-IO", sf::Style::Fullscreen);
+    m_window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "It-Takes-IO", sf::Style::Fullscreen);
     doorTexture.loadFromFile("data/object/door.png");
     door.setTexture(doorTexture);
     door.setTextureRect(sf::IntRect(0, 0, 100, 200));
@@ -40,7 +40,7 @@ void sfmlJeu::loadLevel() {
     int dimy = m_window->getSize().y;
     if (level != nullptr) delete level;
     level = new Level(this->levelNumber, dimx, dimy);
-    spriteSize = min(dimx/level->getWidth(), dimy/level->getHeight());
+    spriteSize = std::min(dimx/level->getWidth(), dimy/level->getHeight());
     m_window->setFramerateLimit(120);
     playerSfml0 = new PlayerSfml(level->getPlayer0(), spriteSize);
     playerSfml1 = new PlayerSfml(level->getPlayer1(), spriteSize);
@@ -286,7 +286,7 @@ void sfmlJeu::sfmlAff() {
 
 void sfmlJeu::sfmlBoucle () {
 
-    Clock clock;
+    sf::Clock clock;
     music.setLoop(true);
     music.play();
 
@@ -360,21 +360,21 @@ void sfmlJeu::sfmlBoucle () {
 
         if(this->menu->getQuit()) m_window->close();
 
-        Event event;
+        sf::Event event;
 
         while (m_window->pollEvent(event))
         {
-            if (event.type == Event::Closed)
+            if (event.type == sf::Event::Closed)
                 m_window->close();
             if (!menu->getPlay()) {
-                if (event.type == Event::MouseButtonPressed) {
-                    if (event.mouseButton.button == Mouse::Left) {
+                if (event.type == sf::Event::MouseButtonPressed) {
+                    if (event.mouseButton.button == sf::Mouse::Left) {
                         this->menu->click(event.mouseButton.x, event.mouseButton.y);
                     }
                 }
-                if (event.type == Event::KeyPressed) {
+                if (event.type == sf::Event::KeyPressed) {
                     switch (event.key.code) {
-                    case Keyboard::Escape : {
+                    case sf::Keyboard::Escape : {
                         this->menu->pause();
                     }
                     break;
@@ -382,42 +382,42 @@ void sfmlJeu::sfmlBoucle () {
                     }
                 }
             } else {
-                if (event.type == Event::KeyPressed) {
+                if (event.type == sf::Event::KeyPressed) {
                     switch (event.key.code) {
-                    case Keyboard::Escape : this->menu->pause();
+                    case sf::Keyboard::Escape : this->menu->pause();
                         break;
-                    case Keyboard::Z : level->getPlayer0()->jump();
+                    case sf::Keyboard::Z : level->getPlayer0()->jump();
                         break;
-                    case Keyboard::Q : level->getPlayer0()->setMoving(true);
+                    case sf::Keyboard::Q : level->getPlayer0()->setMoving(true);
                         level->getPlayer0()->setDirection(true);
                         break;
-                    case Keyboard::D : level->getPlayer0()->setMoving(true);
+                    case sf::Keyboard::D : level->getPlayer0()->setMoving(true);
                         level->getPlayer0()->setDirection(false);
                         break; 
-                    case Keyboard::S : level->getPlayer0()->use(*level);
+                    case sf::Keyboard::S : level->getPlayer0()->use(*level);
                         break;   
-                    case Keyboard::Up : level->getPlayer1()->jump();
+                    case sf::Keyboard::Up : level->getPlayer1()->jump();
                         break;
-                    case Keyboard::Left : level->getPlayer1()->setMoving(true);
+                    case sf::Keyboard::Left : level->getPlayer1()->setMoving(true);
                         level->getPlayer1()->setDirection(true);
                         break;
-                    case Keyboard::Right : level->getPlayer1()->setMoving(true);
+                    case sf::Keyboard::Right : level->getPlayer1()->setMoving(true);
                         level->getPlayer1()->setDirection(false);
                         break;
-                    case Keyboard::Down : level->getPlayer1()->use(*level);
+                    case sf::Keyboard::Down : level->getPlayer1()->use(*level);
                         break;
                     default : break;
                     }
                 }
-                if (event.type == Event::KeyReleased) {
+                if (event.type == sf::Event::KeyReleased) {
                     switch (event.key.code) {
-                    case Keyboard::Q : if (level->getPlayer0()->getDirection()) level->getPlayer0()->setMoving(false);
+                    case sf::Keyboard::Q : if (level->getPlayer0()->getDirection()) level->getPlayer0()->setMoving(false);
                         break;
-                    case Keyboard::D : if (!level->getPlayer0()->getDirection()) level->getPlayer0()->setMoving(false);
+                    case sf::Keyboard::D : if (!level->getPlayer0()->getDirection()) level->getPlayer0()->setMoving(false);
                         break;    
-                    case Keyboard::Left : if (level->getPlayer1()->getDirection()) level->getPlayer1()->setMoving(false);
+                    case sf::Keyboard::Left : if (level->getPlayer1()->getDirection()) level->getPlayer1()->setMoving(false);
                         break;
-                    case Keyboard::Right : if (!level->getPlayer1()->getDirection()) level->getPlayer1()->setMoving(false);
+                    case sf::Keyboard::Right : if (!level->getPlayer1()->getDirection()) level->getPlayer1()->setMoving(false);
                         break;
                     default : break;
                     }
@@ -426,11 +426,11 @@ void sfmlJeu::sfmlBoucle () {
         }
 
         if (!menu->getPlay()) {
-            m_window->clear(Color(230, 240, 255, 255));
+            m_window->clear(sf::Color(230, 240, 255, 255));
             sfmlAff();
             sfmlMenu();
         } else {
-            m_window->clear(Color(230, 240, 255, 255));
+            m_window->clear(sf::Color(230, 240, 255, 255));
             sfmlAff();
         }    
         m_window->display();    

@@ -1,20 +1,14 @@
 #include "Level.h"
-#include "Block.h"
-#include "Enum.h"
-#include "Gate.h"
-#include "Pickable.h"
 #include "Platform.h"
-#include "Player.h"
 #include "Sensor.h"
 #include "Receptacle.h"
 #include "Trap.h"
-#include "Vector2D.h"
-#include "Door.h"
-#include <cassert>
-#include <cstddef>
+#include "Generator.h"
+
 #include <iostream>
 #include <fstream>
 #include <math.h>
+#include <cassert>
 
 Level::Level(int levelNumber, int dimWindowX, int dimWindowY)
 {
@@ -69,6 +63,9 @@ void Level::loadLevel(int dimWindowX, int dimWindowY)
     {
         this->spriteSize = dimWindowY/height;
     }
+    #ifdef TXT
+    this->spriteSize = 50;
+    #endif // TXT
     char type;
     for (int y = 0; y < height; y++)
     {
