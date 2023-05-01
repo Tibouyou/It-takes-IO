@@ -13,11 +13,14 @@ L'organistion des fichiers est la suivante.
 
 - **It-Takes-IO/src/core** : les classes de base du jeu qui compile sans aucune dépendance.
 - **It-Takes-IO/src/sfml** : les classes s'occupant de faire fonctionner le jeu et de l'afficher avec SFML.
+- **It-Takes-IO/src/sfml/menu** : les classes s'occupant de faire fonctionner le menu et de l'afficher avec SFML.
 - **It-Takes-IO/src/txt** : les classes s'occupant de faire fonctionner le jeu et de l'afficher en version console.
 
 - **It-Takes-IO/data** : les assets du jeu.
 - **It-Takes-IO/data/blocks** : les images des différents blocks à afficher.
+- **It-Takes-IO/data/bruitages** : les sons utilisés dans le jeu.
 - **It-Takes-IO/data/levels** : les fichiers .txt des niveaux.
+- **It-Takes-IO/data/menu** : les images utilisés dans le menu _Manuel_ du jeu.
 - **It-Takes-IO/data/object** : les images des différents objets à afficher.
 - **It-Takes-IO/data/player** : les sprites des deux personnages pour réaliser les animations.
 - **It-Takes-IO/data/preview** : les images des previews des niveaux dans le menu _Select level_.
@@ -26,12 +29,12 @@ L'organistion des fichiers est la suivante.
 
 - **It-Takes-IO/obj** : répertoire comportant les compilations intermédiaires (.o).
 
+- **It-Takes-IO/extern** : répertoire comprtant la librairie SFML afin de permettre l'affichage graphique du jeu.
+
 - **It-Takes-IO/doc** : la documentation de notre projet 
 - **It-Takes-IO/doc/html** : la documentation du code générée par doxygen.
 
 - **It-Takes-IO/Makefile** : permet d'effectuer toute le phase de compilation de notre code.
-
-- **It-Takes-IO/SFML** : librairie afin d'afficher l'interface du jeu.
 
 ### Compilation du programme
 
@@ -41,26 +44,44 @@ Pour effectuer la compilation du programme, vous devez exécuter la commande `ma
 #### Version SFML
 Pour effectuer la compilation du programme, vous devez exécuter la commande `make sfml`
 
+> Si cela ne fontcionne pas, il faudra installer la librairie SFML à la main avant de pouvoir compiler notre programme. 
+
 ## Exécution et démarrage du jeu 
 
-#### Version Texte 
+### Version Texte 
 Pour procéder à l'exécution, il suffit d'exécuter `bin/main_txt`
 
-#### Version SFML
-Ce jeu a été réalisé grâce à la librairie SFML. Vous aurez donc besoin de l'installer à partir de la commande ... ou bien de la télécharger directement à partir de l'archive.
+### Version SFML
 
 Puis, pour procéder à l'exécution, il suffit d'exécuter `bin/main_sfml`
 
-Comment jouer : 
+> Si cela ne fontcionne pas, il faudra installer la librairie SFML à la main avant de pouvoir compiler notre programme. 
+
+### Comment jouer 
+
 - Après le lancement du jeu, vous apparaîssez alors dans le niveau 0.
-- Déplacez le permier personnage en utilisant les touches Z,Q,S,D et le second en utilisant les flèches directionnelles.
-- Activez les capteurs d'énergie en vous plaçant simplement au-dessus.
-- Récupérez des objets au sol en vous plaçant dessus et en appuyant sur la touche S ou la flèche du bas. 
-- Accédez au menu en appuyant sur la touche ECHAP.
-- Sélectionnez le niveau souhaité dans le menu _Select Level_.
-- Activez les portes logiques en vous plaçant sur les capteurs d'énergie. Vous trouverez un manuel d'explications pour les différentes portes logiques dans le menu _Manuel_. 
+- Déplacez les personnages et activez les boutons en vous plaçant simplement au-dessus.
+- Récupérez des objets au sol pour les déplacer où vous le souhaiter. 
+- Vous pouvez sélectionner le niveau souhaité dans le menu _Select Level_.
+- Activez les portes logiques en vous plaçant sur les boutons. Vous trouverez un manuel d'explications pour les différentes portes logiques dans le menu _Manuel_. 
 - Trouvez la bonne combinaison afin d'envoyer du courant de type 1 dans la porte finale pour la dévérouiller. Cela vous permettra de passer au niveau suivant.
-- Si l'un des deux joueurs meurt au cours d'un niveau, celui-ci se réinitialise.
+- Si l'un des deux joueurs meurt au cours d'un niveau, celui-ci se réinitialise. 
+
+#### Commandes 
+
+Pour accéder au menu du jeu : `ECHAP`
+
+Pour le joueur 0 : 
+- Aller vers la gauche `Q`
+- Aller vers la droite `D`
+- Sauter `Z`
+- Récuperer un objet sur le sol `S`
+
+Pour le joueur 1 : 
+- Aller vers la gauche `◄`
+- Aller vers la droite `►`
+- Sauter `▲`
+- Récuperer un objet sur le sol `▼`
 
 > **Tip :** n'oubliez pas d'activer le son afin de profiter de la musique du jeu
 
