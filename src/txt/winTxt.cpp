@@ -135,15 +135,6 @@ int kbhit() {
 }
 #endif
 
-void WinTXT::pause() {
-#ifdef _WIN32
-    system("pause");
-#else
-    printf("Appuyer sur une touche\n");
-    while(!kbhit());
-#endif
-}
-
 char WinTXT::getCh() { // lire un caractere si une touche a ete pressee
     char touche=0;
 #ifdef _WIN32

@@ -12,7 +12,6 @@ Menu::Menu (int windowWidth, int windowHeight, sf::RenderWindow * m_window)
     this->manual = new Manual(windowWidth, windowHeight, m_window);
     this->menuTitle = "Menu principal";
     this->m_window = m_window;
-    this->rectangleMenu = RectangleShape(Vector2f(windowWidth, windowHeight));
     this->font.loadFromFile("data/Holidays Homework.ttf");
     float scale;
     if (windowHeight/172 > windowWidth/640) {
@@ -82,8 +81,6 @@ Menu::~Menu()
 
 void Menu::draw(RenderWindow *window)
 {
-    //window->draw(rectangleMenu);
-
     if (selectLevelMenuActive) {
         for (Button *button : selectLevelButtons)
         {

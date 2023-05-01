@@ -20,6 +20,10 @@ class Pickable : public Entity
          */
         bool isHeld;
 
+        /**
+         * @brief The direction of the pickable
+         * 
+         */
         bool direction = false;
     
     public:
@@ -68,10 +72,25 @@ class Pickable : public Entity
          */
         bool getHeld();
 
+        /**
+         * @brief Get the direction of the pickable
+         * 
+         * @return true The pickable is facing right
+         * @return false The pickable is facing left
+         */
         bool getDirection();
 
+        /**
+         * @brief Set the direction of the pickable
+         * 
+         * @param direction The direction of the pickable
+         */
         void setDirection(bool direction);
 
+        /**
+         * @brief Reset the pickable
+         * 
+         */
         void reset();
 };
 

@@ -58,6 +58,9 @@ class Door : public Block
          */
         void update(Player& p0, Player& p1, Level& currentLevel);
 
+        /**
+         * @brief Reset the door
+         */
         void reset();
 
 };

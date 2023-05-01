@@ -19,7 +19,6 @@ struct Vector2D {
      * 
      * @param x x coordinate
      * @param y y coordinate
-     * @param id id of the vector
      */
     Vector2D(int x = 0, int y = 0);
 };

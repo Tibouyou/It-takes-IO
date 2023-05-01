@@ -90,11 +90,6 @@ sf::Sprite PlayerSfml::getSprite()
     return this->sprite;
 }
 
-void PlayerSfml::setColor(sf::Color color)
-{
-    this->sprite.setColor(color);
-}
-
 bool PlayerSfml::getDeathAnimationDone()
 {
     if(deathAnimationDone) {

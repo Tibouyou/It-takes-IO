@@ -79,6 +79,10 @@ class Level
          */
         bool isWon;
 
+        /**
+         * @brief The size of a sprite
+         * 
+         */
         int spriteSize;
 
     public :

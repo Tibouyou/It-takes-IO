@@ -14,7 +14,7 @@ class Generator : public Block
 
     public :
         /**
-         * @brief Construct a new Receptacle object
+         * @brief Construct a new Generator object
          * 
          * @param x x coordinate
          * @param y y coordinate
@@ -23,14 +23,14 @@ class Generator : public Block
         Generator(int x, int y, PowerType powerType, BlockType type = GENERATOR);
 
         /**
-         * @brief Get the solidity of the receptacle
+         * @brief Get the solidity of the generator
          * 
          * @return false
          */
         bool isSolid();
 
         /**
-         * @brief Function called when the receptacle is powered
+         * @brief Function called when the generator is powered
          * 
          * @param type type of the power
          * @param currentLevel current level
@@ -44,6 +44,9 @@ class Generator : public Block
          */
         PowerType getPowerType();
 
+        /**
+         * @brief Function called when the generator is update
+         */
         void update(Player &p0, Player &p1, Level &currentLevel);
 }; 
 

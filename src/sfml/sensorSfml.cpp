@@ -9,8 +9,6 @@ SensorSfml::SensorSfml(Block * sensor, int spriteSize)
     this->sprite.setTextureRect(sf::IntRect(0, 0, 50, 50));
     this->sprite.setPosition(sensor->getX()*spriteSize, sensor->getY()*spriteSize);
     this->sensor = dynamic_cast<Sensor*>(sensor);
-    this->tileX = sensor->getX();
-    this->tileY = sensor->getY();
     this->spriteSize = spriteSize;
     this->sprite.setScale((float)spriteSize/50, (float)spriteSize/50);
 }

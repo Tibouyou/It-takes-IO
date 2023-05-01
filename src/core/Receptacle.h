@@ -55,6 +55,9 @@ class Receptacle : public Block
          */
         void power(PowerType type, const Level& currentLevel, unsigned char directionMask);
 
+        /**
+         * @brief Function called when the receptacle is reset
+         */
         void reset();
 }; 
 

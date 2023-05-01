@@ -11,7 +11,6 @@ Manual::Manual (int windowWidth, int windowHeight, sf::RenderWindow * m_window)
 {
     this->menuTitle = "Menu principal";
     this->m_window = m_window;
-    this->rectangleMenu = RectangleShape(Vector2f(windowWidth, windowHeight));
     this->font.loadFromFile("data/Holidays Homework.ttf");
     this->background.loadFromFile("data/menu/menu_bg.png");
     this->button.loadFromFile("data/menu/menu_bouton.png");
@@ -73,7 +72,6 @@ Manual::~Manual()
 
 void Manual::draw(RenderWindow *window)
 {
-    //window->draw(rectangleMenu);
     switch (currentPage) {
         case 0:
             this->sprite.setTexture(background);
@@ -118,25 +116,6 @@ void Manual::addButton (Button* button)
 
 bool Manual::getQuit() {
     return quit;
-}
-
-bool Manual::getPlay() {
-    return play;
-}
-
-void Manual::pause()
-{
-    play = !play;
-}
-
-int Manual::getCurrentLevel()
-{
-    return currentLevel;
-}
-
-void Manual::setLevel(int level)
-{
-    this->currentLevel = level;
 }
 
 void Manual::Open() {

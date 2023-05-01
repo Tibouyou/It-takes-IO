@@ -94,8 +94,18 @@ class Gate : public Block
          */
         void update(Level& currentLevel);
 
+        /**
+         * @brief Get the input of the gate
+         * 
+         * @return std::vector<Vector2D*> the input of the gate
+         */
         std::vector<Vector2D*> getInput();
 
+        /**
+         * @brief Get the output of the gate
+         * 
+         * @return std::vector<Vector2D*> the output of the gate
+         */
         std::vector<Vector2D*> getOutput();
 }; 
 

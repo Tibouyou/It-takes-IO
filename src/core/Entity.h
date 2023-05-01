@@ -18,8 +18,16 @@ class Entity
          */
         float y; 
 
+        /**
+         * @brief The origin x of the entity
+         * 
+         */
         float originX;
 
+        /**
+         * @brief The origin y of the entity
+         * 
+         */
         float originY;
 
         /**
@@ -34,6 +42,10 @@ class Entity
          */
         int width;
 
+        /**
+         * @brief The size of the sprite
+         * 
+         */
         int spriteSize;
 
     public:
@@ -97,10 +109,24 @@ class Entity
          */
         int getTileY(int offset = 0);
 
+        /**
+         * @brief Get the width of the entity
+         * 
+         * @return int The width of the entity
+         */
         int getWidth() const;
 
+        /**
+         * @brief Get the height of the entity
+         * 
+         * @return int The height of the entity
+         */
         int getHeight() const;
 
+        /**
+         * @brief Overridable function called when the entity is reset
+         * 
+         */
         void reset();
 
 }; 

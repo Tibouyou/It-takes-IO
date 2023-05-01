@@ -72,8 +72,24 @@ class Block
          */
         virtual void update(Player& p0, Player& p1, Level& currentLevel);
 
+        /**
+         * @brief Get the position x of the block in the level
+         * 
+         * @return int 
+         */
         int getX();
+
+        /**
+         * @brief Get the position y of the block in the level
+         * 
+         * @return int 
+         */
         int getY();
+
+        /**
+         * @brief Overridable function for the block to do something when the level is reset
+         * 
+         */
         void reset();
 }; 
 

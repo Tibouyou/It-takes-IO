@@ -43,6 +43,10 @@ class Player : public Entity
          */
         bool isAlive;
 
+        /**
+         * @brief is the player on the ground
+         * 
+         */
         bool isOnGround;
 
     public:
@@ -117,26 +121,83 @@ class Player : public Entity
          */
         float getGravity();
 
+        /**
+         * @brief Set if the player is moving
+         * 
+         * @param isMoving true if the player is moving false otherwise
+         */
         void setMoving(bool isMoving);
 
+        /**
+         * @brief Set the direction of the player
+         * 
+         * @param direction direction of the player true if right false if left
+         */
         void setDirection(bool direction);
 
+        /**
+         * @brief Get the direction of the player
+         * 
+         * @return true if the player is looking right false otherwise
+         */
         bool getDirection();
 
+        /**
+         * @brief Get if the player is moving
+         * 
+         * @return true if the player is moving false otherwise
+         */
         bool getMoving();
 
+        /**
+         * @brief Get the collision on the y axis
+         * 
+         * @param currentLevel current level
+         * @param moveX movement on the x axis
+         * @return true if there is a collision false otherwise
+         */
         bool getCollisionX(const Level& currentLevel, float moveX);
 
+        /**
+         * @brief Get if the player is on the ground
+         * 
+         * @return true if the player is on the ground
+         * @return false  if the player is not on the ground
+         */
         bool getOnGround();
 
+        /**
+         * @brief Set the player height
+         * 
+         * @param height height of the player
+         */
         void setHeight(int height);
         
+        /**
+         * @brief Set the player width
+         * 
+         * @param width width of the player
+         */
         void setWidth(int width);
         
+        /**
+         * @brief Set the player sprite size
+         * 
+         * @param spriteSize sprite size of the player
+         */
         void setSpriteSize(int spriteSize);
 
+        /**
+         * @brief Get the player type
+         * 
+         * @return false if the player is player 0 true if the player is player 1
+         */
         bool getPlayerType();
 
+        /**
+         * @brief Reset the player
+         * 
+         */
         void reset();
 };
 

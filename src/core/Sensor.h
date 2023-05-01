@@ -9,7 +9,15 @@ class Level;
 class Sensor : public Block
 {
     private :
+        /**
+         * @brief The state of the sensor
+         * 
+         */
         bool activated;
+        /**
+         * @brief The size of the sprite
+         * 
+         */
         int spriteSize;
     public :
         /**
@@ -37,8 +45,11 @@ class Sensor : public Block
          */
         void update(Player& p0, Player& p1, Level& currentLevel);
 
+        /**
+         * @brief Get the state of the sensor
+         * 
+         * @return true if the sensor is activated, false otherwise
+         */
         bool isActivated();
 }; 
-
-
 #endif
