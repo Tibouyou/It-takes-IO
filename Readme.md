@@ -35,6 +35,8 @@ L'organistion des fichiers est la suivante.
 
 - **It-Takes-IO/Makefile** : permet d'effectuer toute le phase de compilation de notre code.
 
+- **It-Takes-IO/valgrind.supp** : fichier de suppression des erreurs valgrind pour la librairie SFML.
+
 ### Compilation du programme
 
 #### Version Texte 
@@ -43,7 +45,7 @@ Pour effectuer la compilation du programme, vous devez exécuter la commande `ma
 #### Version SFML
 Pour effectuer la compilation du programme, vous devez exécuter la commande `make`
 
-> Si cela ne fontcionne pas, il faudra installer la librairie SFML à la main avant de pouvoir compiler notre programme. 
+> Si cela ne fonctionne pas, il faudra installer la librairie SFML à la main avant de pouvoir compiler notre programme. 
 
 ## Exécution et démarrage du jeu 
 
@@ -54,7 +56,7 @@ Pour procéder à l'exécution, il suffit d'exécuter `bin/main_txt`
 
 Puis, pour procéder à l'exécution, il suffit d'exécuter `bin/main_sfml`
 
-> Si cela ne fontcionne pas, il faudra installer la librairie SFML à la main avant de pouvoir compiler notre programme. 
+> Si cela ne fonctionne pas, il faudra installer la librairie SFML à la main avant de pouvoir compiler notre programme. 
 
 ### Comment jouer 
 
