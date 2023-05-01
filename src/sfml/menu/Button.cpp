@@ -33,6 +33,19 @@ Button::Button(std::wstring buttonTitle, int x, int y, int fontSize,float scale,
     this->text.setPosition(x, y);
 }
 
+Button::~Button()
+{
+    if (this->sprite != nullptr) {
+        delete this->sprite;
+        this->sprite = nullptr;
+    }
+
+    if (this->texture != nullptr) {
+        delete this->texture;
+        this->texture = nullptr;
+    }
+}
+
 void Button::draw(sf::RenderWindow *window)
 {
     window->draw(*sprite);

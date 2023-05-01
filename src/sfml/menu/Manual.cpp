@@ -62,6 +62,13 @@ Manual::~Manual()
     {
         delete button;
     }
+    buttons.clear();
+
+    if (buttonReturn != nullptr)
+    {
+        delete buttonReturn;
+        buttonReturn = nullptr;
+    }
 }
 
 void Manual::draw(RenderWindow *window)

@@ -22,5 +22,4 @@ void Generator::update(Player &p0, Player &p1, Level &currentLevel){
 
 void Generator::power(PowerType type, const Level& currentLevel, unsigned char directionMask)
 {
-    
 }

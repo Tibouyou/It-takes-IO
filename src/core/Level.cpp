@@ -24,22 +24,32 @@ Level::~Level()
     delete p0;
     delete p1;
 
+    p0 = nullptr;
+    p1 = nullptr;
+
     for (Block* block: tabBlock)
     {
         delete block;
     }
+    tabBlock.clear();
+
     for (Gate* gate: tabGate)
     {
         delete gate;
     }
+    tabGate.clear();
+
     for (Cable* cable: tabCable)
     {
         delete cable;
     }
+    tabCable.clear();
+
     for (Pickable* pickable: tabPickable)
     {
         delete pickable;
     }
+    tabPickable.clear();
 }
 
 void Level::loadLevel(int dimWindowX, int dimWindowY)

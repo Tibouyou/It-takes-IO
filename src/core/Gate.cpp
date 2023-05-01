@@ -68,10 +68,13 @@ Gate::~Gate()
     {
         delete input;
     }
+    input.clear();
+
     for (Vector2D* output : output)
     {
         delete output;
     }
+    output.clear();
 }
 
 std::vector<Vector2D*> Gate::getInput()

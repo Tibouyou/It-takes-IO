@@ -10,7 +10,6 @@ Block::Block(int x, int y, BlockType type)
 
 Block::~Block()
 {
-
 }
 
 bool Block::isSolid()

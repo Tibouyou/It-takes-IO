@@ -2,21 +2,22 @@
    <SFML:Graphics>
    Memcheck:Leak
    ...
-   obj:/usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1
+   obj:libsfml-graphics.so.2.5
 }
 
 {
    <SFML:window>
    Memcheck:Leak
+   match-leak-kinds: reachable
    ...
-   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1
+   obj:libsfml-window.so.2.5
 }
 
 {
    <SFML:system>
    Memcheck:Leak
    ...
-   obj:/usr/lib/x86_64-linux-gnu/libsfml-system.so.2.5.1
+   obj:libsfml-system.so.2.5
 }
 
 {
@@ -47,3 +48,37 @@
    obj:/usr/lib/x86_64-linux-gnu/libLLVM-15.so.1
 }
 
+{
+   nvidia
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/libnvidia-glcore.so.530.41.03
+}
+
+{
+   nvidiaglx
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/libGLX_nvidia.so.530.41.03
+}
+
+{
+   sfml audio
+   Memcheck:Addr4
+   fun:UnknownInlinedFun
+   fun:UnknownInlinedFun
+   fun:UnknownInlinedFun
+   fun:UnknownInlinedFun
+   fun:UnknownInlinedFun
+   fun:UnknownInlinedFun
+   fun:_ZN12_GLOBAL__N_110DeviceNode6RemoveEj
+   fun:UnknownInlinedFun
+   fun:_ZN12_GLOBAL__N_112EventManager15removeCallbackCEPvj.lto_priv.0
+   fun:registry_demarshal_global_remove.lto_priv.0
+   fun:process_remote
+   fun:on_remote_data
+   fun:loop_iterate
+   fun:do_loop
+   fun:start_thread
+   fun:clone
+}

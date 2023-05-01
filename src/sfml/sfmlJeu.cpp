@@ -75,9 +75,41 @@ void sfmlJeu::loadLevel() {
 }
 
 sfmlJeu::~sfmlJeu () {
-    if (m_window != NULL) delete m_window;
-    if (level != nullptr) delete level;
-    if (menu != nullptr) delete menu;
+    if (m_window != nullptr) {
+        delete m_window;
+        m_window = nullptr;
+    }
+
+    if (level != nullptr) {
+        delete level;
+        level = nullptr;
+    }
+
+    if (menu != nullptr) {
+        delete menu;
+        menu = nullptr;
+    }
+
+    if (playerSfml0 != nullptr) {
+        delete playerSfml0;
+        playerSfml0 = nullptr;
+    }
+
+    if (playerSfml1 != nullptr) {
+        delete playerSfml1;
+        playerSfml1 = nullptr;
+    }
+
+    for (BlockSfml* block : blocksSfml) {
+        delete block;
+    }
+    blocksSfml.clear();
+
+    for (SensorSfml* sensor : sensorsSfml) {
+        delete sensor;
+    }
+    
+    sensorsSfml.clear();
 }
 
 void sfmlJeu::sfmlAff() {
@@ -285,14 +317,16 @@ void sfmlJeu::sfmlAff() {
 }
 
 void sfmlJeu::sfmlBoucle () {
-
-    sf::Clock clock;
     music.setLoop(true);
     music.play();
 
-    while (m_window->isOpen())
-    {   
-        float elapsed = clock.getElapsedTime().asSeconds();
+    sf::Clock clock;
+
+    while (m_window->isOpen()) {
+        float elapsed = clock.restart().asSeconds();
+        if (elapsed > 0.3) // FIX : valgrind makes the game crash without this
+            continue;
+
         if (menu->getPlay()) {
             if (level->getPlayer0()->getAlive() && level->getPlayer1()->getAlive()) {
                 level->update(elapsed);
@@ -314,9 +348,7 @@ void sfmlJeu::sfmlBoucle () {
             for (SensorSfml* sensor : sensorsSfml) {
                 sensor->update(level->getPlayer0(), level->getPlayer1(), elapsed);
             }
-        }   
-        
-        clock.restart();
+        }
 
         //Ouverture de la porte 
         if(level->getDoor()->isOpened() && frameDoor != 6) {

@@ -66,10 +66,18 @@ Menu::~Menu()
     {
         delete button;
     }
+    buttons.clear();
+
     for (Button *button : selectLevelButtons)
     {
         delete button;
     } 
+    selectLevelButtons.clear();
+
+    if (manual != nullptr) {
+        delete manual;
+        manual = nullptr;
+    }
 }
 
 void Menu::draw(RenderWindow *window)

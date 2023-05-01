@@ -29,7 +29,6 @@ void SensorSfml::update(Player* p0, Player* p1, float elapsed)
 
 SensorSfml::~SensorSfml()
 {
-    delete this->sensor;
 }
 
 sf::Sprite SensorSfml::getSprite()

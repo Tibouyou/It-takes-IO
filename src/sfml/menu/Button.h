@@ -18,7 +18,12 @@ class Button
         sf::Sprite* sprite = nullptr;
     
     public :
-        Button(std::wstring buttonTitle, int x, int y, int fontSize, float scale, sf::Font *font, std::function<void()> onClick,int levelNumber=-1);  
+        Button(std::wstring buttonTitle, int x, int y, int fontSize, float scale, sf::Font *font, std::function<void()> onClick,int levelNumber=-1);
+
+        /**
+         * @brief Destroy the Button object
+        */
+        ~Button();
         void draw(sf::RenderWindow *window);
         void handleEvent(int x, int y);
 };
