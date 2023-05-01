@@ -1,4 +1,3 @@
-
 # It takes IO 
 
 _It takes IO_ est un jeu de plateforme à deux joueurs. Ceux-ci doivent évoluer à travers les différents niveaux pour ouvrir la porte principale et accéder au niveau suivant. Ce jeu est basé sur un ensemble d'énigmes à résoudre pour activer des portes logiques. Les deux personnages incarnés sont ainsi complémentaires en représentant un 0 et un 1. Le but est ainsi de coopérer pour terminer tous les niveaux en trouvant la bonne combinaison pour déverrouiller la porte et en évitant les obstacles.
@@ -39,10 +38,10 @@ L'organistion des fichiers est la suivante.
 ### Compilation du programme
 
 #### Version Texte 
-Pour effectuer la compilation du programme, vous devez exécuter la commande `make`
+Pour effectuer la compilation du programme, vous devez exécuter la commande `make txt`
 
 #### Version SFML
-Pour effectuer la compilation du programme, vous devez exécuter la commande `make sfml`
+Pour effectuer la compilation du programme, vous devez exécuter la commande `make`
 
 > Si cela ne fontcionne pas, il faudra installer la librairie SFML à la main avant de pouvoir compiler notre programme. 
 
